@@ -27,7 +27,7 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
     var $helper       = false;
     var $fckg_bak_file = "";
     var $debug = false;
-    var $test = true;
+    var $test = false;
     var $page_from_template;
     var $draft_found = false;
     var $draft_text;
@@ -341,22 +341,6 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
                 ),
                 $this->xhtml
               ); 
-			  
-			 /*
-       $this->xhtml = preg_replace_callback(
-                '/(<style\s+class=\'face\' \s+style=\'.*?\')(.*?)(<\/style>)/ms',
-                create_function(
-                   '$matches', 
-                   '$matches[1] = preg_replace("/TPRE_CODE/","<pre class=\'code\'>\n", $matches[1]);  
-                    $matches[1] = preg_replace("/TPRE_FILE/","<pre class=\'file\'>\n", $matches[1]);  
-                    $matches[2] = preg_replace("/TC_NL/ms", "\n", $matches[2]);  
-                    $matches[3] = "</pre>";                    
-                    return $matches[1] . $matches[2] . $matches[3];'            
-                ),
-                $this->xhtml
-              );
-*/			  
-			
 			  
        }
 
@@ -886,6 +870,10 @@ function parse_wikitext(id) {
                   this.link_formats.push(tag);
                   return; 
          }
+      if(format_chars[tag] && this.in_font) {          
+                  return; 
+         }
+	 
      else if(tag == 'acronym') {
          if(this.list_level) {
              results+='_@ACRO_SPACE@_';
@@ -1569,6 +1557,9 @@ function parse_wikitext(id) {
           }
           else if(this.in_font || tag == 'font') {
               /* <font 18pt:bold/garamond;;color;;background_color>  */
+			   if(!font_family) {			 
+				   return;
+			   }
                if(font_color) font_family = font_family + ';;'+ font_color;
                if(font_bgcolor) font_family = font_family + ';;'+ font_bgcolor;
                var font_tag = '<font ' + font_size + ':'+ font_weight + '/'+font_family+'>';
@@ -1644,7 +1635,10 @@ function parse_wikitext(id) {
 
     end: function( tag ) {
 
-
+     if(format_chars[tag] && this.in_font) {     
+                 results+=' ';     
+                  return; 
+         }
     if(this.in_endnotes && tag == 'a') return;
     if(this.link_only){     
        this.link_only=false;
@@ -1661,10 +1655,10 @@ function parse_wikitext(id) {
      }
 	 if(tag == 'span' && this.in_font) {
 	      tag = 'font';
-		  this.in_font=false;
+		  this.in_font=false;		
 	 }
      if(tag == 'span' && this.curid) {
-             this.curid = false;
+             this.curid = false;			  
              return; 
      }
      if(tag == 'dl' && this.downloadable_code) {
@@ -1793,7 +1787,7 @@ function parse_wikitext(id) {
      }       
 
        results += tag;
-
+  
       if(format_chars[current_tag]) {               
             if(this.list_level) {
                   this.format_in_list = true; 
@@ -1848,7 +1842,7 @@ function parse_wikitext(id) {
          else if(current_tag == 'span' ) {
                   this.immutable_plugin = false;
          }
-       
+ 
     },
 
     chars: function( text ) {

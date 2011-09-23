@@ -1,4 +1,4 @@
-rev 11-Sep_14-19_31
+rev 11-Sep_23-17_05
 
 Note:  For the log of Changes prior to thei document, see the file named Changes.1.
 
@@ -168,3 +168,13 @@ All future distributions of fckgLite will be based on this model.  Please report
 14 Sep
 Fix to fckdialog.html, where JQuery-like syntax $(id) caused Javascript error in IE 9.  Fixed font plugin,
 which failed in FireFox 6 because it fails to recgnize the deprecated font tag.
+ 
+17 Sep
+Some clean-up and minor edits in meta.php and edit.php
+
+22 Sep
+Added short-cut keys: ALT+- for creating new ordered list; ALT+* for creating new unordered list.  The mnemonics are the
+Dokuwiki editor's codes for ordered and unordered lists.
+
+23 Sep
+Fixes for updated font tool.  Fonts can no longer take DW text formatting.
