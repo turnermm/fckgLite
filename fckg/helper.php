@@ -416,8 +416,16 @@ function FCKeditor_OnComplete( editorInstance )
 
 function CTRL_Key_Formats(parm) {
 
-     if(!parm.ctrlKey) return;
+     if(!parm.ctrlKey && !parm.altKey) return;
 
+    if(parm.altKey && parm.keyCode == 56) {
+		oDokuWiki_FCKEditorInstance.get_FCK().ToolbarSet.CurrentInstance.Commands.GetCommand('InsertUnorderedList').Execute();
+ 	}
+		
+	if(parm.altKey && parm.keyCode == 109) {	 
+		oDokuWiki_FCKEditorInstance.get_FCK().ToolbarSet.CurrentInstance.Commands.GetCommand('InsertOrderedList').Execute();
+    }
+	 
     /* h1 - h5 */
      if(parm.ctrlKey && parm.keyCode >=49 && parm.keyCode <=53) {
          var n = parm.keyCode - 48;
