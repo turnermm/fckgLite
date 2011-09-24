@@ -46,7 +46,7 @@ class action_plugin_fckg_meta extends DokuWiki_Action_Plugin {
             $controller->register_hook( 'HTML_EDITFORM_INJECTION', 'AFTER', $this, 'preprocess'); 
             $controller->register_hook( 'HTML_EDITFORM_OUTPUT', 'BEFORE', $this, 'insertFormElement');            
             $controller->register_hook('DOKUWIKI_STARTED', 'BEFORE', $this, 'file_type');         
-            $controller->register_hook('TPL_CONTENT_DISPLAY', 'AFTER', $this, 'prevent_output');       
+            $controller->register_hook('TPL_CONTENT_DISPLAY', 'AFTER', $this, 'setupDWEdit');       
             $controller->register_hook('DOKUWIKI_STARTED', 'AFTER', $this, 'fnencode_check');                 
   }
 
@@ -272,7 +272,7 @@ SCRIPT;
             setcookie("TopLevel", $_REQUEST['TopLevel'], time()-3600, '/');
        }
 
-    
+     
        if(!isset($_REQUEST['id']) || isset($ACT['preview'])) return;
        if(isset($_REQUEST['do']) && isset($_REQUEST['do']['edit'])) {
               $_REQUEST['do'] = 'edit';
@@ -296,25 +296,15 @@ function loadScript(&$event) {
 SCRIPT;
 
 }
-/*
-function fck_editor(&$event) {
-  
-    if($_REQUEST['fckEditor_text'] ) {
-        echo "<div id = 'fckEd__text' style='position:absolute; visibility:hidden;'>";   
-        echo $_REQUEST['fckEditor_text'];     
-        echo '</div>';
-    }
-
-
-}
-*/
 
 /** 
  *  Handle features need for DW Edit: 
  *    1. load script, if not loaded
  *    2. Re-label Cancel Button "Exit" when doing a preview  
+ *    3. set up $REQUEST value to identify a preview when in DW Edit , used in 
+ *       set_session to remove fckgLite and DW drafts if present after a DW preview  
 */
-  function prevent_output(&$event) {
+  function setupDWEdit(&$event) {
   global $ACT;
 
   $url = DOKU_URL . 'lib/plugins/fckg/scripts/script-cmpr.js';
@@ -331,6 +321,7 @@ function fck_editor(&$event) {
     catch (ex) {  
          LoadScript("$url");        
     }             
+
     function createRequestValue() {
         try{
         var inputNode=document.createElement('input');
@@ -350,7 +341,7 @@ SCRIPT;
   if(isset($_REQUEST['do']) && is_array($_REQUEST['do'])) {
     if(isset($_REQUEST['do']['preview'])) {
            echo '<script type="text/javascript">';
-           echo ' var dwform = GetE("dw__editform"); dwform["do[draftdel]"].value = "Exit"';
+           echo ' var dwform = GetE("dw__editform"); dwform["do[draftdel]"].value = "Exit";';
            echo "\ncreateRequestValue()\n";
            echo  '</script>';
     }
