@@ -767,10 +767,9 @@ function parse_wikitext(id) {
          'del': '<del>', 'strike': '<del>', p: "\n\n" , 'a':'[[', 'img': '\{\{',
          'h1': "\n====== ", 'h2': "\n===== ", 'h3': "\n==== ", 'h4': "\n=== ", 'h5': "\n== ",
          'td': "|", 'th': "^", 'tr':" ", 'table': "\n\n", 'ol':"  - ", 'ul': "  * ", 'li': "",
-         'plugin': '<plugin ', 'code': "\'\'",'pre': "\n<", 'hr': "\n\n----\n\n", 'sub': '<sub>',
-         //'font': "<font ",
+         'plugin': '<plugin ', 'code': "\'\'",'pre': "\n<", 'hr': "\n\n----\n\n", 'sub': '<sub>',         
          'font': "\n",
-         'sup': '<sup>', 'div':"\n\n",'acronym': " ", 'span': "\n", 'dl': "\n", 'dd': "\n", 'dt': "\n"
+         'sup': '<sup>', 'div':"\n\n", 'span': "\n", 'dl': "\n", 'dd': "\n", 'dt': "\n"
      };
     var markup_end = { 'del': '</del>', 'strike': '</del>', 'p': " ", 'br':" ", 'a': ']] ','img': '\}\}',
           'h1': " ======\n", 'h2': " =====\n", 'h3': " ====\n", 'h4': " ===\n", 'h5': " ==\n", 
@@ -875,10 +874,6 @@ function parse_wikitext(id) {
          }
 	 
      else if(tag == 'acronym') {
-         if(this.list_level) {
-             results+='_@ACRO_SPACE@_';
-             HTMLAcroInList=true;
-         }
           return;
      }
         if(tag == 'ol' || tag == 'ul') {    
@@ -1100,8 +1095,7 @@ function parse_wikitext(id) {
                   type = attrs[i].value;
                }               
             
-              else if(attrs[i].name == 'href' && !this.code_type) { 
-           // if(!confirm(tag + ' ' + attrs[i].name + '="' + attrs[i].escaped + '"', "top")) exit;  
+              else if(attrs[i].name == 'href' && !this.code_type) {
                     var http =  attrs[i].escaped.match(/http:\/\//) ? true : false; 
                     if(attrs[i].escaped.match(/\/lib\/exe\/detail.php/)) {
                         this.image_link_type = 'detail';
@@ -1496,41 +1490,17 @@ function parse_wikitext(id) {
                     this.list_started = true;
               }
               results = results.replace(/[\x20]+$/,"");  
-              results = results.replace(/_@ACRO_SPACE@_OS\s+$/,"_@ACRO_SPACE@_OS");  
 
               for(var s=0; s < this.list_level; s++) {
-
-                  // this occurs when an acronym is enclosed in format characters  
-
-                  if(results.match(/_@ACRO_SPACE@_\s*(\w+\s*[\-,:;!_]+)(_@ACRO_SPACE@_)/)) {  
-                      results = results.replace(/_@ACRO_SPACE@_\s*(\w+\s*[\-,:;!_]+)(_@ACRO_SPACE@_)\s*$/,"$1");  
-                  }
-
-                  if(results.match(/_FORMAT_SPACE_\s*_@ACRO_SPACE@_\s*(\w+\s*[\-,:;!_]+)(_@ACRO_SPACE@_)?/)) {  
-                      results = results.replace(/_FORMAT_SPACE_\s*_@ACRO_SPACE@_\s*(\w+\s*[\-,:;!_]+)(_@ACRO_SPACE@_)?\s*$/,"$1");  
-                  }
-
                   // this handles format characters at the ends of list lines
                   if(results.match(/_FORMAT_SPACE_\s*$/)) {   
                       results = results.replace(/_FORMAT_SPACE_\s*$/,"\n");  
                   }
-
-                  // this handles acronyms at the ends of list lines
-                  if(results.match(/_@ACRO_SPACE@_\s*(\w+)$/)) {   
-                      results = results.replace(/_@ACRO_SPACE@_\s*(\w+[\-,:;!_]?)$/," $1\n");  
-                  }
-
-                  results = results.replace(/_@ACRO_SPACE@_/g," ");
-
                   results += '  ';
-
               }
              
              if(this.prev_list_level > 0 && markup['li'] == markup['ol']) {
                 this.prev_list_level = -1;
-                /* if(this.last_tag == 'b' || this.last_tag == 'i') {                      
-                     results += "\n";
-                } */
              }
           }
 
@@ -1744,8 +1714,6 @@ function parse_wikitext(id) {
             tag = 'u';
     }  
     else if(tag == 'acronym') {
-       tag = '_@ACRO_SPACE@_';
-       this.is_acronym = true;
     }
     else {
            tag = markup[tag];
@@ -1869,10 +1837,6 @@ function parse_wikitext(id) {
 
         if(this.is_acronym) {
           this.is_acronym = false;
-          if(text.match(/^[\-,:;!_]/)) { 
-             results = results.replace(/_@ACRO_SPACE@_\s*$/,"");  
-          }
-          else results = results.replace(/_@ACRO_SPACE@_\s*$/," "); 
         }
         if(this.format_in_list ) {  
            text = text.replace(/^[\n\s]+$/g, '');       
@@ -1945,6 +1909,10 @@ function parse_wikitext(id) {
       results += text;        
    }
 
+   if(this.list_level && this.list_level > 1) {  
+        results = results.replace(/(\[\[.*?\]\])([ ]+[\*\-].*)$/," $1\n$2");   
+   }
+   
   if(!HTMLParserOpenAngleBracket) {
        if(text.match(/&lt;/)) {
          HTMLParserOpenAngleBracket = true;
@@ -2023,9 +1991,6 @@ function parse_wikitext(id) {
          }
     }
 
-    if(HTMLAcroInList) {
-        results = results.replace(/_@ACRO_SPACE@_/g," ");
-    }
     var line_break_final = "\\\\";
 
     if(HTMLParser_LBR) {
@@ -2317,11 +2282,9 @@ if(window.DWikifnEncode && window.DWikifnEncode == 'safe') {
         $Renderer->notoc();
         $Renderer->smileys = getSmileys();
         $Renderer->entities = getEntities();
-       // $Renderer->acronyms = getAcronyms();
         $Renderer->acronyms = array();
         $Renderer->interwiki = getInterwiki();
-        #$Renderer->badwords = getBadWords();
-
+       
         // Loop through the instructions
         foreach ( $instructions as $instruction ) {
             // Execute the callback against the Renderer
