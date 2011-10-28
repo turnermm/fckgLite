@@ -1,4 +1,4 @@
-rev 11-Sep_23-17_05
+rev 11-Oct_28-09_25
 
 Note:  For the log of Changes prior to thei document, see the file named Changes.1.
 
@@ -178,3 +178,10 @@ Dokuwiki editor's codes for ordered and unordered lists.
 
 23 Sep
 Fixes for updated font tool.  Fonts can no longer take DW text formatting.
+
+26 Oct
+Fixed bug in nested list, where a list item ending in a link preceding nested item failed to move to 
+a new line causing the nested item to appear in the saem line as the link.
+
+28 Oct
+Upgraded security to deny guest uploads.

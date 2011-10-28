@@ -76,6 +76,7 @@ class helper_plugin_fckg extends DokuWiki_Plugin {
   if(!$user_groups) $user_groups = array();
   if (@in_array("guest", $user_groups)) {
      $create_folder = 'n';
+	 $user_type = 'visitor';
   }
   $user_groups = implode(";;",$user_groups);
 
