@@ -1,4 +1,4 @@
-rev 11-Oct_28-09_25
+rev 11-Oct_31-00_20
 
 Note:  For the log of Changes prior to thei document, see the file named Changes.1.
 
@@ -185,3 +185,6 @@ a new line causing the nested item to appear in the saem line as the link.
 
 28 Oct
 Upgraded security to deny guest uploads.
+
+31 Oct
+Added name="do[save]" to fckg editor's save button

@@ -518,6 +518,7 @@ $DW_EDIT_hide = $this->dw_edit_displayed();
          <div class="editButtons">
             <input type="checkbox" name="fckg" value="fckg" checked="checked" style="display: none"/>
              <input class="button" type="button" 
+                   name="do[save]"
                    value="<?php echo $lang['btn_save']?>" 
                    title="<?php echo $lang['btn_save']?> "   
                    <?php echo $DW_EDIT_disabled; ?>
