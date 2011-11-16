@@ -1994,9 +1994,10 @@ function parse_wikitext(id) {
 
     var line_break_final = "\\\\";
 
-    if(HTMLParser_LBR) {
-        results = results.replace(/(L_BR_K)+/g,line_break_final);
-        results = results.replace(/L_BR_K/gm, line_break_final);
+    if(HTMLParser_LBR) {		
+        results = results.replace(/(L_BR_K)+/g,line_break_final);		
+        results = results.replace(/L_BR_K/gm, line_break_final) ;
+	    results = results.replace(/(\\\\)\s+/gm, "$1 \n");
     }
 
 
