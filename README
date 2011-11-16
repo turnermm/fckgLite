@@ -1,0 +1,8 @@
+This is the jquery branch of fckgLite which uses calls to jQuery to handle
+ajax and contains a substitute jquery class that mirrors jQuery calls and
+implements access to tw-sack when jQuery is not available.
+
+For information on the installation and features of fckgLite, see
+the fckgLite web site:  http://www.mturner.org/fckgLite
+
+See also fcgk/README for additional details.

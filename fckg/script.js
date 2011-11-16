@@ -218,43 +218,57 @@ function show_backup_msg(msg) {
   return false;
 }
 
+  // legacy function 
   function remove_draft(){
- 
-        // remove a possibly saved draft using ajax
-        var dwform = $('dw__editform');
-        if(dwform){
-            var params = 'call=draftdel';
-            params += '&id='+encodeURIComponent(dwform.elements.id.value);
-
-            var sackobj = new sack(DOKU_BASE + 'lib/exe/ajax.php');
-            sackobj.AjaxFailedAlert = '';
-            sackobj.encodeURIString = false;
-            sackobj.runAJAX(params);
-            // we send this request blind without waiting for
-            // and handling the returned data
-        }
-    
- 
-}
+ }
 
 function dwedit_draft_delete(cname) {
         var debug = false;
         var params = "draft_id=" +cname;
-        var draft_rn = new sack(DOKU_BASE + 'lib/plugins/fckg/scripts/prev_delete.php');
-        draft_rn.asynchronous = false;
-        draft_rn.onCompletion = function() {
-        	if (draft_rn.responseStatus){                           
-                if(draft_rn.responseStatus[0] == 200) {               
-                  if(draft_rn.response && draft_rn.response != 'done') {
-                    if(debug) alert('success: ' + draft_rn.response);
-                  }
-                }
-                
-            }
-        };
-
-        draft_rn.runAJAX(params);
+        jQuery.ajax({
+           url: DOKU_BASE + 'lib/plugins/fckg/scripts/prev_delete.php',
+           async: false,
+           data: params,    
+           type: 'POST',
+           dataType: 'html',         
+           success: function(data){                 
+               if(debug) {            
+                  alert(data);
+               }
+              
+    }
+    });
 
 }
+
+
+  if(!window.jQuery) {
+     var jQuery = {
+      ajax: function(obj) {
+         var s = new sack(obj.url); 
+         s.asynchronous = obj.async;
+         s.onCompletion = function() {
+        	if (s.responseStatus && s.responseStatus[0] == 200) {   
+                  obj.success(s.response);
+        	}
+         };
+         s.runAJAX(obj.data);
+     
+      },
+      post: function(url,params,callback,context) {
+         var s = new sack(url);
+         s.onCompletion = function() {
+        	if (s.responseStatus && s.responseStatus[0] == 200) {   
+                  callback(s.response);
+        	}
+         };
+         s.runAJAX(params);
+      }
+     };
+  }
+
+  function GetE(e) {
+       return  document.getElementById(e);
+  }
 var dokuBase = location.host + DOKU_BASE;
-//var insertedDokuSmiley = false;
+

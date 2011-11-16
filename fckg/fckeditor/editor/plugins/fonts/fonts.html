@@ -120,7 +120,7 @@ function allreset(){
     
     if(font_node) {
        font_node = font_node.replace(/\n/g,"");
-       matches = font_node.match(/<FONT[^>]+>(.*)<\/font/i);
+       matches = font_node.match(/<SPAN[^>]+>(.*)<\/SPAN/i);
        if(matches) {
           matches[1] = matches[1].replace(/\n+/g,"");
          return matches[1];
@@ -295,13 +295,13 @@ function checkSelection(force) {
     saveSelection = saveSelection.replace(/\s+$/,"");
 
     var parent = getSelectedNodeParent();
-    if(parent.nodeName.toUpperCase() == 'FONT') {
+    if(parent.nodeName.toUpperCase() == 'SPAN"') {
          return parent;
     }
 
     var currentNode = getCurrentNode(parent, force);
 
-    if(currentNode && currentNode.nodeName.toUpperCase() == 'FONT') {
+    if(currentNode && currentNode.nodeName.toUpperCase() == 'SPAN') {
          return currentNode;
     }
 
@@ -319,7 +319,7 @@ function getCurrentNode(node) {
         var text = children[i].nodeValue;
 
         if(text) {
-            if(children[i].parentNode.nodeName.toLowerCase() == 'font') {
+            if(children[i].parentNode.nodeName.toLowerCase() == 'span') {
                 return children[i].parentNode;
             }
             text = text.replace(/^\s+/);

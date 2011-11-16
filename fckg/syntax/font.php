@@ -91,12 +91,12 @@ class syntax_plugin_fckg_font extends DokuWiki_Syntax_Plugin {
                     }
 
                 }
- 
-                $renderer->doc .= "<font face='$face' style='$style'>"; 
+                $style = "font-family: $face; $style";
+                $renderer->doc .= "<span face='$face' style='$style'>"; 
                 break;
  
               case DOKU_LEXER_UNMATCHED :  $renderer->doc .= $renderer->_xmlEntities($match); break;
-              case DOKU_LEXER_EXIT :       $renderer->doc .= "</font>"; break;
+              case DOKU_LEXER_EXIT :       $renderer->doc .= "</span>"; break;
             }
             return true;
         }

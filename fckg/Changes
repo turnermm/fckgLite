@@ -1,4 +1,4 @@
-rev 11-Sep_04-13_52
+rev 11-Oct_31-00_20
 
 Note:  For the log of Changes prior to thei document, see the file named Changes.1.
 
@@ -158,3 +158,33 @@ is treated as coming off the wiki's root directory.
 
 4 Sep
 Minor non-affecting edit to meta.php
+
+10 Sep
+This distribution of fckgLite is compatible with Dokuwiki's implementation of JQuery for its internal
+Javascript library.  It is also backwardly compatible with Dokuwiki's pre-JQuery distributions.  
+All future distributions of fckgLite will be based on this model.  Please report any issues.
+
+
+14 Sep
+Fix to fckdialog.html, where JQuery-like syntax $(id) caused Javascript error in IE 9.  Fixed font plugin,
+which failed in FireFox 6 because it fails to recgnize the deprecated font tag.
+ 
+17 Sep
+Some clean-up and minor edits in meta.php and edit.php
+
+22 Sep
+Added short-cut keys: ALT+- for creating new ordered list; ALT+* for creating new unordered list.  The mnemonics are the
+Dokuwiki editor's codes for ordered and unordered lists.
+
+23 Sep
+Fixes for updated font tool.  Fonts can no longer take DW text formatting.
+
+26 Oct
+Fixed bug in nested list, where a list item ending in a link preceding nested item failed to move to 
+a new line causing the nested item to appear in the saem line as the link.
+
+28 Oct
+Upgraded security to deny guest uploads.
+
+31 Oct
+Added name="do[save]" to fckg editor's save button

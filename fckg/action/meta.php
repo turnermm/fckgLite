@@ -46,7 +46,7 @@ class action_plugin_fckg_meta extends DokuWiki_Action_Plugin {
             $controller->register_hook( 'HTML_EDITFORM_INJECTION', 'AFTER', $this, 'preprocess'); 
             $controller->register_hook( 'HTML_EDITFORM_OUTPUT', 'BEFORE', $this, 'insertFormElement');            
             $controller->register_hook('DOKUWIKI_STARTED', 'BEFORE', $this, 'file_type');         
-            $controller->register_hook('TPL_CONTENT_DISPLAY', 'AFTER', $this, 'prevent_output');       
+            $controller->register_hook('TPL_CONTENT_DISPLAY', 'AFTER', $this, 'setupDWEdit');       
             $controller->register_hook('DOKUWIKI_STARTED', 'AFTER', $this, 'fnencode_check');                 
   }
 
@@ -129,10 +129,19 @@ class action_plugin_fckg_meta extends DokuWiki_Action_Plugin {
    }
   global $INFO;
   $cname =  $INFO['draft'];   
-  
+    
+ $url = DOKU_URL . 'lib/plugins/fckg/scripts/jq_alt.js';    
+ 
   echo <<<SCRIPT
     <script type="text/javascript">
     //<![CDATA[ 
+    
+      if(!window.jQuery){
+        LoadScript("$url"); 
+      }
+ 
+      
+   
     
     function setDWEditCookie(which, e) { 
        var cname = "$cname";       
@@ -263,12 +272,11 @@ SCRIPT;
             setcookie("TopLevel", $_REQUEST['TopLevel'], time()-3600, '/');
        }
 
-    
+     
        if(!isset($_REQUEST['id']) || isset($ACT['preview'])) return;
        if(isset($_REQUEST['do']) && isset($_REQUEST['do']['edit'])) {
               $_REQUEST['do'] = 'edit';
        }
-     
   } 
 
 function loadScript(&$event) {
@@ -288,25 +296,15 @@ function loadScript(&$event) {
 SCRIPT;
 
 }
-/*
-function fck_editor(&$event) {
-  
-    if($_REQUEST['fckEditor_text'] ) {
-        echo "<div id = 'fckEd__text' style='position:absolute; visibility:hidden;'>";   
-        echo $_REQUEST['fckEditor_text'];     
-        echo '</div>';
-    }
-
-
-}
-*/
 
 /** 
  *  Handle features need for DW Edit: 
  *    1. load script, if not loaded
  *    2. Re-label Cancel Button "Exit" when doing a preview  
+ *    3. set up $REQUEST value to identify a preview when in DW Edit , used in 
+ *       set_session to remove fckgLite and DW drafts if present after a DW preview  
 */
-  function prevent_output(&$event) {
+  function setupDWEdit(&$event) {
   global $ACT;
 
   $url = DOKU_URL . 'lib/plugins/fckg/scripts/script-cmpr.js';
@@ -317,12 +315,13 @@ function fck_editor(&$event) {
 
     try {
     if(!HTMLParserInstalled){
-	    LoadScript("$url");  
-		}
+         LoadScript("$url");        
+    }
     }
     catch (ex) {  
          LoadScript("$url");        
     }             
+
     function createRequestValue() {
         try{
         var inputNode=document.createElement('input');
@@ -330,7 +329,7 @@ function fck_editor(&$event) {
         inputNode.setAttribute('value','yes');
         inputNode.setAttribute('name','dwedit_preview');
         inputNode.setAttribute('id','dwedit_preview');
-        var dwform = $("dw__editform");
+        var dwform = GetE("dw__editform");
         dwform.appendChild(inputNode);
         }catch(e) { alert(e); }
     }
@@ -342,7 +341,7 @@ SCRIPT;
   if(isset($_REQUEST['do']) && is_array($_REQUEST['do'])) {
     if(isset($_REQUEST['do']['preview'])) {
            echo '<script type="text/javascript">';
-           echo ' var dwform = $("dw__editform"); dwform["do[draftdel]"].value = "Exit"';
+           echo ' var dwform = GetE("dw__editform"); dwform["do[draftdel]"].value = "Exit";';
            echo "\ncreateRequestValue()\n";
            echo  '</script>';
     }
@@ -357,7 +356,11 @@ function fnencode_check() {
        global $conf;
        global $updateVersion;
        $rencode = false;
+	  
         if($conf['fnencode'] != 'safe') return;
+		if (file_exists(DOKU_PLUGIN . 'fckg/conf/saferencode.revert')) {
+		     return;
+		}
         if(isset($updateVersion) && $updateVersion >= 31) {           
           $rencode = true;     
         }
@@ -375,12 +378,19 @@ function fnencode_check() {
             }
         }
 
+
       if($rencode && !file_exists(DOKU_PLUGIN . 'fckg/saferencode')) {
          msg("This version of fckgLiteSafe does not support the re-encoded safe filenames. "
          . "You risk corrupting your file system.  Download an fnrencode version from either gitHub or the fckgLite web site."
          . " <a style='color:blue' href='http://www.dokuwiki.org/plugin:fckglite?&#fckglitesafe'>See fckgLite at Dokuwiki.org</a>  ",
             -1);
-      }
+      }	 
+      else if(!$rencode && file_exists(DOKU_PLUGIN . 'fckg/saferencode'))   {
+	    msg("This version of fckgLiteSafe requires a newer version of Dokuwiki (2011-05-25 Rincewind or later).  You risk corrupting your file system. "
+		 .   "To convert this distribution of fckgLite/fckgLiteSafe for use with earlier versions of Dokuwiki,  see the README file or " 
+		 . " <a style='color:blue' href='http://www.mturner.org/dwfck/fckgLite/doku.php?id=docs:upgrade_6&#anteater'>or the fckgLite web site</a>  ",
+		-1);
+    }	  
 }
 
 

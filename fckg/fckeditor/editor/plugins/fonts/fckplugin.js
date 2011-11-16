@@ -41,10 +41,11 @@ FCKFonts.Insert = function(font_weight, font_family, font_size, fg_color, bg_col
     var style = " font-weight: " + font_weight + "; ";
     style += " font-size: " + font_size + "; ";
     style += " color: " + fg_color + "; ";
+	style += " font-family: " + font_family + "; ";
     style += " background-color: " + bg_color + "; ";    
 
-	var hrefStartHtml	=  '<font face="'+ font_family + '" style="' + style + '">';
-	var hrefEndHtml		=  '</font>';
+	var hrefStartHtml	=  '<span face="'+ font_family + '" style="' + style + '">';
+	var hrefEndHtml		=  '</span>';
 
     var reset = false;
     if(!FCKBrowserInfo.IsIE && !FCKBrowserInfo.IsGecko) isSafari = true;
