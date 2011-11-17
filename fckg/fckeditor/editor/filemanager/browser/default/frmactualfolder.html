@@ -26,6 +26,7 @@
 		<title>Folder path</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">		
 		<link href="browser.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="js/safeFN_class.js"></script>
 		<script type="text/javascript">
 // Automatically detect the correct document.domain (#1919).
 (function()
@@ -62,7 +63,10 @@
 
 function SetCurrentFolder( resourceType, folderPath )
 {
-	document.getElementById('tdName').innerHTML = decodeURI(folderPath) ;
+    var DwikiFNencode = parent.DwikiFNencode;
+
+//	document.getElementById('tdName').innerHTML = folderPath ;
+	document.getElementById('tdName').innerHTML = dwikiUTF8_decodeFN(folderPath,DwikiFNencode) ;
 }
 
 window.onload = function()

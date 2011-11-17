@@ -32,7 +32,7 @@ var FCKTools	= oEditor.FCKTools ;
 FCK.dwiki_browser = 'img';
 FCK.islocal_dwikibrowser = false;
 var DWIKI_Client = FCK.dwiki_client;
-
+var DWIKI_fnencode = FCK.dwiki_fnencode;
 var bImageButton = ( document.location.search.length > 0 && document.location.search.substr(1) == 'ImageButton' ) ;
 
 //#### Dialog Tabs
@@ -511,7 +511,8 @@ function SetUrl( url, width, height, alt )
 	else
 	{  
 
-		GetE('txtUrl').value = encodeURI(encodeURI(url)); 
+        GetE('txtUrl').value = dwikiUTF8_encodeFN(url,DWIKI_fnencode);
+	    GetE('txtUrl').value = encodeURI(GetE('txtUrl').value); 
 		GetE('txtWidth').value = width ? width : '' ;
 		GetE('txtHeight').value = height ? height : '' ;
 

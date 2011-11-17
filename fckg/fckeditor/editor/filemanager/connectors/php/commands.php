@@ -36,31 +36,56 @@ function GetDwfckNs()
 	echo $_SESSION['dwfck_ns'];	
 }
 
- function has_permission($folder, $resourceType) {
-   global $_FolderClass;
 
+ function has_permission($folder, $resourceType, $isFolder=true) {
+   global $_FolderClass;
+   global $Dwfck_conf_values;   
         $folder = str_replace('//','/',$folder);
+       
         $sFolderPath = GetResourceTypeDirectory( $resourceType, 'GetFoldersAndFiles'); 
     
        $ns_tmp = str_replace('/',':',$folder);
-       $ns_tmp=trim($ns_tmp,':');
-       $test = $ns_tmp . ':*' ;   
-       $test = urldecode($test);
+       $ns_tmp=trim($ns_tmp,':');   
+       
+       if(preg_match('/%[a-zA-a0-9]/', $ns_tmp) && $Dwfck_conf_values['fnencode'] == 'safe') {
+          $test = dwiki_decodeFN($ns_tmp);
+       }
+       else {
+        
+       $test = urldecode($ns_tmp);
+       }
+       
+       if($isFolder) {
+           $test .=  ':*' ;   
+       }
+       else {
+           $test=preg_replace('/\.txt$/',"",$test);
+       }
+
        $AUTH =  auth_aclcheck($test, $_SESSION['dwfck_client'] , $_SESSION['dwfck_grps'], 1);   
 
-      $_FolderClass = $AUTH;    
-      return ($AUTH >1);
+       $_FolderClass = $AUTH;    
+       if(!$isFolder) return($AUTH > 0);       
+       return ($AUTH >1);
  }
+
   
 function GetFolders( $resourceType, $currentFolder )
 {
 
-   global $_FolderClass;   
-   $currentFolder=encode_dir($currentFolder);
-   
+   global $_FolderClass; 
+   global $Config;
+  
+    $currentFolder=encode_dir($currentFolder);
+   $isInternalLink = isset($_GET['DWFCK_Browser']) && $_GET['DWFCK_Browser'] == 'local'?  true : false;
+
 	// Map the virtual path to the local server path.
 	$sServerDir = ServerMapFolder( $resourceType, $currentFolder, 'GetFolders' ) ;
-  
+
+    if($Config['osWindows']) {
+        $sServerDir = normalizeWIN($sServerDir); 
+    }
+
 	// Array that will hold the folders names.
 	$aFolders	= array() ;
 
@@ -73,13 +98,15 @@ function GetFolders( $resourceType, $currentFolder )
 			if ( $sFile != '.' && $sFile != '..' && is_dir( $sServerDir . $sFile ) ) {
 				
 
-                if(has_permission($currentFolder .'/' . $sFile,  $resourceType) || has_open_access() ) {  
-                   
-                   $class = ($_FolderClass < 8) ? 'r' : 'u';   
-                   if($_FolderClass) {   
-			  	   $aFolders[] = '<Folder name="' . ConvertToXmlAttribute( $sFile ) .   
-                        '" class="'. $class .'" />' ;
-                   }
+                if(has_permission(dwiki_encodeFN($currentFolder) .'/' . $sFile,  $resourceType) || has_open_access() ) {  
+                        if($isInternalLink && $_FolderClass < 255) {
+                            $class = 'r';                         
+                       }              
+                       else $class = ($_FolderClass < 8) ? 'r' : 'u';  
+                       if($_FolderClass) {    
+ 			  	           $aFolders[] = '<Folder name="' . ConvertToXmlAttribute( $sFile ) .   
+                            '" class="'. $class .'" />' ;
+                       }
 
                }
 			}
@@ -95,6 +122,7 @@ function GetFolders( $resourceType, $currentFolder )
 	natcasesort( $aFolders ) ;
       
 	foreach ( $aFolders as $sFolder )
+
 		echo $sFolder ;
 
 
@@ -138,29 +166,37 @@ function has_open_access() {
 
 function GetFoldersAndFiles( $resourceType, $currentFolder )
 {
+	if (!isset($_GET)) {
+		global $_GET;
+	}
+     global $Config; 
+
 
    $isInternalLink = isset($_GET['DWFCK_Browser']) && $_GET['DWFCK_Browser'] == 'local'?  true : false;
    global $_FolderClass;
    global $Config;
    $currentFolder=encode_dir($currentFolder);
+
    $sess_id = session_id();
    if(!isset($sess_id) || $sess_id != $_COOKIE['FCK_NmSp_acl']) {
        session_id($_COOKIE['FCK_NmSp_acl']);
        session_start();    
    }    
-    $acl_del = isset($_SESSION['dwfck_del']) ? $_SESSION['dwfck_del'] : 0;  
-    //write_debug($_SESSION);
+    $acl_del = isset($_SESSION['dwfck_del']) ? $_SESSION['dwfck_del'] : 0;   
 	// Map the virtual path to the local server path.
 	$sServerDir = ServerMapFolder( $resourceType, $currentFolder, 'GetFoldersAndFiles' ) ;
+    if($Config['osWindows']) {
+        $sServerDir = normalizeWIN($sServerDir); 
+    }
 
-    mkdir_rek($sServerDir);  
+    mkdir_rek($sServerDir);
 	// Arrays that will hold the folders and files names.
 	$aFolders	= array() ;
 	$aFiles		= array() ;
 
     $sFile = '__AAAAAAAA__.AAA';  
     $temp_folder = $currentFolder;
-    $temp_folder = trim($temp_folder,'/');
+    $temp_folder = dwiki_encodeFN(trim($temp_folder,'/'));
     has_permission($temp_folder, $resourceType);
     if($isInternalLink && $_FolderClass < 16) {
          $sfclass = 'r';
@@ -170,15 +206,19 @@ function GetFoldersAndFiles( $resourceType, $currentFolder )
             $sfclass = $_FolderClass >= 16 ? 'u' : 'r'; 
          }
          else $sfclass = ($_FolderClass >= 8  || has_open_access()) ? 'u' : 'r'; 
-    }    
+    }
     if(!$_FolderClass) return;
     $aFolders[] = '<Folder name="' . ConvertToXmlAttribute( $sFile ) .   
                             '" class="'. $sfclass .'" />' ;
  
     $sErrorNumber=0;  
 
-
+ 
      $sFolderPath = GetResourceTypeDirectory( $resourceType, 'GetFoldersAndFiles');  
+
+     $absolute_path = $Config['UserFilesAbsolutePath'];
+
+
 
   
 	$oCurrentFolder = @opendir( $sServerDir ) ;
@@ -187,23 +227,30 @@ function GetFoldersAndFiles( $resourceType, $currentFolder )
 	{
 		while ( $sFile = readdir( $oCurrentFolder ) )
 		{ 
-
+          
 			if ( $sFile != '.' && $sFile != '..' )
 			{
 				if ( is_dir( $sServerDir . $sFile ) ) {  
-                
-                    if(has_permission($currentFolder  .$sFile,  $resourceType) || has_open_access()) {                  
-                       $class = ($_FolderClass < 8) ? 'r' : 'u'; 
-                      if($_FolderClass){
-				  	    $aFolders[] = '<Folder name="' . ConvertToXmlAttribute( $sFile ) .   
-                            '" class="'. $class .'" />' ;
-                     }
+                    
+                    if(has_permission(dwiki_encodeFN($currentFolder)  .$sFile,  $resourceType) || has_open_access()) {                  
+                        if($isInternalLink && $_FolderClass < 255) {
+                            $class = 'r';                         
+                       }
+                       else {
+                              $class = ($_FolderClass < 8) ? 'r' : 'u';                        
+                       }   
+                       if($_FolderClass){               
+				  	       $aFolders[] = '<Folder name="' . ConvertToXmlAttribute( $sFile ) .   
+                              '" class="'. $class .'" />' ;
+                       }
+                        
                     }
                     
 				}
 				else
 				{
 					$iFileSize = @filesize( $sServerDir . $sFile ) ;
+
 					if ( !$iFileSize ) {
 						$iFileSize = 0 ;
 					}
@@ -213,6 +260,13 @@ function GetFoldersAndFiles( $resourceType, $currentFolder )
 						if ( $iFileSize < 1 )
 							$iFileSize = 1 ;
 					}
+                    if($isInternalLink) {
+                        if(!preg_match('/\.txt$/', $sFile)) continue;
+                        if(has_permission(dwiki_encodeFN($currentFolder)  .$sFile,  $resourceType, false)) {                   
+       				   	   $aFiles[] = '<File name="' . ConvertToXmlAttribute( $sFile ) . '" size="' . $iFileSize . '" />' ;
+                        }
+                    }
+                    else { 
                        if($resourceType == 'Image') {
                             list($width, $height, $type, $attr) = getimagesize($sServerDir . $sFile);
                                 if(isset($width) && isset($height)) {
@@ -221,19 +275,24 @@ function GetFoldersAndFiles( $resourceType, $currentFolder )
                             
                             }
 
-					$aFiles[] = '<File name="' . ConvertToXmlAttribute( $sFile ) . '" size="' . $iFileSize . '" />' ;
+
+                          $aFiles[] = '<File name="' . ConvertToXmlAttribute( $sFile ) . '" size="' . $iFileSize . '" />' ;
+                    }
+                    
 				}
 			}
 		}
 		closedir( $oCurrentFolder ) ;
 	}
 
+
+
 	// Send the folders
 	natcasesort( $aFolders ) ;
 	echo '<Folders>' ;
 
 	foreach ( $aFolders as $sFolder ) {
-
+        
 		echo $sFolder;
 	}
 
@@ -245,12 +304,10 @@ function GetFoldersAndFiles( $resourceType, $currentFolder )
 
 	foreach ( $aFiles as $sFiles )
 		echo $sFiles ;
-
+  
 	echo '</Files>' ;
-/*
-    if($sErrorNumber > 0) 
-    	echo '<Error number="' . $sErrorNumber . '" />' ;
-*/
+
+
 
 }
 
@@ -258,23 +315,21 @@ function CreateFolder( $resourceType, $currentFolder )
 {
     global $_FolderClass;
     global $Config;
-
 	if (!isset($_GET)) {
 		global $_GET;
 	}
 	$sErrorNumber	= '0' ;
 	$sErrorMsg		= '' ;
-    if(!has_permission($currentFolder, $resourceType) || $_FolderClass < 8 ) {           
+    if(!has_permission($currentFolder, $resourceType) || $_FolderClass < 8 ) {    
          if(!has_open_access()) {    
             $sErrorNumber = 103;     
-            echo '<Error number="' . $sErrorNumber . '" />' ;
+      	    echo '<Error number="' . $sErrorNumber . '" />' ;
             return;
          }
     }
-  
-         
-   
-   if ( isset( $_GET['NewFolderName'] ))
+
+
+	if ( isset( $_GET['NewFolderName'] ) )
 	{
        $sess_id = session_id();
        if(!isset($sess_id) || $sess_id != $_COOKIE['FCK_NmSp_acl']) {
@@ -291,19 +346,24 @@ function CreateFolder( $resourceType, $currentFolder )
             $dwfck_conf['sepchar'] = isset($Dwfck_conf_values['sepchar']) ? $Dwfck_conf_values['sepchar'] : '_';
         }
 
-		$sNewFolderName = $_GET['NewFolderName'] ;        
+		$sNewFolderName = $_GET['NewFolderName'] ;
+        $sNewFolderName = str_replace(' ', $dwfck_conf['sepchar'], $sNewFolderName);
         $sNewFolderName=Dwfck_sanitize( $sNewFolderName ) ;
-        $sNewFolderName=rawurlencode($sNewFolderName ) ;
+
 		if ( strpos( $sNewFolderName, '..' ) !== FALSE )
 			$sErrorNumber = '102' ;		// Invalid folder name.
 		else
 		{
 			// Map the virtual path to the local server path of the current folder.
 			$sServerDir = ServerMapFolder( $resourceType, $currentFolder, 'CreateFolder' ) ;
-            $sServerDir = encode_dir($sServerDir); 
+
+           if($Dwfck_conf_values['fnencode'] == 'url' || ($Config['osWindows'] && !isset($Dwfck_conf_values['fnencode']))) {
+                  $sServerDir=encode_dir($sServerDir);
+           }
             if($Config['osWindows']) {
                 $sServerDir = normalizeWIN($sServerDir); 
             }
+
 			if ( is_writable( $sServerDir ) )
 			{
 				$sServerDir .= $sNewFolderName ;
@@ -336,81 +396,102 @@ function CreateFolder( $resourceType, $currentFolder )
 }
 
 function Dwfck_sanitize($sFileName, $media=false) {    
-    
-        $sFileName = cleanID($sFileName,false,$media);
-        return $sFileName; 
+  global $Dwfck_conf_values;
+          
+        if($Dwfck_conf_values['fnencode'] == 'safe') {
+            if(!$media) {     
+              return dwiki_encodeFN($sFileName); 
+            }
+           return cleanID($sFileName,false,$media);
+        }
+        $sFileName = cleanID(dwiki_decodeFN($sFileName),false,$media);
+        return dwiki_encodeFN($sFileName); 
 }
 
 
 function normalizeWIN($path) {
+  if(!$path) return "";
   global $winChars,  $winSearch;
   if(!isset($winSearch)) {
       $winChars = array('/',':','(',')','{','}','{','}',' ', '\\', 
      ']','[', '$',  '+',  '@',  '!',  '#',  '%',  '*', '?');
       $winSearch = array_map('rawurlencode', $winChars);
   }
+  
    $path = str_replace($winSearch,$winChars,$path);
+   $path = str_replace('/','\\',$path);
+   $path = preg_replace('#\\\\{2,}#','\\',$path);
+   $path = str_replace('.\\','\\',$path);
+  
    return str_replace('+',' ', $path);
+ 
 
 }
-
 
 function UnlinkFile($resourceType, $currentFolder, $sCommand, $filename ) {
 global $Config;
-$move = false;
-$sServerDir = ServerMapFolder( $resourceType, $currentFolder, 'GetFoldersAndFiles' ) ;
+  global $Dwfck_conf_values;
+  $move = false;
 
-if(preg_match('/^(.*?)\/(.*?)$/',$filename,$matches)) {
-  $move = true;
-  $sMoveDir = $sServerDir;
-  $sMoveDir .= encode_dir(Dwfck_sanitize($matches[1])); 
-  $sMoveDir = rtrim($sMoveDir, '/');
+    $sServerDir = ServerMapFolder( $resourceType, $currentFolder, 'GetFoldersAndFiles' ) ;
+    
+    if(preg_match('/^(.*?)\/(.*?)$/',$filename,$matches)) {
+      $move = true;
+      $sMoveDir = $sServerDir;
+      $sMoveDir .= dwiki_encodeFN($matches[1]);
 
-  $filename = $matches[2];
-  mkdir_rek($sMoveDir);
+      $sMoveDir = rtrim($sMoveDir, '/');
+      $filename = $matches[2];        
+      mkdir_rek($sMoveDir); 
+
   
-  if(preg_match('/secure$/', $sMoveDir)){  
-      if(!file_exists($sMoveDir . '/' . '.htaccess')) {
-         copy( 'htaccess' , $sMoveDir . '/' . '.htaccess') ;  
-     }
-  }
+      if(preg_match('/secure$/', $sMoveDir)){  
+          if(!file_exists($sMoveDir . '/' . '.htaccess')) {
+            copy( 'htaccess' , $sMoveDir . '/' . '.htaccess') ;  
+          }
+      }
+      $moveFile = $sMoveDir . '/' . dwiki_encodeFN($filename ); 
 
-  $moveFile = $sMoveDir . '/' . rawurlencode($filename ); 
-}
-else {
-          $sServerDir=encode_dir($sServerDir);
-}
+    }
+    else {
+        if($Dwfck_conf_values['fnencode'] == 'url' || ($Config['osWindows'] && !isset($Dwfck_conf_values['fnencode']))) {
+              $sServerDir=encode_dir($sServerDir);
+        }
+    }
 
-$unlinkFile =    $sServerDir . rawurlencode($filename );
+    $unlinkFile =    $sServerDir . dwiki_encodeFN($filename );
 
-if($Config['osWindows']) {
-   $unlinkFile = normalizeWIN($unlinkFile);
-}
+    if($Config['osWindows']) {
+       $unlinkFile = normalizeWIN($unlinkFile);
+    }
 
-if($move) {
-   if($Config['osWindows']) {
-        $moveFile = normalizeWIN($moveFile);
-   }
-   if(rename($unlinkFile, $moveFile)) {
-     return GetFoldersAndFiles( $resourceType, $currentFolder );
-   }
-   else {
-     $sErrorNumber = '205';
-     echo '<Error number="' . $sErrorNumber . '" />' ;
-     return;
-   }
-}
+    if($move) {
+      if($Config['osWindows']) {
+         $moveFile = normalizeWIN($moveFile);
+       }
+          
+       if(rename($unlinkFile, $moveFile)) {
+         return GetFoldersAndFiles( $resourceType, $currentFolder );
+       }
+       else {
+         $sErrorNumber = '205';
+         echo '<Error number="' . $sErrorNumber . '" />' ;
+         return;
+       }
+    }
 
-if(file_exists($unlinkFile) && unlink($unlinkFile)) {
-      return GetFoldersAndFiles( $resourceType, $currentFolder );
-}
-else $sErrorNumber = '204';
-echo '<Error number="' . $sErrorNumber . '" />' ;
+    if(file_exists($unlinkFile) && unlink($unlinkFile)) {
+          return GetFoldersAndFiles( $resourceType, $currentFolder );
+    }
+    else {
+        $sErrorNumber = '204';
+        echo '<Error number="' . $sErrorNumber . '" />' ;
+    }
 
 }
 
 function encode_dir($path) {
- 
+   
    if(preg_match('/%25/',$path)) {
      $path =  urldecode($path);
      while(preg_match('/%25/',$path)) {
@@ -420,6 +501,7 @@ function encode_dir($path) {
      return $path;
 
    }
+
    if(preg_match('/%[A-F]\d/i',$path) || preg_match('/%\d[A-F]/i',$path)) {          
      return $path;
    }
@@ -429,19 +511,19 @@ function encode_dir($path) {
 
    $new_path = "";
    foreach($dirs as $dir) {
-      $new_path .=rawurlencode($dir) . '/';     
+     $new_path .= dwiki_encodeFN($dir). '/';
    }
 
     $new_path = rtrim($new_path,'/');
     $new_path .= '/';
-   
+
     return $new_path;
 }
 
 function FileUpload( $resourceType, $currentFolder, $sCommand )
 {
     global $dwfck_conf;
-
+    
 	if (!isset($_FILES)) {
 		global $_FILES;
 	}
@@ -468,17 +550,28 @@ function FileUpload( $resourceType, $currentFolder, $sCommand )
     }
 
 
-  $ns_tmp = urldecode(trim($currentFolder, '/'));
 
+  $safe = false;
+  global $Dwfck_conf_values;
+  if($Dwfck_conf_values['fnencode'] == 'safe') {
+      if(preg_match('/%[a-z]+[0-9]/',$currentFolder) || preg_match('/%[0-9][a-z]/',$currentFolderp)) {
+          $safe = true;
+      }
+  }
+  $ns_tmp = dwiki_decodeFN(trim($currentFolder, '/'));
+ 
   $ns_tmp = str_replace('/', ':', $ns_tmp);  
   $test = $ns_tmp . ':*' ;   
-  $test =  urldecode($test);
-  while(preg_match('/%25/',$test)){
+
+  if(!$safe) {
+    $test = urldecode($test);
+    
+    while(preg_match('/%25/',$test)){
           $test =  urldecode($test);
+    }
+    $test = urldecode($test);
   }
-
-  $test = urldecode($test);
-
+  
    $isadmin = isset($_SESSION['dwfck_conf']['isadmin']) ? $_SESSION['dwfck_conf']['isadmin'] : false; 
    if(!$isadmin) {
        $AUTH = auth_aclcheck($test, $_SESSION['dwfck_client'] , $_SESSION['dwfck_grps'],1);   
@@ -491,7 +584,9 @@ function FileUpload( $resourceType, $currentFolder, $sCommand )
 
          }
    }
-    $currentFolder = encode_dir($currentFolder);
+    if(!$safe) {
+        $currentFolder = encode_dir($currentFolder);
+    }
 	if ( isset( $_FILES['NewFile'] ) && !is_null( $_FILES['NewFile']['tmp_name'] ) )
 	{
 		global $Config ;
@@ -499,12 +594,13 @@ function FileUpload( $resourceType, $currentFolder, $sCommand )
  
 		$oFile = $_FILES['NewFile'] ;
 
+
 		// Map the virtual path to the local server path.
 		$sServerDir = ServerMapFolder( $resourceType, $currentFolder, $sCommand ) ; 
 
 		// Get the uploaded file name.
-		$sFileName = $oFile['name'] ;
-        $sOriginalFileName = $sFileName;
+		$sFileName = dwiki_encodeFN($oFile['name']) ;
+        $sOriginalFileName = dwiki_encodeFN($sFileName);
 
 		// Get the extension.
 		$sExtension = substr( $sFileName, ( strrpos($sFileName, '.') + 1 ) ) ;
@@ -531,9 +627,8 @@ function FileUpload( $resourceType, $currentFolder, $sCommand )
 				$sErrorNumber = '202' ;
 			}
 		}
-         
+        
         $sFileName = Dwfck_sanitize($sFileName, $image_file);
-
 
 		// Check if it is an allowed extension.
 		if ( !$sErrorNumber && IsAllowedExt( $sExtension, $resourceType ) )
@@ -567,14 +662,14 @@ function FileUpload( $resourceType, $currentFolder, $sCommand )
                 }
                
 				$sFilePath = $sServerDir . $sFileName ;
-				
+
 
 				if ( is_file( $sFilePath ) )
 				{
 					$iCounter++ ;
        			    $sFileName = RemoveExtension($sOriginalFileName) . '_' . $iCounter  . ".$sExtension" ;
                     $sFileName = Dwfck_sanitize($sFileName, $image_file);
- 
+
 					$sErrorNumber = '201' ;
 				}
 				else
@@ -637,9 +732,8 @@ function FileUpload( $resourceType, $currentFolder, $sCommand )
 function mkdir_rek($dir, $mode = 0777)
 {
  global $Config; 
-    if($Config['osWindows']) $dir=normalizeWIN($dir);
-  	if (!is_dir($dir))	{
-        
+    if($Config['osWindows']) $dir=normalizeWIN($dir);  
+	if (!is_dir($dir))	{        
 		mkdir_rek(dirname($dir), $mode);
 		mkdir($dir, $mode);
 
@@ -647,7 +741,7 @@ function mkdir_rek($dir, $mode = 0777)
 }
 
 
-function write_debug($what) {
+function cmd_write_debug($what) {
 return;
 if(is_array($what)) {
    $what = print_r($what,true);

@@ -59,6 +59,8 @@ function FindBadUtf8( $string )
 
 function ConvertToXmlAttribute( $value )
 {
+ // util_debug($value);
+ // util_debug( utf8_encode( htmlspecialchars( $value ) ));
 	if ( defined( 'PHP_OS' ) )
 	{
 		$os = PHP_OS ;
@@ -70,10 +72,14 @@ function ConvertToXmlAttribute( $value )
 
 	if ( strtoupper( substr( $os, 0, 3 ) ) === 'WIN' || FindBadUtf8( $value ) )
 	{
+	    
+//	        util_debug('FindBad' .  htmlspecialchars($value)); 
+//               util_debug('FindBad' . utf8_encode( htmlspecialchars( $value ) ));
 		return ( utf8_encode( htmlspecialchars( $value ) ) ) ;
 	}
 	else
 	{
+//	util_debug('speccial chars=' . htmlspecialchars($value));
 		return ( htmlspecialchars( $value ) ) ;
 	}
 }
@@ -270,6 +276,10 @@ function folder_as_entities($path, $type="abs") {
     return $return_path;
 }
 
-
+ function util_debug($data) {
+    $handle = fopen('util.dbg', 'a');
+    fwrite($handle, $data . "\n");
+    fclose ($handle);
+ }
 
 ?>

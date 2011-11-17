@@ -1,0 +1,159 @@
+rev 11-Sep_08-10_41
+
+Note:  For the log of Changes prior to thei document, see the file named Changes.1.
+
+11 May 2011
+A completely new handling of the Dokuwiki draft mechanism.  The previous implementation
+for accessing drafts was out-of-date.  These changes meant pruning away a great deal of 
+unnecssary code (and there is always the chance that an error crept in when pruning).
+
+12 May 2011
+Improved Ajax handling for re-naming DW's draft files to fckgLite names, since not
+all browsers handled the previous method successfully.  Current method runs an
+interval timer to check for DW draft files, whereas previously the Ajax call was made
+from the timer function in handler.php.
+
+Changed regex for handling angle brackets inside code blocks (edit.php), using
+entities instead of "< " and " >", &lt; and &gt;.
+
+Added assignment of FCKeditor's Editor Node to helper.php's FCKeditor_OnComplete();
+fckeditor.html also makes this assigment but has to keep re-trying until is succeeds
+in connecting to FCK.EditorDocument, whereas this method is more immediate. This
+assigment is critical to the draft system.
+
+13 May 2011
+Decreased draft time from minute to 45 seconds (DW writes draft every 30 secs).
+Decreased time for renaming of DW draft files to fckgLite draft files.
+Added lock to renaming of DW draft files in scripts/draft_rename.php.
+
+19 May 2011
+Removed "TEST" designation from the distribution which offers a new implementation of the
+Dokuwiki Draft mechanism.
+
+19  May 
+Removed DW Renderer's acronym processing from the output to the FCKEditor editor;
+this does not interfere with acronyms processed for final output in browser. This
+solves a problem of acronymic names that appear in plugins and plugin syntax, since
+the editor sess these as acronyms instead of as plugin syntax.
+ 
+23 May
+Fixed ACL check in filemanager/connectors/php/check_acl.php which was not fully
+backwardly compatible with DW after upgrading wilcdard %USER% substitions and which
+could fail under some conditions even in current DW distros. 
+
+Put array check into edit.php when checking for guest user in edit.php where
+the save and delete buttons are disabled for guests (approx lines 435ff.).  Some
+systems got a PHP warning because the $INFO[userinfo][grps] did not hold an array.
+
+25 May
+Forward slashes in userewrite=2 were not being converted to colons, when saved.
+This is now fixed in edit.php.
+
+3 June
+Re-worked the new draft recovery facility so that fckl draft files are removed in a
+timely fashion, so as to prevent false draft file notifications.  Save, Show, Delete,
+and Cancel buttons call draft_rename(), which deletes the fckl file, so that
+it remains on the server only in cases where there is some interruption of
+normal processing.
+
+4 June
+Made Call to draft_rename synchronous; otherwise there is no guarantee that it will
+delete the draft file from the server
+
+5 June
+Renamed draft_refresh to draft_delete in function calls and fckg/scripts to reflect
+the new use of that function (see 3 June).
+
+6 June
+Added regex to save.php that preserves %[a-f]{2} sequences, like %ad in %admin,
+from being mistaken by rawurldecode for html-encoded characters.
+
+Cleaned up some useless code in meta.php.
+
+Added check in edit.php to ignore draft files left over by DW Edit previews 
+when switching from DW Edit to FCKG Edit; these are not deleted, as they
+are when saving of canceling when in DW Edit.
+
+7 June
+Fixed problem where HTML brackets were replaced by entities in GESHI blocks.
+
+9 June
+Permanent fix for draft file left over after DW Edit preview -- there was a bug in the
+Javascript call, which corrupted  draft filename.
+
+10 June
+Spoke too soon on 9 June.  With multiple previews in DW Edit, draft file remains on
+server.  This is now removed in meta.php set_session().
+
+Added additional check to above by creating a new POST/hidden input item for the edit form
+Qbject that appears in the $_REQUEST object only when DW Edit preview is in effect.
+
+20 June
+Inserted paragraph break above a code block that comes at top of file to enable insertion
+of text above it; it is removed on save.
+
+25 June
+Added mechanism to handle swf files.
+
+
+26 June
+Fix for corrupted code blocks containing MULTI_PLUGIN (uses old style "< " and " >' instead
+of &lt; and &gt; for html-style elements.
+
+Added flash icon to FCKeditor
+
+Added %%. . .%% escape around characters, which is converted to <nowiki>; this is an extension
+of the earlier use of this on 12 Jan 2011.
+
+27 June
+Added support for nolinks and direct image links.
+
+28 June
+Fixed bug where direct (internal) links were being identified as external; also where
+external direct were being missed.
+
+In link.js removed wikilink class from URL when re-writing a url that had been an internal link.
+
+30 June
+Upgraded action/ent.ser to handle additional Latin entities
+
+4 Jul
+Fix for bugs in converting percent escapes to nowiki tags
+
+Further Fix:  created single preg_replace_callback which handles all nested configurations of 
+percents and nowiki tags.
+
+15 Jul
+In helper.php: fixed bug in passing usergroups to filebrowser's browser.html, which affects
+acl determination in config.php
+
+17 Jul
+In helper.php: intercept DW's onbeforeunload to issue our own warning when changes have
+been made but not saved.
+
+20 Jul
+Added support for link-only images.
+
+Set window.dwfckTextChanged to false on save, because Anteater gives onbeforunload warning
+on save.
+
+21 Jul
+Removed onbeforeunload from Safari which freezes when message is canceled and improved
+keyhandler install.
+
+1 Aug
+Removed upload and folder create buttons from filebrowser when DW's 'Show pagesource' is in effect.
+
+Eliminated php warning from an implode in helper.php.
+
+12 Aug
+aspell.php: added isset() check for 'FCK_aspell' index in $COOKIE array
+
+2 Sep
+fckeditor link dialog:  when manually entering internal links, any link name that is not specified
+as being from the top of the wiki is now treated as relative to the current namespace, i.e.
+any name that does not begin with a colon for instance, namespace:file, whereas :namespace:file
+is treated as coming off the wiki's root directory.
+
+4 Sept
+Minor non-affecting edit to meta.php.

@@ -23,7 +23,7 @@ FCKLang.AbbrDlgHLStet		="<b>Stet Plugin</b>";
 FCKLang.AbbrDlgHLEdit		="<b>Edit Dokuwiki Plugin</b>";
 FCKLang.AbbrDlgClick		="<b>Click OK when done. Or Cancel.</b>";
 FCKLang.AbbrDlgStet 	        ="Create a string literal from text containing HTML and/or DokuWiki Markup characters";
-FCKLang.AbbrDlgEditPlugin	="Edit a plugin which was not created using the plugin tool.";
+FCKLang.AbbrDlgEditPlugin	="Edit a Syntax Plugin.";
 FCKLang.ImmutableEditorHeader = "Immutable Plugin Editor";
 FCKLang.AbbrDlgImmRevise = "Revise raw plugin syntax";
 

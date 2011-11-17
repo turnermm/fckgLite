@@ -90,9 +90,7 @@ function Ok() {
     if(document.getElementById("remove").checked) {
         document.getElementById("infotext").value = '';
     }
-    if(document.getElementById("stet").checked) {
-        document.getElementById("infotext").value = 'stet';
-    }
+
     if(document.getElementById("edit").checked) {
        var checked = document.getElementById('revise_imm_markup').checked;
 
@@ -108,9 +106,7 @@ function Ok() {
          }
              return true;
        }
-       
-
-       
+              
        if(immutable_plugin) {
          var regex = new RegExp(">.*<");
          text = document.getElementById("edited_text").value;
@@ -144,6 +140,7 @@ function Ok() {
 
 	return true;
 }
+
 var saveSelection = "";
 function checkSelection () {
 	if (document.selection) {													// IE
@@ -265,7 +262,7 @@ function openEditor() {
 
 <style type="text/css">
 #message, #inputfield, #checkbox,#stet_checkbox, #edit_checkbox, #editing_area { display: none; }
-#inputfield, .title { font-size: 10pt; }
+/*#inputfield, .title { font-size: 10pt; } */
 #checkbox,#stet_checkbox, #edit_checkbox, #edited_text { font-size: 9pt; }
 #message { font-size: 11pt; color: white; background-color:blue; }
 abbr { border-bottom: 1px dotted rgb(102, 102, 102); cursor: help; }
@@ -276,27 +273,28 @@ abbr { border-bottom: 1px dotted rgb(102, 102, 102); cursor: help; }
 
 <table cellSpacing="8"  cellPadding="0" align="center" border="0">
 <tr>
-<td><span style="font-family:Verdana, Arial, sans-serif;font-size:10pt; color:#444;"></span>
+<td>
 <span id="message" fckLang="AbbrDlgSelectFirst">You have to select the plugin syntax first!</span>
-<div id="inputfield"><span fckLang="AbbrDlgHLCreate"><b>Create a Plugin</b></span><br />
-<span style="line-height: 150% font-size: 100%" fckLang="AbbrDlgName">Enter Plugin Name</span><br>&nbsp;&nbsp;&nbsp;
-
-<input type = "text" size="30" style="font-size:10pt;" name="infotext" id="infotext">
-</input><br><span fckLang="AbbrDlgClick">Click OK when done. Or Cancel.</span>
-<br></div>
+<div id="inputfield">
+<span fckLang="AbbrDlgHLCreate"><b>Create a Plugin</b></span><br />
+<span fckLang="DlgNotAvail">No Longer Available. </span> See documentation.
+<input type = "hidden" size="30" name="infotext" id="infotext"  value="">
+</div>
 
 <tr><td>
-<div id="stet_checkbox"><span fckLang="AbbrDlgHLStet">
-<b class="title" >Stet Plugin</b></span><br>
-<input id="stet" type="checkbox" onclick='toggle_infotext();'>&nbsp;&nbsp;<label for="stet">
+<div id="stet_checkbox">
+<span fckLang="AbbrDlgHLStet"><b class="title" >Stet Plugin</b></span><br />
+<span fckLang="DlgNotAvail"> No Longer Available.</span> <span fckLang="DlgPluginUseNowiki"> Use &lt;nowiki&gt;</span>
+<br />
+<input id="stet" type="hidden" value="">&nbsp;&nbsp;<label for="stet">
 <span fckLang="AbbrDlgStet">Create a string literal from text containing HTML and/or DokuWiki Markup characters </span></label>
-<br><span fckLang="AbbrDlgClick"><br><b>Click OK when done. Or Cancel.</b></span>
+<br>
 </div>
 <tr><td>
 <div id="edit_checkbox"><span fckLang="AbbrDlgHLEdit">
 <b class="title">Edit Dokuwiki Plugin</b></span><br> 
 <input id="edit" onclick="openEditor();" type="checkbox">&nbsp;&nbsp;&nbsp;<label for="edit">
-<span fckLang="AbbrDlgEditPlugin">Edit a plugin which was not created using the plugin tool</span></label></div>
+<span fckLang="AbbrDlgEditPlugin">Edit a plugin</span></label></div>
 </td>
 </tr>
 
@@ -304,7 +302,6 @@ abbr { border-bottom: 1px dotted rgb(102, 102, 102); cursor: help; }
 <div id="checkbox">
 <input id="remove" type="checkbox">&nbsp;&nbsp;&nbsp;<label for="remove">
 <span fckLang="AbbrDlgRemove">Remove Plugin</span></label></div>
-
 </td>
 </tr>
 </table>

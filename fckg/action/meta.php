@@ -350,6 +350,25 @@ SCRIPT;
 
   }
 
+function is_safeUpgraded() {
+   $safescript = DOKU_PLUGIN . 'fckg/scripts/safeFN_class.js';
+    if(!file_exists($safescript) ){	    
+		return false; 
+	}
+   $lines = file($safescript );
+	
+	for($i=0; $i<count($lines); $i++) {    
+	  if(strpos($lines[$i],'/**')){
+		 if(isset($lines[$i+1])) { 
+			if(stripos($lines[$i+1], 'upgrade') !== false) {
+			 return true;
+		  } 
+		}
+	   }
+	  }
+	  return false;
+}
+  
 function fnencode_check() {
 
 
@@ -358,9 +377,7 @@ function fnencode_check() {
        $rencode = false;
 	  
         if($conf['fnencode'] != 'safe') return;
-		if (file_exists(DOKU_PLUGIN . 'fckg/conf/saferencode.revert')) {
-		     return;
-		}
+
         if(isset($updateVersion) && $updateVersion >= 31) {           
           $rencode = true;     
         }
@@ -385,7 +402,7 @@ function fnencode_check() {
          . " <a style='color:blue' href='http://www.dokuwiki.org/plugin:fckglite?&#fckglitesafe'>See fckgLite at Dokuwiki.org</a>  ",
             -1);
       }	 
-      else if(!$rencode && file_exists(DOKU_PLUGIN . 'fckg/saferencode'))   {
+      else if(!$rencode && file_exists(DOKU_PLUGIN . 'fckg/saferencode') && $this->is_safeUpgraded() )   {	    
 	    msg("This version of fckgLiteSafe requires a newer version of Dokuwiki (2011-05-25 Rincewind or later).  You risk corrupting your file system. "
 		 .   "To convert this distribution of fckgLite/fckgLiteSafe for use with earlier versions of Dokuwiki,  see the README file or " 
 		 . " <a style='color:blue' href='http://www.mturner.org/dwfck/fckgLite/doku.php?id=docs:upgrade_6&#anteater'>or the fckgLite web site</a>  ",

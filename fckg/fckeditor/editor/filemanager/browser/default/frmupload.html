@@ -28,17 +28,22 @@
 		<link href="browser.css" type="text/css" rel="stylesheet" >
 		<script type="text/javascript" src="js/common.js"></script>
 		<script type="text/javascript" src="js/language.js"></script>
+		<script type="text/javascript" src="js/safeFN_class.js"></script>
 		<script type="text/javascript">
+
+/* requires safe_ascii */
 
 var CurrentDWikiUser = parent.CurrentDWikiUser;
 var isLocalDwikiBrowser = parent.isLocalDwikiBrowser;
 var CreateDwikiFolder = parent.CreateDwikiFolder;
+var DwikiFNencode = parent.DwikiFNencode;
 
 function SetCurrentFolder( resourceType, folderPath )
 {
 	var sUrl = oConnector.ConnectorUrl + 'Command=FileUpload' ;
 	sUrl += '&Type=' + resourceType ;
-	sUrl += '&CurrentFolder=' + encodeURIComponent( folderPath ) ;
+  	sUrl += '&CurrentFolder=' + dwikiUTF8_encodeFN(folderPath,DwikiFNencode) ;
+//	sUrl += '&CurrentFolder=' + encodeURIComponent( folderPath ) ;
 
 	document.getElementById('frmUpload').action = sUrl ;
 }
@@ -108,7 +113,8 @@ window.onload = function()
 {
     window.top.IsLoadedUpload = true ;
     setupLanguage();
-    if(CurrentDWikiUser == 'visitor' || isLocalDwikiBrowser || !CurrentDWikiUser) { 
+
+    if(CurrentDWikiUser == 'visitor' || isLocalDwikiBrowser || !CurrentDWikiUser) {
        document.getElementById('btnUpload').disabled = true ;
        document.getElementById('btnUpload_div').innerHTML = "";
 
@@ -120,6 +126,7 @@ window.onload = function()
    if(navigator.userAgent.match(/macintosh/i)) {
        document.getElementById('is_mac').innerHTML = 'Cmd';
    }
+
 }
 		</script>
 	</head>
@@ -137,7 +144,6 @@ window.onload = function()
 						</table>
 					</td>
 <td align='right'>
-
 <div id ='folder_hints'>
 <table>
 <tr>

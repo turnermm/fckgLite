@@ -208,9 +208,6 @@ window.document.dir = FCKLang.Dir ;
 	</script>
 	<script type="text/javascript">
 
-var getDocAttempts = 0;
-var getDocAttemptsID;
-
 window.onload = function()
 {
 	InitializeAPI() ;
@@ -219,47 +216,7 @@ window.onload = function()
 		FCK_PreloadImages() ;
 	else
 		LoadToolbarSetup() ;
-
-  getDocAttemptsID = window.setTimeout(getdocbody, 1000);
   top.FCKEditorWindowObj(window);
-}
-
-function getdocbody() {
-   window.clearTimeout(getDocAttemptsID);
-   getDocAttempts++;
-
-   if(getDocAttempts > 7 && top.resetDokuWikiLockTimer) {
-         top.resetDokuWikiLockTimer(false);
-         return;
-   }
-   if(FCK.EditorDocument && FCK.EditorDocument.body) {     
-      top.ourFCKEditorNode = FCK.EditorDocument.body;   
-      if(document.attachEvent) {
-           var mt = new MT_DataEvent('IE');
-           mt.push(FCK.EditorDocument.body,'KeyboardEvent','onkeypress');                  
-           mt.eventLoop ();
-           MT_DataEvent.notify(mt);
-      }
-      else {     
-            var mt = new MT_DataEvent('gecko');
-            mt.push(FCK.EditorDocument,'KeyboardEvent','keypress');
-            mt.push(FCK.EditingArea.Window,'KeyboardEvent','keypress');
-            mt.eventLoop ();     
-            MT_DataEvent.notify(mt);
-     }
-     
-    }
-     
-   else {
-     getDocAttemptsID = window.setTimeout(getdocbody, 1000);
-   }
-}
-
-function locktimer_count(e) {
-   // alert("Type: " + e.type);
-    if(top.handlemouspress) {
-        top.handlemouspress(e);
-    }
 }
 
 function LoadToolbarSetup()
@@ -338,7 +295,7 @@ if ( FCKBrowserInfo.IsGecko && !FCKBrowserInfo.IsOpera )
 	</script>
 
 	<script type="text/javascript">
-     LoadScript( 'dataEvent.js' )  
+     //LoadScript( 'dataEvent.js' )  
 	</script>
 
 </head>

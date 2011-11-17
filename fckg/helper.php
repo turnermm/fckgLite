@@ -155,7 +155,8 @@ var oldBeforeunload;
     *    handles both mousepresses and keystrokes from FCKeditor window
     *    assigned in fckeditor.html
   */
- function handlemouspress(e) { 
+ function handlekeypress (e) {  
+   // alert(e);
    if(ourLockTimerIsSet) {
          lockTimerRefresh();
    }
@@ -175,7 +176,7 @@ var oldBeforeunload;
     }
   
   locktimer.reset = function(){
-        locktimer.clear();  /// alert(locktimer.timeout);
+        locktimer.clear();  // alert(locktimer.timeout);
         window.clearTimeout(ourLockTimerWarningtimerID);
         ourLockTimerWarningtimerID =  window.setTimeout(function () { locktimer.warning(); }, locktimer.timeout);
    };
@@ -345,21 +346,12 @@ function disableDokuWikiLockTimer() {
   }
 }
 
-var dwfck_keyPressHandlerInstalled=false;
-function MT_keyPressHandlerInstalled() {
-  dwfck_keyPressHandlerInstalled=true;
-}
-
-function dwfckKeypressBak() {
-  if(window.addEventListener){
-    if(!dwfck_keyPressHandlerInstalled) {
-      oDokuWiki_FCKEditorInstance.EditorDocument.addEventListener('keyup', handlemouspress, false) ;
-    }
+function dwfckKeypressInstallHandler() {
+  if(window.addEventListener){    
+      oDokuWiki_FCKEditorInstance.EditorDocument.addEventListener('keyup', handlekeypress , false) ;
   }
-  else {
-   if(!dwfck_keyPressHandlerInstalled) {
-     oDokuWiki_FCKEditorInstance.EditorDocument.attachEvent('onkeyup', handlemouspress) ;
-   }
+  else {   
+     oDokuWiki_FCKEditorInstance.EditorDocument.attachEvent('onkeyup', handlekeypress ) ;
   }
 }
 
@@ -397,11 +389,10 @@ function FCKeditor_OnComplete( editorInstance )
   }
   else {
    editorInstance.EditorDocument.attachEvent('onkeydown', CTRL_Key_Formats) ;
-  }
-  window.setTimeout(dwfckKeypressBak, 3000);
+  }  
+  dwfckKeypressInstallHandler();
   
   var index = navigator.userAgent.indexOf('Safari'); 
-
   if(index == -1  || (navigator.userAgent.indexOf('Chrome'))) {
     oldBeforeunload = window.onbeforeunload;
     window.onbeforeunload = fckgEditorTextChanged;
@@ -417,18 +408,20 @@ function FCKeditor_OnComplete( editorInstance )
 
 function CTRL_Key_Formats(parm) {
 
-     if(!parm.ctrlKey && !parm.altKey) return;
-
-    if(parm.altKey && parm.keyCode == 56) {
-		oDokuWiki_FCKEditorInstance.get_FCK().ToolbarSet.CurrentInstance.Commands.GetCommand('InsertUnorderedList').Execute();
+     if(!parm.ctrlKey) return;
+  
+    if(parm.keyCode == 56) {
+		oDokuWiki_FCKEditorInstance.get_FCK().ToolbarSet.CurrentInstance.Commands.GetCommand('InsertUnorderedList').Execute();	
+		return;
  	}
-		
-	if(parm.altKey && parm.keyCode == 109) {	 
+	
+	if(parm.keyCode == 109) {	 
 		oDokuWiki_FCKEditorInstance.get_FCK().ToolbarSet.CurrentInstance.Commands.GetCommand('InsertOrderedList').Execute();
+		return;
     }
-	 
+		
     /* h1 - h5 */
-     if(parm.ctrlKey && parm.keyCode >=49 && parm.keyCode <=53) {
+     if(parm.keyCode >=49 && parm.keyCode <=53) {
          var n = parm.keyCode - 48;
          oDokuWiki_FCKEditorInstance.get_FCK().Styles.ApplyStyle('_FCK_h' + n);
          return;  
@@ -436,6 +429,7 @@ function CTRL_Key_Formats(parm) {
      /*  code/monospace -> 77 = 'm' */
      if(parm.keyCode == 77) {
         oDokuWiki_FCKEditorInstance.get_FCK().Styles.ApplyStyle('_FCK_code');
+		return;
      }
 
     /* CTRL-0 = Normal, i.e. <p> */
@@ -445,41 +439,23 @@ function CTRL_Key_Formats(parm) {
 
   }
 
-
  
   var DWikifnEncode = "$fnencode";
-  
-/* Make sure that show buttons in top and/or bottom clear the fckl file */
-function get_showButtons() {
-	var buttons = new Array();
-	var forms = document.getElementsByTagName('form');
 
-	for(var i=0; i<forms.length;i++) {
-	   var f = forms[i]; 
-	   var stoploop = false;
-	   for(name in f) {
-	    if(name.match(/classList/i)){   
-	        var fnm =new String(f[name]); 
-	        if(!fnm) continue; 
-	        if(fnm.match(/btn_show/)) {
-	           buttons.push(f);
-	        }
-	   }
-	 }
-   }
-  
-  
-  for(var i=0; i<buttons.length; i++) {
-    var f = buttons[i].elements;
-    for(var i in f) {
-        if(f[i].type && f[i].type.match(/submit/i)) {
-           f[i].onmouseup = draft_delete;
+/* Make sure that show buttons in top and/or bottom clear the fckl file */  
+ function get_showButtons() {	
+	var inputs = document.getElementsByTagName('input');
+    
+     for(var i=0; i<inputs.length; i++) {	    
+        if(inputs[i].type && inputs[i].type.match(/submit/i)) {		           		    
+			if(inputs[i].value.match(/Show/i) || (inputs[i].form &&  inputs[i].form.className.match(/btn_show/) ) )
+    			inputs[i].onmouseup = draft_delete;
         }
-    }
+     }
   }
-}
-
- get_showButtons();
+ 
+ /* make sure the entire page has been loaded */
+ setTimeout("get_showButtons()", 3000);
  //]]>
  
 </script>

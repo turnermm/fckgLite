@@ -28,11 +28,14 @@
 		<link href="browser.css" type="text/css" rel="stylesheet">
 		<script type="text/javascript" src="js/common.js"></script>
 		<script type="text/javascript" src="js/language.js"></script>
+		<script type="text/javascript" src="js/safeFN_class.js"></script>
 		<script type="text/javascript">
 
 var CurrentDWikiUser = parent.CurrentDWikiUser;
 var isLocalDwikiBrowser = parent.isLocalDwikiBrowser;
 var CreateDwikiFolder = parent.CreateDwikiFolder;
+var DwikiFNencode = parent.DwikiFNencode;
+
 function SetCurrentFolder( resourceType, folderPath )
 {
 	oConnector.ResourceType = resourceType ;
@@ -55,7 +58,12 @@ function CreateFolder()
 			break ;
 	}
 
-	oConnector.SendCommand( 'CreateFolder', 'NewFolderName=' + encodeURIComponent( sFolderName) , CreateFolderCallBack ) ;
+/* requires safe_ascii */
+if(DwikiFNencode == 'safe') {
+   sFolderName=sFolderName.toLowerCase();
+   sFolderName=sFolderName.replace(/\s/g, '_');
+}
+oConnector.SendCommand( 'CreateFolder', 'NewFolderName=' + dwikiUTF8_encodeFN(sFolderName,DwikiFNencode) , CreateFolderCallBack ) ;
 }
 
 function CreateFolderCallBack( fckXml )
@@ -97,7 +105,7 @@ window.onload = function()
    window.top.IsLoadedCreateFolder = true ;
    setupLanguage();
 
-  if(CurrentDWikiUser == 'visitor' || isLocalDwikiBrowser || !CurrentDWikiUser) {
+   if(CurrentDWikiUser == 'visitor' || isLocalDwikiBrowser || !CurrentDWikiUser) {
      document.getElementById("btn__create_folder").disabled = true;    
      document.getElementById("create_folder").innerHTML = "";
    }

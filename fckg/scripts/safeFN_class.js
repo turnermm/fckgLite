@@ -1,4 +1,8 @@
   /**
+   * Upgraded
+   *  !!Do not modify the above line!!
+   */
+  /**
   *  SafeFN is a Javascript implementation of Christopher Smith's php
   *  SafeFN class which was written for Dokuwiki 
   *  

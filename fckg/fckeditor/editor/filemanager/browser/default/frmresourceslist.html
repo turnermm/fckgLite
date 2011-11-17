@@ -33,9 +33,7 @@
 
 var oListManager = new Object() ;
 var currentFolderUploadStatus;
-
-DwikiFNencode = parent.DwikiFNencode ? parent.DwikiFNencode : 'url';
-
+var DwikiFNencode = parent.DwikiFNencode;
 var isInternalLink = parent.isLocalDwikiBrowser;
 var ImagesAllowed = new RegExp(parent.FCKConfig.ImageUploadAllowedExtensions);
 
@@ -75,21 +73,19 @@ oListManager.GetFolderRowHtml = function( folderName, folderPath, folder_class, 
 
 var imageDirectoryRegex = new RegExp ('^(.*?fckg\\/fckeditor\\/userfiles\\/image\\/)(.*)');
 function reviseImgSrc(url) {
-    var imgUrl = decodeURI(decodeURI(url));
-    var matches = imgUrl.match(imageDirectoryRegex);
-    if(matches && matches.length > 1) {
-        return  matches[1]+ encodeURI(dwikiUTF8_encodeFN(matches[2],DwikiFNencode));
-    }
-    else {
-        var matches = imgUrl.match(/^http:\/\/(.*)/);
-        if(matches) {
-          return 'http://' + encodeURI(dwikiUTF8_encodeFN(matches[1],DwikiFNencode));
-       }
-    }
-   return url;
+ var imgUrl = decodeURI(decodeURI(url));
+ var matches = imgUrl.match(imageDirectoryRegex); 
+ if(matches && matches.length > 1) {
+    return  matches[1]+ encodeURI(dwikiUTF8_encodeFN(matches[2],DwikiFNencode));
+ }
+ else { 
+   var matches = imgUrl.match(/^http:\/\/(.*)/);
+   if(matches) {
+      return 'http://' + encodeURI(dwikiUTF8_encodeFN(matches[1],DwikiFNencode));
+   }
+ }
+ return url;
 }
-          
-
 
 function oListImage(fileUrl,width,height) {
 
@@ -124,8 +120,8 @@ function big_image(id) {
         }
     }
 
-    var element = '<img border = "0" src = "' + oImg.src + '" width = "' + width + '" height="' + height + '">';
-    element += '<center><br /><button class="bigwin_close_but" onclick="OpenFile(\''+ ProtectPath(oImg.fileUrl) +'\');void 0;">insert into document<\/button><\/center>';    
+    var element = '<img border = "0" src = "' + oImg.src + '" width = "' + width + '" height="' + height + '">';     
+    element += '<center><br /><button class="bigwin_close_but" onclick="OpenFile(\''+ ProtectPath(oImg.fileUrl) +'\');void 0;">insert into document<\/button><\/center>';
     var big_win = document.getElementById('bigwin_display');
     big_win.innerHTML = element;
     big_win = document.getElementById('big_imagewin');
@@ -241,10 +237,10 @@ function OpenFolder( folderPath )
 	// Load the resources list for this folder.
 	window.parent.frames['frmFolders'].LoadFolders( dwikiUTF8_encodeFN(folderPath,DwikiFNencode) ) ;
 }
-
-
+ 
 function UnlinkFile(evt,f) {
 var evt = (evt) ? evt : ((window.event) ? event : null);
+
     if(evt && (evt.ctrlKey||evt.metaKey)) {
         move_to = window.prompt('Subdirectory of current directory to which you want to move ' + f, "secure");
         if(move_to) {
@@ -254,7 +250,9 @@ var evt = (evt) ? evt : ((window.event) ? event : null);
               alert(translateItem('FolderMoveWarning','You can only move files to a folder one level below the current directory'));
               return false;     
             }
-           // move_to = encodeURI(dwikiUTF8_encodeFN(move_to,DwikiFNencode));
+            move_to = move_to.toLowerCase(move_to);
+            move_to = move_to.replace(/\s/g, '_');
+            move_to = encodeURI(dwikiUTF8_encodeFN(move_to,DwikiFNencode));
             f = move_to + '/' +f;
         }
         else return false;  
@@ -264,7 +262,6 @@ var evt = (evt) ? evt : ((window.event) ? event : null);
     }
     oConnector.SendCommand( 'UnlinkFile', 'file=' + f, UnlinkFileCallBack ) ;
 }
-
 
 function OpenFile( fileUrl )
 {
@@ -361,10 +358,6 @@ function GetFoldersAndFilesCallBack( fckXml )
     var big = '<center><div id="big_imagewin"><div id="bigwin_display"></div>' +
               '<div id="big_iwin_close"><button onclick="close_bigImgwin();"  class="bigwin_close_but">close</button>&nbsp;&nbsp;&nbsp;</div></div></center>';
 	document.body.innerHTML = big + oHtml.ToString() ;
-    if(isImage) {
-    //   insertImages();   
-    }
-
   
    
 }

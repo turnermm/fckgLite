@@ -109,7 +109,8 @@ AbbrDlgEditPlugin	: "Edit a plugin which was not created using the plugin tool."
 AbbrDlgName  		: "Enter Plugin Name--try to be exact",
 AbbrDlgRemove		: "Remove plugin-tag (content remains)",
 AbbrDlgSelectFirst	: "You have to select the plugin syntax first!",
-
+DlgNotAvail            : "Deprecated. No longer available. ",
+DlgPluginUseNowiki : 'Use &lt;nowiki&gt; instead',
 
 //Break To Paragraph
 BreakToParagraph :	"<BR> to <P>",

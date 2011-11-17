@@ -30,6 +30,7 @@ require('./io.php') ;
 require('./basexml.php') ;
 require('./commands.php') ;
 require('./phpcompat.php') ;
+require_once('./SafeFN.class.php');
 
 if ( !$Config['Enabled'] )
 	SendError( 1, 'FileBrowserError_Connector') ;
