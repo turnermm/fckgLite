@@ -1,10 +1,9 @@
-fckgLiteSafe supports the new Dokuwiki file system encoding for non-Roman 
-character sets.  This encoding is put into effect in the Configuration Manager
-by setting the new fnencode option to 'safe'.  fckgLiteSafe also supports
-url-style encoding, which was the encoding for all previous versions of 
-Dokuwiki.
+This version of fckgLite supports the Dokuwiki 'safe' file system encoding for non-Roman 
+character sets.  fckgLiteSafe also supports url-style encoding, which was the encoding 
+for all previous versions of Dokuwiki.
 
-
+This version also supports the the jQuery conversion which Dokuwiki made beginning
+with the Angua desitribtution.
 
 /*********************************************/
 IMPORTANT FOR USERS OF ANTEATER
