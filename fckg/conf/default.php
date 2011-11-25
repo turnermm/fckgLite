@@ -14,3 +14,5 @@ $conf['create_folder'] ='n';
 $conf['dwedit_ns'] = 'NONE';
 $conf['acl_del'] = 0;
 $conf['auth_ci'] = 0;
+$conf['nix_style'] = 0;
+$conf['no_symlinks'] = 0;

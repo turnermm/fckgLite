@@ -23,6 +23,6 @@ $lang['create_folder'] = "Enable folder creation button in file browser (y/n)";
 $lang['dwedit_ns'] = "Comma separated list of namespaces where FckgLite automatically switches " .
                      "over to the native DokuWiki Editor."; 
 $lang['acl_del'] =  "Default (box not checked) allows users with upload permission to delete media files; if box is checked, then user needs delete permission to delete from the folder.";
-$lang['auth_ci'] = "User login id is case insensitive, that is you can login as both USER and user";
-
-             
+$lang['auth_ci'] = "The user login id is case insensitive, that is you can login as both USER and user";
+$lang['nix_style'] = "For Windows Servers (Vista and Later).  This setting makes it possible to access data\\media through fckg\\fckeditor\\userfiles, if links to media and file have been successfully created in userfiles";
+$lang['no_symlinks']  = "Disable automatic creation of symbolic links in fckg/userfiles.";            

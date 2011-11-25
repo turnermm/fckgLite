@@ -1,9 +1,9 @@
 This version of fckgLite supports the Dokuwiki 'safe' file system encoding for non-Roman 
-character sets.  fckgLiteSafe also supports url-style encoding, which was the encoding 
+character sets.  It also supports url-style encoding, which was the encoding 
 for all previous versions of Dokuwiki.
 
 This version also supports the the jQuery conversion which Dokuwiki made beginning
-with the Angua desitribtution.
+with the Angua distribtution.
 
 /*********************************************/
 IMPORTANT FOR USERS OF ANTEATER

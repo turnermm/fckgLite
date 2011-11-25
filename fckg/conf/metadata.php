@@ -14,4 +14,7 @@ $meta['create_folder'] = array('multichoice','_choices' => array('n','y'));
 $meta['dwedit_ns'] = array('string');
 $meta['acl_del'] = array('onoff');
 $meta['auth_ci'] = array('onoff');
+$meta['nix_style'] = array('onoff');
+$meta['no_symlinks'] = array('onoff');
+
 

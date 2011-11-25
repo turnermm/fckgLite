@@ -31,6 +31,7 @@ global $AUTH;
 global $dwfck_client;
 global $topLevelFolder;
 global $sep;
+global $useNixStyle;
 global $Dwfck_conf_values;
 $Dwfck_conf_values = doku_config_values();
 
@@ -118,13 +119,17 @@ $Config['osDarwin'] = DWFCK_is_OS('DARWIN') ? true : false;
 $isWindows = DWFCK_isWinOS();
 $Config['osWindows'] = $isWindows;
 $useWinStyle = false;
+$useNixStyle = false;
 $sep = $isWindows ? '\\' : '/';
 $dwfck_local = false;
-
-
+$useNixStyle=false;
+if(isset($Dwfck_conf_values['plugin']['fckg']['nix_style'])) {
+   $useNixStyle = $Dwfck_conf_values['plugin']['fckg']['nix_style']; 
+}
 if(isset($_REQUEST['DWFCK_Browser']) && $_REQUEST['DWFCK_Browser'] == 'local') {
      $useWinStyle = true;
      $dwfck_local = true;
+	 $useNixStyle = false;
 }
 
 $Config['isWinStyle'] = $useWinStyle;
@@ -208,9 +213,16 @@ function setupBasePathsNix() {
 function setupBasePathsWin() {
   global $Config;
   global $isWindows;
-
+  global $useNixStyle;
+ 
     $data_media = $isWindows ? 'data\\media\\' : 'data/media/';
-    $regex = $isWindows ? 'lib\plugins\fckg\fckeditor\editor\filemanager\connectors' : 'lib/plugins/fckg/fckeditor/editor/filemanager/connectors'; 
+    if($useNixStyle) {
+    $regex = $isWindows ? '\editor\filemanager\connectors' : 'lib/plugins/fckg/fckeditor/editor/filemanager/connectors'; 
+	$data_media = '\\userfiles\\';
+    }  
+    else {
+       $regex = $isWindows ? 'lib\plugins\fckg\fckeditor\editor\filemanager\connectors' : 'lib/plugins/fckg/fckeditor/editor/filemanager/connectors'; 
+     }
     $dir = dirname(__FILE__) ;   
        
     $regex = preg_quote($regex, '/');
@@ -220,7 +232,10 @@ function setupBasePathsWin() {
     $Config['UserFilesAbsolutePath'] = $dir;
      
     $base_url = getBaseURL_fck();
-    $Config['UserFilesPath'] =  $base_url . 'data/media/';
+    if($useNixStyle) {
+       $Config['UserFilesPath'] =  $base_url . 'lib/plugins/fckg/fckeditor/userfiles/';
+     }  
+    else $Config['UserFilesPath'] =  $base_url . 'data/media/';
 
 }
 
@@ -284,10 +299,12 @@ function setUpMediaPaths() {
   global $useWinStyle; 
   global $AUTH;
   global $dwfck_client;
+  global $useNixStyle;
   
-  
-
-  
+  if($useNixStyle) {  
+	$useWinStyle=false;
+	$isWindows = false;
+  }
   $ALLOWED_MIMES = DOKU_INC . 'conf/mime.conf';
   
   $out=@file($ALLOWED_MIMES,FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);

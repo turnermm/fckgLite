@@ -1,4 +1,4 @@
-rev 11-Nov_15-07_26
+rev 11-Nov_25-06_57
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -54,3 +54,16 @@ the Advanced panel of Internet Options. The errors crop up only in certain list 
 15 Nov
 Added newline after the Dokuwiki forced line-break: \\, so that in the native DW editor these lines appear
 on separate lines.
+
+23 Nov
+Implemented facility for automatically creating symlinks in fckg/fckeditor/userfiles.  This applies
+to Linux systems and to Window from Vista onward.  This makes it possible now to install fckgLite
+using Dokuwiki's plugin manager.  
+
+24 Nov
+Edited message for symlink create failure and added auto_install.pdf to fckg/ which explains the 
+auto symlink procedures.
+
+25 Nov
+Return from meta.php check_userfiles() if userfiles directory is not writable (probably been manually installed).
+Updated auto_ionstall.pf.

@@ -140,8 +140,7 @@ class action_plugin_fckg_meta extends DokuWiki_Action_Plugin {
         LoadScript("$url"); 
       }
  
-      
-   
+        
     
     function setDWEditCookie(which, e) { 
        var cname = "$cname";       
@@ -178,7 +177,104 @@ SCRIPT;
 
   }
 
+function check_userfiles() {	  
+ 
+    if($this->getConf('no_symlinks')) {	
+	   return;
+	}
+	
+    global $INFO;
+	$userfiles = DOKU_PLUGIN . 'fckg/fckeditor/userfiles/';
+    $data_media = DOKU_INC.'data/media/';
+	
+     if(!is_writable($userfiles)){
+		      return;
+     }		   
+	$version = io_readFile(DOKU_PLUGIN . 'fckg/version');
+	if(!$version) return;
+    $meta = metaFN('fckl:symchk','.meta'); 
+	$symcheck = io_readFile($meta);	    
+    if($symcheck) {
+	   if(trim($version)== trim($symcheck)) {  //symlinks should already have been created	 
+		  return;
+	   }
+    }
+				
+	if (function_exists('php_uname')) {
+	   $sys = php_uname() ;
+	   if( preg_match('/Windows/i',  $sys) ) {
+		     preg_match('/build\s+(\d+)/',$sys, $matches);	  
+		    if($matches[1]  < 6000) {  // we can make symlinks for vista (6000) or later 
+			   return;
+		   }		
+		 
+		   $winlinks =  array();
+		   $userfiles = str_replace('/', '\\',$userfiles);		   
+		   exec("dir " . $userfiles, $output);
+		   foreach($output as $line) {
+		      if(preg_match('/<SYMLINKD>\s+(.*?)\s+\[/i',$line,$matches)) {
+			     $winlinks[] = $matches[1];
+			  }
+		   }
+		}
+		
+    }  
+	else if( preg_match('/WINNT/i',  PHP_OS) ) {    // if we can't get php_uname and a build and this is Windows, just return
+         return;
+    }
+	
+       $show_msg = false;
+	   if($INFO['isadmin'] || $INFO['ismanager'] )    {  // only admins and mgrs get messages
+	       $show_msg = true;		   
+	   }
+	   $link_names = array('flash',  'image',  'media', 'file', 'image');
+	   if(count($winlinks)) {
+	       $link_names = array_diff($link_names, $winlinks);
+	   }
+	   $links = array();
+	   foreach ($link_names as $ln) {
+	        $links[$ln] = $userfiles . $ln;
+	   }
 
+      $bad_create = false; 
+	  $successes =  array();
+	  if(@file_exists($userfiles)) {
+		   foreach($links as $name => $path) {		
+			  if(!is_link($path)) {		                      
+					 if(!@symlink($data_media,$path) ) {
+					     $bad_create = true;
+						  if($show_msg)  msg("unable to create $name link:  $path",-1);			  
+				   }
+				   else {
+				     $successes[] = $name; 
+				   }
+			 }	   	   
+		  }
+      }
+	  else {
+	     if($show_msg)  {
+			msg("Cannot create symlinks for filebrowser.  Cannot access:  $userfiles   ",-1);
+		 }
+	  }
+	   
+	 
+	   
+	  if($bad_create) {
+	       if($show_msg)  {
+			   msg("There was an error when trying to create symbolic links in $userfiles. "
+					. "See fckg/auto_install.pdf  or  the <a href='http://www.mturner.org/fckgLite/doku.php?id=docs:auto_install'>fckgLite web site</a>" , 2);					
+				}
+      }
+	  else {	        
+	       if(count($successes)) {
+				$links_created = implode(', ',$successes);
+				msg('The following links were created in the userfiles directory: ' . $links_created,2);
+			 }
+	  }
+	  			io_saveFile($meta,$version);
+}
+            
+  
   function set_session() {	
       global $USERINFO, $INFO; 
       global $conf; 
@@ -259,6 +355,8 @@ SCRIPT;
        global $ACT, $TEXT;
        global $USERINFO, $INFO, $ID; 
 
+	   $this->check_userfiles(); 
+	   
        if(isset($_COOKIE['FCK_NmSp'])) $this->set_session(); 
        /* set cookie to pass namespace to FCKeditor's media dialog */
       // $expire = time()+60*60*24*30;
