@@ -13,7 +13,11 @@ $fckg_lang['title_dw_cancel']="Editor schliessen";
 $fckg_lang['btn_fck_edit'] = "FCK Editor";
 $fckg_lang['confirm_delete'] = "Sind Sie sicher, dass Sie diese Seite l&ouml;schen wollen?";
 $fckg_lang['confirm_preview'] = "Jede nicht gespeicherte Bearbeitung wird verloren gehen.";
-
 $fckg_lang['dw_btn_backup'] ="Backup";
 $fckg_lang['title_dw_backup'] ="Backup-Editor";
 $fckg_lang['backup_empty'] = "Es ist kein Backup vorhanden. Wollen Sie weiterfahren?";
+$fckg_lang['backup_empty'] = "Es ist kein Backup vorhanden. Wollen Sie fortfahren?";
+$fckg_lang['btn_draft'] = "Entwurf &ouml;ffnen";
+$fckg_lang['title_draft'] = "Entwurf anzeigen und bearbeiten";
+$fckg_lang['btn_exit_draft'] = "Entwurf schliessen";
+$fckg_lang['draft_msg']= "Für dieses Dokument besteht eine Entwurfsversion. Der Knopf 'Entwurf' schaltet zwischen diesem Dokument und dem Entwurf hin und her. Es k&ouml;nnen beide Dokumente bearbeitet oder gesichert werden." ;
