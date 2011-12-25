@@ -1954,8 +1954,13 @@ function parse_wikitext(id) {
       the escapes are removed here together with any DW percent escapes
    */
 
+     results = results.replace(/(\[\[\\\\)(.*?)\]\]/gm, function(match,brackets,block) {     
+          block=block.replace(/\\/g,"_SMB_");      
+          return brackets+block + ']]';
+     }); 
+
      results = results.replace(/%*\\%*([^\\%]{1})%*\\%*/g, "$1"); 
-     
+     results=results.replace(/_SMB_/g, "\\");     
  
     if(id == 'test') {
       if(!HTMLParser_test_result(results)) return;     

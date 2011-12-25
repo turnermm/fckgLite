@@ -1,4 +1,4 @@
-rev 11-Nov_25-06_57
+rev 11-Dec_25-12_06
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -67,3 +67,9 @@ auto symlink procedures.
 25 Nov
 Return from meta.php check_userfiles() if userfiles directory is not writable (probably been manually installed).
 Updated auto_ionstall.pf.
+
+28 Nov
+German language update for fckgLite editor window
+
+25 Dev
+Fixed bug in handling of Samba shares which caused backslashes to be removed in lng paths.
