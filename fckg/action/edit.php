@@ -1114,6 +1114,10 @@ function parse_wikitext(id) {
                        this.attr = attrs[i].escaped;
                        local_image = false;
                     }
+                   if(attrs[i].escaped.match(/^ftp:/)) {
+                       this.attr = attrs[i].escaped;
+                       local_image = false;
+                    }
                     else if(attrs[i].escaped.match(/do=export_code/)) {
                             this.export_code = true;
                     }

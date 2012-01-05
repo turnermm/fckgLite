@@ -1,4 +1,4 @@
-rev 11-Dec_25-12_06
+rev 12-Jan_05-07_44
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -57,7 +57,7 @@ on separate lines.
 
 23 Nov
 Implemented facility for automatically creating symlinks in fckg/fckeditor/userfiles.  This applies
-to Linux systems and to Window from Vista onward.  This makes it possible now to install fckgLite
+to Linux systems and to Windows from Vista onward.  This makes it possible now to install fckgLite
 using Dokuwiki's plugin manager.  
 
 24 Nov
@@ -66,7 +66,7 @@ auto symlink procedures.
 
 25 Nov
 Return from meta.php check_userfiles() if userfiles directory is not writable (probably been manually installed).
-Updated auto_ionstall.pf.
+Updated auto_install.pdf.
 
 28 Nov
 German language update for fckgLite editor window
