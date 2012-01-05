@@ -75,4 +75,4 @@ German language update for fckgLite editor window
 Fixed bug in handling of Samba shares which caused backslashes to be removed in lng paths.
 
 5 Jan 2012
-Added suport in edit php for stp protocol.
+Added suport in edit php for ftp protocol.
