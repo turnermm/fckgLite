@@ -2338,7 +2338,7 @@ if(window.DWikifnEncode && window.DWikifnEncode == 'safe') {
         // inserts p before an initial codeblock to enable text entry above block
         $xhtml = preg_replace('/^<pre/',"<p>&nbsp;</p><pre",$xhtml);  
         //remove empty markup remaining after removing marked-up acronyms in lists
-        $xhtml = preg_replace('/<(em|b|u|i)>\W+<\/(em|b|u|i)>/ms',"",$xhtml);
+        $xhtml = preg_replace('/<(em|b|u|i)>\s+<\/(em|b|u|i)>/ms',"",$xhtml);
 
 
        if($smiley_as_text) {

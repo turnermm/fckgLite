@@ -1,4 +1,4 @@
-rev 12-Jan_05-07_54
+rev 12-Jan_17-08_57
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -71,8 +71,13 @@ Updated auto_install.pdf.
 28 Nov
 German language update for fckgLite editor window
 
-25 Dev
-Fixed bug in handling of Samba shares which caused backslashes to be removed in lng paths.
+25 Dec
+Fixed bug in handling of Samba shares which caused backslashes to be removed in long paths.
 
 5 Jan 2012
-Added suport in edit php for ftp protocol.
+Added support in edit php for ftp protocol.
+
+15 Jan 2012
+Fixed bug in edit.php which deleted non-Roman characters embedded in DW markup, like bold and italic.
+In render_xhtml, where empty markup is removed from ends of lists where acronyms occur (but this should really
+no longer apply since acronyms are no longer implemented inside the FCKeditor).
