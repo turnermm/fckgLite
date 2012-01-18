@@ -24,7 +24,7 @@ if(isset($conf['lang']) && $conf['lang'] != 'en' ) {
 class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
     //store the namespaces for sorting
     var $fck_location = "fckeditor";
-    var $helper       = false;
+    var $helper = false;
     var $fckg_bak_file = "";
     var $debug = false;
     var $test = false;
@@ -918,6 +918,7 @@ function parse_wikitext(id) {
             this.downloadable_file = "";
             var qs_set = false;
             this.link_only = false;
+            save_url = "";            
         }
   
        if(tag == 'p') {         
@@ -1098,6 +1099,7 @@ function parse_wikitext(id) {
             
               else if(attrs[i].name == 'href' && !this.code_type) {
                     var http =  attrs[i].escaped.match(/http:\/\//) ? true : false; 
+                    if(http) save_url = attrs[i].escaped;                    
                     if(attrs[i].escaped.match(/\/lib\/exe\/detail.php/)) {
                         this.image_link_type = 'detail';
                     }
@@ -1178,7 +1180,7 @@ function parse_wikitext(id) {
                            else {
                                 this.attr = matches[1];
                            }
-;
+
                            if(this.attr.match(/\.\w+$/)) {  // external mime's first access 
                                if(type && type == 'other_mime') {
                                     this.external_mime = true; 
@@ -1271,6 +1273,9 @@ function parse_wikitext(id) {
                          this.attr = ':' + this.attr;
                        }
                    }
+                if(this.link_class == 'urlextern') {
+                    this.attr = save_url;
+                }                   
 
                    this.link_title = "";
                    this.link_class= "";

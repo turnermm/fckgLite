@@ -1,4 +1,4 @@
-rev 12-Jan_17-08_57
+rev 12-Jan_17-19_36
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -81,3 +81,7 @@ Added support in edit php for ftp protocol.
 Fixed bug in edit.php which deleted non-Roman characters embedded in DW markup, like bold and italic.
 In render_xhtml, where empty markup is removed from ends of lists where acronyms occur (but this should really
 no longer apply since acronyms are no longer implemented inside the FCKeditor).
+
+17 Jan 2012
+Fixed bug in edit.php which mistook all ur;s with 'doku.php?id=' as internal dw file; this happened when 
+another dokuwiki was being accessed in the url.
