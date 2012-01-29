@@ -1452,16 +1452,19 @@ function parse_wikitext(id) {
                 }
 
                 if(!this.code_type) {
-                   HTMLParser_LBR = true;
+                   HTMLParser_LBR = true;				 
                 }
                 else if(this.code_type) {
                       results += "\n";
                       return;
-                      
                 }
+				
                 if(this.in_table) {
                    results += HTMLParserParaInsert;
                    return;
+                }
+               if(this.list_started) {
+                   results += '_LIST_EOFL_'; /* enables newlines in lists:   abc \\def */
                 }
                 else {
                     results += '\\\\  ';
@@ -1888,7 +1891,9 @@ function parse_wikitext(id) {
       text = text.replace(/---/g,'&mdash;');
       text = text.replace(/--/g,'&ndash;');     
     }
-
+    if(this.list_started) {
+	    results=results.replace(/_LIST_EOFL_\s*L_BR_K\s*$/, '_LIST_EOFL_');  
+   }
     if(!this.code_type) {   // keep special character literals outside of code block
                               // don't touch samba share or Windows path backslashes
         if(!results.match(/\[\[\\\\.*?\|$/) && !text.match(/\w:(\\(\w?))+/ ))
@@ -2014,7 +2019,6 @@ function parse_wikitext(id) {
 	    results = results.replace(/(\\\\)\s+/gm, "$1 \n");
     }
 
-
     if(HTMLParser_PRE) {  
       results = results.replace(/\s+<\/(code|file)>/g, "\n</" + "$1" + ">");
       if(HTMLParser_Geshi) {
@@ -2080,7 +2084,7 @@ function parse_wikitext(id) {
     results = results.replace(/\|.*?\]*(\s*)FWS/g,"$1}}");    
     results = results.replace(/(\s*)FWS/g,"$1}}");    
     results = results.replace(/\n{3,}/g,'\n\n');
-   
+    results = results.replace(/_LIST_EOFL_/gm, " " + line_break_final + " ");
     if(id == 'test') {
       if(HTMLParser_test_result(results)) {
          alert(results);

@@ -1,4 +1,4 @@
-rev 12-Jan_17-19_36
+rev 12-Jan_29-12_08
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -83,5 +83,11 @@ In render_xhtml, where empty markup is removed from ends of lists where acronyms
 no longer apply since acronyms are no longer implemented inside the FCKeditor).
 
 17 Jan 2012
-Fixed bug in edit.php which mistook all ur;s with 'doku.php?id=' as internal dw file; this happened when 
+Fixed bug in edit.php which mistook all urls with 'doku.php?id=' as internal dw file; this happened when 
 another dokuwiki was being accessed in the url.
+
+29 Jan 2012
+Eabled newlines at end of list lines, as in:
+            1. this is line one
+               new line one and a half
+            2. line two
