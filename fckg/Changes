@@ -1,4 +1,4 @@
-rev 12-Jan_29-12_08
+rev 12-Feb_01-09_33
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -90,4 +90,6 @@ another dokuwiki was being accessed in the url.
 Eabled newlines at end of list lines, as in:
             1. this is line one
                new line one and a half
-            2. line two
+            2. line two   
+1 Feb 2012
+Chinese language update for configuration options.  From Ian Ko.
