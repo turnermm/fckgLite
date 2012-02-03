@@ -316,15 +316,19 @@ function setUpMediaPaths() {
   }
   
   $extensions = array();
+  $image_extensions = array();
   foreach($out as $line) {
       if(strpos($line,'#') ===  false) {
          list($ext,$mtype)  = preg_split('/\s+/', $line); 
          $extensions[] = $ext;
+		 if(strpos($mtype,'image')!==false) {
+		     $image_extensions[] = $ext;
+		 }
      }
   }
 
   
-
+   
     // if !$dwfck_client then the file browser is not restricted to the client's permissions 
    if(!$dwfck_client) {
       $unrestricted_browser = true;
@@ -348,13 +352,14 @@ else {
       'tiff', 'txt', 'vsd', 'wav', 'wma', 'wmv', 'xls', 'xml', 'zip') ;
 }
     $Config['DeniedExtensions']['File']		= array() ;
-    $Config['AllowedExtensions']['Image']	= array('bmp','gif','jpeg','jpg','png') ;
+    $Config['AllowedExtensions']['Image']	= array_merge(array('bmp','gif','jpeg','jpg','png'),$image_extensions) ;
     $Config['DeniedExtensions']['Image']	= array() ;
     $Config['AllowedExtensions']['Flash']	= array('swf','flv') ;
     $Config['DeniedExtensions']['Flash']	= array() ;
-    $Config['AllowedExtensions']['Media']	= array('aiff', 'asf', 'avi', 'bmp', 'fla', 'flv', 'gif', 'jpeg', 'jpg', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'png', 'qt', 'ram', 'rm', 'rmi', 'rmvb', 'swf', 'tif', 'tiff', 'wav', 'wma', 'wmv') ;
+    $Config['AllowedExtensions']['Media']	= array_merge(array('aiff', 'asf', 'avi', 'bmp', 'fla', 'flv', 'gif', 'jpeg', 'jpg', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 
+	                              'png', 'qt', 'ram', 'rm', 'rmi', 'rmvb', 'swf', 'tif', 'tiff', 'wav', 'wma', 'wmv') ,$image_extensions);
     $Config['DeniedExtensions']['Media']	= array() ;
-
+  
     $DWFCK_MediaTypes = array('File','Image', 'Flash','Media'); 
     $DWFCK_use_acl = true;
     if($unrestricted_browser) $DWFCK_use_acl = false;

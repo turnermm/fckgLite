@@ -357,11 +357,13 @@ FCKConfig.FlashBrowserWindowHeight = FCKConfig.ScreenHeight * 0.7 ;	//70% ;
 
 FCKConfig.LinkUpload = true ;
 FCKConfig.LinkUploadURL = FCKConfig.BasePath + 'filemanager/connectors/' + _QuickUploadLanguage + '/upload.' + _QuickUploadExtension ;
-FCKConfig.LinkUploadAllowedExtensions	= ".(7z|aiff|asf|avi|bmp|csv|doc|fla|flv|gif|gz|gzip|jpeg|jpg|mid|mov|mp3|mp4|mpc|mpeg|mpg|ods|odt|pdf|png|ppt|pxd|qt|ram|rar|rm|rmi|rmvb|rtf|sdc|sitd|swf|sxc|sxw|tar|tgz|tif|tiff|txt|vsd|wav|wma|wmv|xls|xml|zip)$" ;			// empty for all
+//FCKConfig.LinkUploadAllowedExtensions	= ".(7z|aiff|asf|avi|bmp|csv|doc|fla|flv|gif|gz|gzip|jpeg|jpg|mid|mov|mp3|mp4|mpc|mpeg|mpg|ods|odt|pdf|png|ppt|pxd|qt|ram|rar|rm|rmi|rmvb|rtf|sdc|sitd|swf|sxc|sxw|tar|tgz|tif|tiff|txt|vsd|wav|wma|wmv|xls|xml|zip)$" ;			// empty for all
+FCKConfig.LinkUploadAllowedExtensions	= "";
 FCKConfig.LinkUploadDeniedExtensions	= "" ;	// empty for no one
 
 FCKConfig.ImageUpload = true ;
 FCKConfig.ImageUploadURL = FCKConfig.BasePath + 'filemanager/connectors/' + _QuickUploadLanguage + '/upload.' + _QuickUploadExtension + '?Type=Image' ;
+//FCKConfig.ImageUploadAllowedExtensions	= ".(jpg|gif|jpeg|png|bmp|svg)$" ;		// empty for all
 FCKConfig.ImageUploadAllowedExtensions	= ".(jpg|gif|jpeg|png|bmp)$" ;		// empty for all
 FCKConfig.ImageUploadDeniedExtensions	= "" ;							// empty for no one
 
@@ -443,6 +445,24 @@ FCKConfig.Geshi_Types = new Array(
 
 );
 
+
+function get_image_extensions(){
+    var ajx = new sack();
+	ajx.requestFile =  "../extensions.php";
+	ajx.method = 'POST';
+	ajx.onCompletion = function() {
+	    if(ajx.responseStatus && ajax.responseStatus[0] == 200) {
+		    var image_types = ajx.response;
+			if(image_types.length>6) {
+			    FCKConfig.ImageUploadAllowedExtensions	= '.(' + image_types+ ')$' ;		
+			}
+			
+		}
+	};
+	ajx.runAJAX();
+}
+
+
 FCKConfig.dokuSmileyConfImages;
 try {
 var ajax = new sack();
@@ -451,6 +471,9 @@ var ajax = new sack();
 
 }
 
+try {
+get_image_extensions();
+}catch(ex) {alert(ex)}
 
 function do_smileys(){
 	ajax.requestFile =  "../dwsmileys.php";
@@ -480,8 +503,7 @@ function whenCompleted(){
 
 FCKConfig.dokuSmileyImages	=
                           [['8-)','icon_cool.gif'],
-                      	  ['8-O','icon_eek.gif'],
-                      	
+                      	  ['8-O','icon_eek.gif'],                      	
                       	  [':-(','icon_sad.gif'],
                       	  [':-)','icon_smile.gif'],
                       	  ['=)','icon_smile2.gif'],
