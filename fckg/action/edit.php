@@ -1098,7 +1098,7 @@ function parse_wikitext(id) {
                }               
             
               else if(attrs[i].name == 'href' && !this.code_type) {
-                    var http =  attrs[i].escaped.match(/http:\/\//) ? true : false; 
+                    var http =  attrs[i].escaped.match(/https*:\/\//) ? true : false; 
                     if(http) save_url = attrs[i].escaped;                    
                     if(attrs[i].escaped.match(/\/lib\/exe\/detail.php/)) {
                         this.image_link_type = 'detail';
