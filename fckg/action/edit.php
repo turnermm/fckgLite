@@ -775,7 +775,7 @@ function parse_wikitext(id) {
     var markup_end = { 'del': '</del>', 'strike': '</del>', 'p': " ", 'br':" ", 'a': ']] ','img': '\}\}',
           'h1': " ======\n", 'h2': " =====\n", 'h3': " ====\n", 'h4': " ===\n", 'h5': " ==\n", 
           'td': " ", 'th': " ", 'tr':"|\n", 'ol':" ", 'ul': " ", 'li': "\n", 'plugin': '</plugin>',
-           'pre': "\n</",'sub': '</sub>', 'sup': '</sup>', 'div':"\n\n", 'p': "\n\n",
+           'pre': "\n</",'sub': '</sub>', 'sup': '</sup> ', 'div':"\n\n", 'p': "\n\n",
            'font': "</font> "
      }; 
    
