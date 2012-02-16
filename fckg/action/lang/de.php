@@ -15,7 +15,6 @@ $fckg_lang['confirm_delete'] = "Sind Sie sicher, dass Sie diese Seite l&ouml;sch
 $fckg_lang['confirm_preview'] = "Jede nicht gespeicherte Bearbeitung wird verloren gehen.";
 $fckg_lang['dw_btn_backup'] ="Backup";
 $fckg_lang['title_dw_backup'] ="Backup-Editor";
-$fckg_lang['backup_empty'] = "Es ist kein Backup vorhanden. Wollen Sie weiterfahren?";
 $fckg_lang['backup_empty'] = "Es ist kein Backup vorhanden. Wollen Sie fortfahren?";
 $fckg_lang['btn_draft'] = "Entwurf &ouml;ffnen";
 $fckg_lang['title_draft'] = "Entwurf anzeigen und bearbeiten";
