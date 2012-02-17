@@ -1275,6 +1275,7 @@ function parse_wikitext(id) {
                    }
                 if(this.link_class == 'urlextern') {
                     this.attr = save_url;
+		    this.external_mime=false;  // prevents external links to images from being converted to image links
                 }                   
 
                    this.link_title = "";
