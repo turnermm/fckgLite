@@ -1275,7 +1275,7 @@ function parse_wikitext(id) {
                    }
                 if(this.link_class == 'urlextern') {
                     this.attr = save_url;
-		    this.external_mime=false;  // prevents external links to images from being converted to image links
+					this.external_mime=false;  // prevents external links to images from being converted to image links
                 }                   
 
                    this.link_title = "";
@@ -1828,7 +1828,13 @@ function parse_wikitext(id) {
     },
 
     chars: function( text ) {
-    if(this.link_only) return;
+    if(this.link_only) {
+	    if(text) {
+	        replacement = '|'+text + '}}';
+	        results = results.replace(/\}\}\s*$/,replacement);
+	    }
+	    return; 
+	}
     if(!this.code_type) { 
         if(! this.last_col_pipes) {
             text = text.replace(/\x20{6,}/, "   "); 
