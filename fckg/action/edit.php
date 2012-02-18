@@ -1830,7 +1830,7 @@ function parse_wikitext(id) {
     chars: function( text ) {
     if(this.link_only) {
 	    if(text) {
-	        replacement = '|'+text + '}}';
+	        replacement = '|'+text + '}} ';
 	        results = results.replace(/\}\}\s*$/,replacement);
 	    }
 	    return; 
