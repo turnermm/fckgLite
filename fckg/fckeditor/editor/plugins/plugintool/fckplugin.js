@@ -97,7 +97,8 @@ FCKAbbr.Insert = function(val, isSafari, stet) {
 FCKAbbr.InsertEdited = function(val) {
 
 	//mySelection = ( FCKBrowserInfo.IsIE) ? FCKSelection.GetSelectedHTML() : removeBR(FCKSelection.GetSelectedHTML());
-
+	              
+    val = val.replace(/</g,"&lt;");
 	hrefHtml = val;
 
 
