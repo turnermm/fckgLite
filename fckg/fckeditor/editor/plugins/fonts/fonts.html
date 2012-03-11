@@ -235,6 +235,7 @@ function Ok()
         style += " font-size: " + font_size + "; ";        
         style += " color: " + fg_color + "; ";
         style += " background-color: " + bg_color + "; ";
+		style += "  font-family: " + select.options[selection].value + "; ";
         if(FCKFonts.isIE()) {
            font_node.style.cssText = style;
         }

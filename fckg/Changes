@@ -1,4 +1,4 @@
-rev 12-Feb_25-23_04
+rev 12-Mar_11-13_13
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -121,5 +121,8 @@ Fixed bug where external links to image files were re-configured as images after
 2. Inserted space after restructured link
 
 25 Feb 2012
-Fixed bug in plugin tool which failed to render open bracket as entity thereby casuing fckEditor to mistake the
-syntaax markup for an actual html tag.
+Fixed bug in plugin tool which failed to render open bracket as entity causing fckEditor to mistake the
+syntax markup for an actual html tag.
+
+11 Mar 2012
+Fixed bug in font tool where font face was not updated in Firefox on changes to already inserted fonts.
