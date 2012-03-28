@@ -1,4 +1,4 @@
-rev 12-Mar_11-13_13
+rev 12-Mar_28-08_08
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -126,3 +126,6 @@ syntax markup for an actual html tag.
 
 11 Mar 2012
 Fixed bug in font tool where font face was not updated in Firefox on changes to already inserted fonts.
+
+28 Mar 2012
+Update to About Panel

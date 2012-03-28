@@ -35,18 +35,19 @@
 
 var oEditor = window.parent.InnerDialogLoaded() ;
 var FCKLang	= oEditor.FCKLang ;
-
-window.parent.AddTab( 'About', FCKLang.DlgAboutAboutTab ) ;
+window.parent.AddTab( 'FckgLiteInfo', 'About fckgLite' ) ;
+window.parent.AddTab( 'About', FCKLang.DlgAboutAboutTab + ' FCKEditor' ) ;
 window.parent.AddTab( 'License', FCKLang.DlgAboutLicenseTab ) ;
 window.parent.AddTab( 'BrowserInfo', FCKLang.DlgAboutBrowserInfoTab ) ;
-window.parent.AddTab( 'FckgLiteInfo', 'About fckgLite' ) ;
+
 // Function called when a dialog tag is selected.
 function OnDialogTabChange( tabCode )
 {
+	ShowE('fckgLInfo'	, ( tabCode == 'FckgLiteInfo' ) ) ;
 	ShowE('divAbout', ( tabCode == 'About' ) ) ;
 	ShowE('divLicense', ( tabCode == 'License' ) ) ;
 	ShowE('divInfo'	, ( tabCode == 'BrowserInfo' ) ) ;
-	ShowE('fckgLInfo'	, ( tabCode == 'FckgLiteInfo' ) ) ;
+	
 }
 var ajax = new sack();
 function doit(){
@@ -108,6 +109,23 @@ window.onload = function()
 	</script>
 </head>
 <body style="overflow: hidden">
+	<div id="fckgLInfo"  style="display: none; font-size: 8pt;">
+  <p>
+   <table class="eight_pt">
+   <tr><td class="eight_pt">
+   <b>fckgLite</b> is a Dokuwiki plugin that converts the HTML output by FCKeditor
+   into native Dokuwiki markup. 
+  <tr><td class="eight_pt">
+   <div id="copyright">Copyright &copy; 2009-2010
+    <a href="#" onclick="SendfckLMail();">Myron Turner</a></div>
+	<b>GNU General Public License</b> Version 2 (GPL 2)<br />
+	<a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">http://www.gnu.org/licenses/gpl-2.0.html</a>
+  <tr><td class="eight_pt">
+   &nbsp;
+</table>
+<div id='version'></div> 
+  </p>
+    </div>
 	<div id="divAbout">
 		<table cellpadding="0" cellspacing="0" border="0" width="100%" style="height: 100%">
 			<tr>
@@ -154,23 +172,8 @@ window.onload = function()
 			</tr>
 		</table>
 	</div>
-    <div id="fckgLInfo"  style="display: none; font-size: 8pt;">
-  <p>
-   <table class="eight_pt">
-   <tr><td class="eight_pt">
-   <b>fckgLite</b> is a Dokuwiki plugin that converts the HTML output by FCKeditor
-   into native Dokuwiki markup. 
-  <tr><td class="eight_pt">
-   <div id="copyright">Copyright &copy; 2009-2010
-    <a href="#" onclick="SendfckLMail();">Myron Turner</a></div>
-	<b>GNU General Public License</b> Version 2 (GPL 2)<br />
-	<a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">http://www.gnu.org/licenses/gpl-2.0.html</a>
-  <tr><td class="eight_pt">
-   &nbsp;
-</table>
-<div id='version'></div> 
-  </p>
-    </div>
+	
+
 	<div id="divLicense" style="display: none">
 			<p>
 				Licensed under the terms of any of the following licenses at your
@@ -221,6 +224,7 @@ document.write( '<b>User Language<\/b><br />' + sUserLang ) ;
 	</div>
 	<script type="text/javascript">
   doit();
+  OnDialogTabChange('FckgLiteInfo' );
    </script>
 </body>
 </html>
