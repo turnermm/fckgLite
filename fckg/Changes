@@ -1,4 +1,4 @@
-rev 12-Mar_28-08_08
+rev 12-Apr_08-16_37
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -129,3 +129,6 @@ Fixed bug in font tool where font face was not updated in Firefox on changes to 
 
 28 Mar 2012
 Update to About Panel
+
+8 April 2012
+Removed space that opened between formatted character and a following HTML entity:  **b**&entity; became:> **b **&entity;
