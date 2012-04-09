@@ -1828,6 +1828,12 @@ function parse_wikitext(id) {
     },
 
     chars: function( text ) {
+      //adjust spacing on multi-formatted strings
+    results=results.replace(/([\/\*_])_FORMAT_SPACE_([\/\*_]{2})_FORMAT_SPACE_$/,"$1$2");
+    if(text.match(/^&\w+;/)) {
+	    results=results.replace(/_FORMAT_SPACE_\s*$/,"");   // remove unwanted space after character entity
+    }	
+
     if(this.link_only) {
 	    if(text) {
 	        replacement = '|'+text + '}} ';
@@ -1884,6 +1890,9 @@ function parse_wikitext(id) {
           }
           return;       
     }
+	
+	
+	
     if(this.downloadable_code &&  (this.export_code || this.code_snippet)) {
           this.downloadable_file = text;          
           return;    
@@ -1930,6 +1939,8 @@ function parse_wikitext(id) {
    if(text && text.length) { 
       results += text;        
    }
+   // remove space between formatted character entity and following character string
+  results=results.replace(/(&\w+;)\s*([\*\/_]{2})_FORMAT_SPACE_(\w+)/,"$1$2$3");
 
    if(this.list_level && this.list_level > 1) {  
         results = results.replace(/(\[\[.*?\]\])([ ]+[\*\-].*)$/," $1\n$2");   
@@ -1997,13 +2008,20 @@ function parse_wikitext(id) {
         results = results.replace(/&quot;/g,'"');
         var regex = new RegExp(HTMLParser_FORMAT_SPACE + '([\\-]{2,})', "g");
         results = results.replace(regex," $1");
+		
         var regex = new RegExp("(\\w|\\d)(\\*\\*|\\/\\/|\\'\\'|__|<\/del>)" + HTMLParser_FORMAT_SPACE + '(\\w|\\d)',"g");
         results = results.replace(regex,"$1$2$3");
+		
         var regex = new RegExp(HTMLParser_FORMAT_SPACE + '@@_SP_@@',"g");
         results = results.replace(regex,' ');
+		
+		    //spacing around entities with double format characters
+		results=results.replace(/([\*\/_]{2})@@_SP_@@(&\w+;)/g,"$1 $2");		
+
         results = results.replace(/\n@@_SP_@@\n/g,'');
         results = results.replace(/@@_SP_@@\n/g,'');
         results = results.replace(/@@_SP_@@/g,'');
+	
         var regex = new RegExp(HTMLParser_FORMAT_SPACE + '([^\\)\\]\\}\\{\\-\\.,;:\\!\?"\x94\x92\u201D\u2019' + "'" + '])',"g");
         results = results.replace(regex," $1");
         regex = new RegExp(HTMLParser_FORMAT_SPACE,"g");
@@ -2092,6 +2110,7 @@ function parse_wikitext(id) {
     results = results.replace(/(\s*)FWS/g,"$1}}");    
     results = results.replace(/\n{3,}/g,'\n\n');
     results = results.replace(/_LIST_EOFL_/gm, " " + line_break_final + " ");
+	
     if(id == 'test') {
       if(HTMLParser_test_result(results)) {
          alert(results);

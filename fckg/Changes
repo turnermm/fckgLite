@@ -1,4 +1,4 @@
-rev 12-Apr_08-19_03
+rev 12-Apr_09-18_41
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -135,3 +135,8 @@ Removed space that opened between formatted character and a following HTML entit
 
 9 April 2012
 Withdrew above fix
+
+9 April 2012
+Several fixes to handling of strings embedded in multiple format markup, as well as space following HTML entity 
+(see above 8 April), and removed from save.php the artifact left over from when fckgLite processed acronyms,
+as this has unintended side effects. (See http://www.freelists.org/post/fckglite/bug-with-setting-character-in-bold,2).

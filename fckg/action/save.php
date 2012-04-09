@@ -76,8 +76,8 @@ class action_plugin_fckg_save extends DokuWiki_Action_Plugin {
         $TEXT = str_replace("__code_NL__","\n", $TEXT);
         $TEXT = str_replace("FCKGPERCENTESC", '%%',  $TEXT);
         $TEXT .= "\n";
-        // Removes relics of markup chatacters left over after acronym markup has been removed
-        $TEXT = preg_replace('/([\*\/_]{2})\s+\\1\s*([A-Z]+)\s*\\1+/ms',"$2",$TEXT);
+        // Removes relics of markup characters left over after acronym markup has been removed
+        //$TEXT = preg_replace('/([\*\/_]{2})\s+\\1\s*([A-Z]+)\s*\\1+/ms',"$2",$TEXT);
       
          $pos = strpos($TEXT, 'MULTI_PLUGIN_OPEN');
          if($pos !== false) {
