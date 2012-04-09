@@ -1,5 +1,5 @@
 <?php
-	if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../../').'/');
+if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../../').'/');
 if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 require_once(DOKU_PLUGIN.'action.php');
 global $conf;
@@ -1994,26 +1994,21 @@ function parse_wikitext(id) {
                  return(format + pipes);                  
              });
         }
-
         results = results.replace(/&quot;/g,'"');
         var regex = new RegExp(HTMLParser_FORMAT_SPACE + '([\\-]{2,})', "g");
         results = results.replace(regex," $1");
-		
         var regex = new RegExp("(\\w|\\d)(\\*\\*|\\/\\/|\\'\\'|__|<\/del>)" + HTMLParser_FORMAT_SPACE + '(\\w|\\d)',"g");
-        results = results.replace(regex,"$1$2$3");			     
-		
-        var regex=new RegExp(HTMLParser_FORMAT_SPACE + '(?!@@_SP_@@)(&\\w+;)',"g");		
-        results = results.replace(regex,"$1");		
-        var regex = new RegExp(HTMLParser_FORMAT_SPACE + '@@_SP_@@',"g");		
+        results = results.replace(regex,"$1$2$3");
+        var regex = new RegExp(HTMLParser_FORMAT_SPACE + '@@_SP_@@',"g");
         results = results.replace(regex,' ');
         results = results.replace(/\n@@_SP_@@\n/g,'');
         results = results.replace(/@@_SP_@@\n/g,'');
         results = results.replace(/@@_SP_@@/g,'');
         var regex = new RegExp(HTMLParser_FORMAT_SPACE + '([^\\)\\]\\}\\{\\-\\.,;:\\!\?"\x94\x92\u201D\u2019' + "'" + '])',"g");
-        results = results.replace(regex," $1");		
+        results = results.replace(regex," $1");
         regex = new RegExp(HTMLParser_FORMAT_SPACE,"g");
         results = results.replace(regex,'');
-	  
+
          if(HTMLFormatInList) {   
              /* removes extra newlines from lists */      
              results =  results.replace(/(\s+[\-\*_]\s*)([\*\/_\']{2})(.*?)(\2)([^\n]*)\n+/gm, 

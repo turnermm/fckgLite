@@ -1,4 +1,4 @@
-rev 12-Apr_08-16_37
+rev 12-Apr_08-19_03
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -132,3 +132,6 @@ Update to About Panel
 
 8 April 2012
 Removed space that opened between formatted character and a following HTML entity:  **b**&entity; became:> **b **&entity;
+
+9 April 2012
+Withdrew above fix
