@@ -1828,6 +1828,7 @@ function parse_wikitext(id) {
     },
 
     chars: function( text ) {
+	
       //adjust spacing on multi-formatted strings
     results=results.replace(/([\/\*_])_FORMAT_SPACE_([\/\*_]{2})_FORMAT_SPACE_$/,"$1$2");
     if(text.match(/^&\w+;/)) {
@@ -1944,6 +1945,11 @@ function parse_wikitext(id) {
 
    if(this.list_level && this.list_level > 1) {  
         results = results.replace(/(\[\[.*?\]\])([ ]+[\*\-].*)$/," $1\n$2");   
+   }
+   var regex = new RegExp('([\*\/\_]{2,})_FORMAT_SPACE_([\*\/\_]{2,})(' + text + ')$');       
+   if(results.match(regex)) {	 
+	 // remove left-over space inside multiple format sequences   
+      results = results.replace(regex,"$1$2$3");     
    }
    
   if(!HTMLParserOpenAngleBracket) {
