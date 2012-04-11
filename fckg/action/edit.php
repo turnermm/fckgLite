@@ -758,6 +758,12 @@ var fckgLPluginPatterns = new Array();
         return value; 
 
      }
+	 
+RegExp.escape = function(str)
+{
+    var specials = new RegExp("[.*+?|()\\[\\]{}\\\\]", "g"); // .*+?|()[]{}\
+    return str.replace(specials, "\\$&");
+}
 
 var HTMLParser_DEBUG = "";
 function parse_wikitext(id) {
@@ -1947,8 +1953,8 @@ function parse_wikitext(id) {
         results = results.replace(/(\[\[.*?\]\])([ ]+[\*\-].*)$/," $1\n$2");   
    }
    
-   try {    // regex throws error on parenthesized urls
-        var regex = new RegExp('([\*\/\_]{2,})_FORMAT_SPACE_([\*\/\_]{2,})(' + text + ')$');        
+   try {    // in case regex throws error on dynamic regex creation
+        var regex = new RegExp('([\*\/\_]{2,})_FORMAT_SPACE_([\*\/\_]{2,})(' + RegExp.escape(text) + ')$');        	
         if(results.match(regex)) {	 
 	        // remove left-over space inside multiple format sequences   
             results = results.replace(regex,"$1$2$3");     
