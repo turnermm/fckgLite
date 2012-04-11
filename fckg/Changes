@@ -1,4 +1,4 @@
-rev 12-Apr_10-11_47
+rev 12-Apr_11-17_01
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -143,3 +143,6 @@ as this has unintended side effects. (See http://www.freelists.org/post/fckglite
 
 10 April 2012
 Removed extra space from multiple format markup that shows up as blank underline
+
+11 April 2012
+Trapped javascript error thrown by regex used for 10 Apr fix.

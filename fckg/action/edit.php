@@ -1946,11 +1946,14 @@ function parse_wikitext(id) {
    if(this.list_level && this.list_level > 1) {  
         results = results.replace(/(\[\[.*?\]\])([ ]+[\*\-].*)$/," $1\n$2");   
    }
-   var regex = new RegExp('([\*\/\_]{2,})_FORMAT_SPACE_([\*\/\_]{2,})(' + text + ')$');       
-   if(results.match(regex)) {	 
-	 // remove left-over space inside multiple format sequences   
-      results = results.replace(regex,"$1$2$3");     
-   }
+   
+   try {    // regex throws error on parenthesized urls
+        var regex = new RegExp('([\*\/\_]{2,})_FORMAT_SPACE_([\*\/\_]{2,})(' + text + ')$');        
+        if(results.match(regex)) {	 
+	        // remove left-over space inside multiple format sequences   
+            results = results.replace(regex,"$1$2$3");     
+        }
+   } catch(ex){}
    
   if(!HTMLParserOpenAngleBracket) {
        if(text.match(/&lt;/)) {
