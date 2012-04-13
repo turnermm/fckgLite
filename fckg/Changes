@@ -1,4 +1,4 @@
-rev 12-Apr_11-18_33
+rev 12-Apr_13-10_55
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -149,3 +149,6 @@ Trapped javascript error thrown by regex used for 10 Apr fix.
 
 Traced error to unescaped javascript dynamically formatted regex string and added escape function
 to RegExp to escape these strings.
+
+13 Apr 2012
+Removed automatic additon of space chatacter after closing link markup and picked up adjustment of spacing in chars().

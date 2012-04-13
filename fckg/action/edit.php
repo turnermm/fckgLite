@@ -778,7 +778,7 @@ function parse_wikitext(id) {
          'font': "\n",
          'sup': '<sup>', 'div':"\n\n", 'span': "\n", 'dl': "\n", 'dd': "\n", 'dt': "\n"
      };
-    var markup_end = { 'del': '</del>', 'strike': '</del>', 'p': " ", 'br':" ", 'a': ']] ','img': '\}\}',
+    var markup_end = { 'del': '</del>', 'strike': '</del>', 'p': " ", 'br':" ", 'a': ']]','img': '\}\}',
           'h1': " ======\n", 'h2': " =====\n", 'h3': " ====\n", 'h4': " ===\n", 'h5': " ==\n", 
           'td': " ", 'th': " ", 'tr':"|\n", 'ol':" ", 'ul': " ", 'li': "\n", 'plugin': '</plugin>',
            'pre': "\n</",'sub': '</sub>', 'sup': '</sup> ', 'div':"\n\n", 'p': "\n\n",
@@ -1862,6 +1862,9 @@ function parse_wikitext(id) {
         if(this.format_tag) {
           if(!this.list_started || this.in_table) text = text.replace(/^\s+/, '@@_SP_@@');  
         }
+        else if(this.last_tag=='a') {
+            text=text.replace(/^\s{2,}/," ");
+        }	
         else text = text.replace(/^\s+/, '');  
 
         if(text.match(/nowiki&gt;/)) {  
