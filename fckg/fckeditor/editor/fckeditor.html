@@ -203,8 +203,9 @@ FCKPlugins.Load() ;
 	<script type="text/javascript">
 
 // Set the editor interface direction.
+FCKLang.Dir = FCKConfig.ContentLangDirection ;
 window.document.dir = FCKLang.Dir ;
-
+FCKConfig.ContentLangDirection    = window.document.dir ;
 	</script>
 	<script type="text/javascript">
 

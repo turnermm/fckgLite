@@ -16,5 +16,6 @@ $meta['acl_del'] = array('onoff');
 $meta['auth_ci'] = array('onoff');
 $meta['nix_style'] = array('onoff');
 $meta['no_symlinks'] = array('onoff');
-
+#$meta['direction_chk'] = array('onoff');
+$meta['direction'] = array('multichoice','_choices' => array('nocheck','dokuwiki','ltr','rtl'));
 

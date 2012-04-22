@@ -1,4 +1,4 @@
-rev 12-Apr_13-10_55
+rev 12-Apr_21-11_04
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -152,3 +152,9 @@ to RegExp to escape these strings.
 
 13 Apr 2012
 Removed automatic additon of space chatacter after closing link markup and picked up adjustment of spacing in chars().
+
+15 Apr
+Fixed permissions on feckeditor plugins directory (owner not x)
+
+21 Apr
+Added Support for rtl language direction in FCKeditor

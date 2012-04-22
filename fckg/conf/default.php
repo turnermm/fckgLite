@@ -16,3 +16,7 @@ $conf['acl_del'] = 0;
 $conf['auth_ci'] = 0;
 $conf['nix_style'] = 0;
 $conf['no_symlinks'] = 0;
+#$conf['direction_chk'] = 0;
+$conf['direction'] = 'nocheck';
+
+

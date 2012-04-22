@@ -46,7 +46,8 @@ FCKConfig.SkinPath = FCKConfig.BasePath + 'skins/silver/' ;
 
 FCKConfig.SkinEditorCSS = '' ;	// FCKConfig.SkinPath + "|<minified css>" ;
 FCKConfig.SkinDialogCSS = '' ;	// FCKConfig.SkinPath + "|<minified css>" ;
-
+FCKConfig.fckgRTLCSS=FCKConfig.BasePath + 'css/fck_editorarea_RTL.css';
+//alert(FCKConfig.fckgRTLCSS);
 FCKConfig.PreloadImages = [ FCKConfig.SkinPath + 'images/toolbar.start.gif', FCKConfig.SkinPath + 'images/toolbar.buttonarrow.gif' ] ;
 
 FCKConfig.PluginsPath = FCKConfig.BasePath + 'plugins/' ;
@@ -59,8 +60,13 @@ FCKConfig.AutoGrowMax = 400 ;
 
 FCKConfig.AutoDetectLanguage	= true ;
 FCKConfig.DefaultLanguage		= 'en' ;
-FCKConfig.ContentLangDirection	= 'ltr' ;
-
+if(top.fckg_isRTL() ) {
+  FCKConfig.ContentLangDirection	= 'rtl'
+  FCKConfig.EditorAreaCSS = FCKConfig.fckgRTLCSS;
+}
+else {
+    FCKConfig.ContentLangDirection	= 'ltr'
+}
 FCKConfig.ProcessHTMLEntities	= true ;
 FCKConfig.IncludeLatinEntities	= true ;
 FCKConfig.IncludeGreekEntities	= true ;

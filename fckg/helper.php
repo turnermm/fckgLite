@@ -43,6 +43,15 @@ class helper_plugin_fckg extends DokuWiki_Plugin {
   global $ID;
   global $lang;
   $preview_button = $lang['btn_preview'];
+  
+  $fckg_conf_direction = $this->getConf('direction');
+   if($fckg_conf_direction == "dokuwiki") {
+       $fckg_lang_direction = $lang['direction'];
+   }    
+  else {
+      $fckg_lang_direction = $fckg_conf_direction;
+  }   
+  
   $media_tmp_ns = preg_match('/:/',$ID) ? preg_replace('/:\w+$/',"",$ID,1) : "";    
   $locktimer_msg = "Your lock for editing this page is about to expire in a minute.\\n"                  
                 . "You can reset the timer by clicking the Back-up button.";
@@ -358,6 +367,13 @@ function dwfckKeypressInstallHandler() {
 var DWFCK_EditorWinObj;
 function FCKEditorWindowObj(w) { 
   DWFCK_EditorWinObj = w;
+}
+
+function fckg_isRTL() { 
+var direction = "$fckg_lang_direction";
+
+return direction == 'rtl';
+  
 }
 
 
