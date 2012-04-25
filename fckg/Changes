@@ -1,4 +1,4 @@
-rev 12-Apr_21-11_04
+rev 12-Apr_25-13_28
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -158,3 +158,6 @@ Fixed permissions on feckeditor plugins directory (owner not x)
 
 21 Apr
 Added Support for rtl language direction in FCKeditor
+
+25 Apr 2012
+Arabic language update for fckgLite GUI
