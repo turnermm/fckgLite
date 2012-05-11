@@ -481,3 +481,7 @@ a.mf_ps {
 a.mf_swf {
     background-image: url(images/fileicons/swf.png);
 }
+
+a.mf_epub {
+    background-image: url(images/fileicons/epub.png);
+}

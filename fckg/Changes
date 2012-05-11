@@ -1,4 +1,4 @@
-rev 12-Apr_25-13_28
+rev 12-May_11-09_12
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -151,7 +151,7 @@ Traced error to unescaped javascript dynamically formatted regex string and adde
 to RegExp to escape these strings.
 
 13 Apr 2012
-Removed automatic additon of space chatacter after closing link markup and picked up adjustment of spacing in chars().
+Removed automatic addition of space character after closing link markup and picked up adjustment of spacing in chars().
 
 15 Apr
 Fixed permissions on feckeditor plugins directory (owner not x)
@@ -161,3 +161,6 @@ Added Support for rtl language direction in FCKeditor
 
 25 Apr 2012
 Arabic language update for fckgLite GUI
+
+11 May
+Added file icon for epub links to editor
