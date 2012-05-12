@@ -1,4 +1,4 @@
-rev 12-May_11-09_12
+rev 12-May_11-22_51
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -164,3 +164,5 @@ Arabic language update for fckgLite GUI
 
 11 May
 Added file icon for epub links to editor
+
+Kludge to fix Chrome's corrupting of mediafile links on re-save.  (lines 1528ff or this distro).

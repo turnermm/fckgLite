@@ -924,7 +924,11 @@ function parse_wikitext(id) {
             this.downloadable_file = "";
             var qs_set = false;
             this.link_only = false;
-            save_url = "";            
+            save_url = "";     
+            this.link_title = "";
+            this.link_class= "";
+
+          
         }
   
        if(tag == 'p') {         
@@ -975,7 +979,7 @@ function parse_wikitext(id) {
 
         for ( var i = 0; i < attrs.length; i++ ) {     
     
-           //if(!confirm(tag + ' ' + attrs[i].name + '="' + attrs[i].escaped + '"')) exit;
+        //   if(!confirm(tag + ' ' + attrs[i].name + '="' + attrs[i].escaped + '"')) exit;
              if(attrs[i].escaped == 'u' && tag == 'em' ) {
                      tag = 'u';
                      this.attr='u'    
@@ -1284,10 +1288,7 @@ function parse_wikitext(id) {
 					this.external_mime=false;  // prevents external links to images from being converted to image links
                 }                   
 
-                   this.link_title = "";
-                   this.link_class= "";
-
-                 //  break;
+//  break;
                  }
             }
 
@@ -1523,6 +1524,11 @@ function parse_wikitext(id) {
                 this.prev_list_level = -1;
              }
           }
+          
+          if(tag == 'a' && !this.external_mime && this.link_class.match(/mediafile/))   {
+               this.attr=this.link_title;
+               this.external_mime = true;               
+           }
 
           if(tag == 'a' &&  local_image) {
                  this.xcl_markup = true;
@@ -1544,7 +1550,7 @@ function parse_wikitext(id) {
                    results += this.attr + '|';
                }
                return;
-          }
+          }           
           else if(this.in_font || tag == 'font') {
               /* <font 18pt:bold/garamond;;color;;background_color>  */
 			   if(!font_family) {			 
@@ -1556,7 +1562,7 @@ function parse_wikitext(id) {
                results += font_tag ;   
                return;            
        }
-
+         
           if(this.in_endnotes && tag == 'a') return; 
           if(this.code_type && tag == 'span') tag = 'blank'; 
           results += markup[tag];
