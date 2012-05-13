@@ -34,6 +34,8 @@ FCK.islocal_dwikibrowser = false;
 var DWIKI_Client = FCK.dwiki_client;
 var DWIKI_fnencode = FCK.dwiki_fnencode;
 var bImageButton = ( document.location.search.length > 0 && document.location.search.substr(1) == 'ImageButton' ) ;
+var ua_temp = navigator.userAgent.toLowerCase();
+var ChromeBrowser =  ua_temp.indexOf('chrome') > -1; 
 
 //#### Dialog Tabs
 
@@ -109,6 +111,36 @@ function UpdateOriginal( resetSize )
 var bPreviewInitialized ;
 
 window.onload = function()
+{
+         if(ChromeBrowser) return;
+	// Translate the dialog box texts.
+	oEditor.FCKLanguageManager.TranslatePage(document) ;
+
+	GetE('btnLockSizes').title = FCKLang.DlgImgLockRatio ;
+	GetE('btnResetSize').title = FCKLang.DlgBtnResetSize ;
+
+	// Load the selected element information (if any).
+	LoadSelection() ;
+
+	// Show/Hide the "Browse Server" button.
+	GetE('tdBrowse').style.display				= FCKConfig.ImageBrowser	? '' : 'none' ;
+	GetE('divLnkBrowseServer').style.display	= FCKConfig.LinkBrowser		? '' : 'none' ;
+
+	UpdateOriginal() ;
+
+	// Set the actual uploader URL.
+	if ( FCKConfig.ImageUpload )
+		GetE('frmUpload').action = FCKConfig.ImageUploadURL ;
+
+	dialog.SetAutoSize( true ) ;
+
+	// Activate the "OK" button.
+	dialog.SetOkButton( true ) ;
+
+	SelectField( 'txtUrl' ) ;
+}
+
+function ChromeKludge()
 {
 	// Translate the dialog box texts.
 	oEditor.FCKLanguageManager.TranslatePage(document) ;
@@ -609,3 +641,6 @@ function CheckUpload()
 
 	return true ;
 }
+
+
+

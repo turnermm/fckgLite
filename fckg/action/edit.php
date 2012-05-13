@@ -855,7 +855,6 @@ function parse_wikitext(id) {
     immutable_plugin: false,
     link_only: false,
 	in_font: false,
-	is_image:false,
 
     backup: function(c1,c2) {
         var c1_inx = results.lastIndexOf(c1);     // start position of chars to delete
@@ -906,7 +905,6 @@ function parse_wikitext(id) {
             var img_align = '';   
             var alt = "";                     
             this.is_smiley = false;
-			this.is_image=true;
         }
 
         if(tag == 'a') {
@@ -926,11 +924,7 @@ function parse_wikitext(id) {
             this.downloadable_file = "";
             var qs_set = false;
             this.link_only = false;
-            save_url = "";     
-            this.link_title = "";
-            this.link_class= "";
-            this.is_image=false;
-          
+            save_url = "";            
         }
   
        if(tag == 'p') {         
@@ -981,7 +975,7 @@ function parse_wikitext(id) {
 
         for ( var i = 0; i < attrs.length; i++ ) {     
     
-        //   if(!confirm(tag + ' ' + attrs[i].name + '="' + attrs[i].escaped + '"')) exit;
+           //if(!confirm(tag + ' ' + attrs[i].name + '="' + attrs[i].escaped + '"')) exit;
              if(attrs[i].escaped == 'u' && tag == 'em' ) {
                      tag = 'u';
                      this.attr='u'    
@@ -1290,7 +1284,10 @@ function parse_wikitext(id) {
 					this.external_mime=false;  // prevents external links to images from being converted to image links
                 }                   
 
-//  break;
+                   this.link_title = "";
+                   this.link_class= "";
+
+                 //  break;
                  }
             }
 
@@ -1526,11 +1523,6 @@ function parse_wikitext(id) {
                 this.prev_list_level = -1;
              }
           }
-          
-          if(tag == 'a' && !this.external_mime && this.link_class.match(/mediafile/))   {
-               this.attr=this.link_title;
-               this.external_mime = true;               
-           }
 
           if(tag == 'a' &&  local_image) {
                  this.xcl_markup = true;
@@ -1552,7 +1544,7 @@ function parse_wikitext(id) {
                    results += this.attr + '|';
                }
                return;
-          }           
+          }
           else if(this.in_font || tag == 'font') {
               /* <font 18pt:bold/garamond;;color;;background_color>  */
 			   if(!font_family) {			 
@@ -1564,13 +1556,9 @@ function parse_wikitext(id) {
                results += font_tag ;   
                return;            
        }
-         
+
           if(this.in_endnotes && tag == 'a') return; 
           if(this.code_type && tag == 'span') tag = 'blank'; 
-		  if(this.image_link_type && tag=='a') {  // fix for Chrome, to prevent images from being embedded in links
-		    tag = 'blank';	
-			this.is_image = true;
-		  }
           results += markup[tag];
 
           if(tag == 'td' || tag == 'th' || (this.last_col_pipes && this.td_align == 'center')) {
@@ -1588,7 +1576,7 @@ function parse_wikitext(id) {
           }
           else if(tag == 'img') {      
                var link_type = this.image_link_type;              
-               this.image_link_type="";			
+               this.image_link_type="";
                if(this.link_only) link_type = 'link_only';
                if(!link_type){
                   link_type = 'nolink'; 
@@ -1598,7 +1586,6 @@ function parse_wikitext(id) {
                }
                
                if(link_type == 'link_only') {
-	            if(!this.attr) this.attr = this.link_title;  // fix for Chrome which loses image name	       
                     img_size='?linkonly';
                }
                else if(link_type) { 
@@ -1621,7 +1608,7 @@ function parse_wikitext(id) {
                   this.attr += '  '; 
                }
            
-               results += this.attr + '}}';			
+               results += this.attr + '}}';
                this.attr = 'src';
           }
           else if(tag == 'plugin' || tag == 'pre' || tag == 'pre_td') {               
@@ -1631,6 +1618,7 @@ function parse_wikitext(id) {
                this.downloadable_file = "";
                this.downloadable_code = false;
           }
+
 
         }   // if markup tag
     },
@@ -1708,10 +1696,6 @@ function parse_wikitext(id) {
     else if(tag == 'a' && this.attr == 'src') {
             // if local image without link content, as in <a . . .></a>, delete link markup 
           if(this.backup('\[\[', '\{')) return;  
-		  if(this.is_image) {
-			 this.is_image = false;  //Chrome fix: prevents images with link components from being marked up as both links and images corrupting markup
-			 return;
-		  }
     }
    
     if(tag == 'ol' || tag == 'ul') {  
@@ -2426,6 +2410,19 @@ if(window.DWikifnEncode && window.DWikifnEncode == 'safe') {
             }
           }
 
+       $ua = strtolower ($_SERVER['HTTP_USER_AGENT']); 
+	  if(strpos($ua,'chrome') !== false) {
+       $xhtml = preg_replace_callback(
+             '/(?<=<a )(href=\".*?\")(\s+\w+=\".*?\")(.*?)(?=>)/sm',
+			 create_function(
+			 '$matches',
+			 '$ret_str = " " . trim($matches[3]) . " " . trim($matches[2])  . " " . trim($matches[1]) ;
+			  return $ret_str;'
+			 ),
+			 $xhtml
+			 );
+		}	 
+
         return $xhtml;
     }
 
@@ -2442,7 +2439,7 @@ if(window.DWikifnEncode && window.DWikifnEncode == 'safe') {
  */
   function fck_convert_text(&$event) {
   }
-
+  
 
  function big_file() {   
  }

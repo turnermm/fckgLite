@@ -38,7 +38,7 @@ document.write( FCKTools.GetStyleHtml( GetCommonDialogCss() ) ) ;
 td { font-size: 90%; }
 </style>
 </head>
-<body scroll="no" style="overflow: none; ">
+<body scroll="yes" style="overflow: auto; ">
 	<div id="divInfo">
 		<table cellspacing="1" cellpadding="1" border="0" width="100%" height="100%">
 			<tr>
@@ -311,4 +311,7 @@ td { font-size: 90%; }
 		<input id="txtAttStyle" style="width: 100%; display:none" type="text" />
 	</div>
 </body>
+<script type="text/javascript">
+ if( ChromeBrowser) ChromeKludge();
+ </script> 
 </html>
