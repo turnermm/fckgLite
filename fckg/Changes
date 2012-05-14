@@ -1,4 +1,4 @@
-rev 12-May_13-15_11
+rev 12-May_14-08_56
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -165,15 +165,12 @@ Arabic language update for fckgLite GUI
 11 May
 Added file icon for epub links to editor
 
-Kludge to fix Chrome's corrupting of mediafile links on re-save.  (lines 1528ff or this distro).
-
-12 May
-Fixes for Chrome where image links are corrupted on re-save. See comments.
 
 13 May
-Fix for Chrome which was not accessing image dialog's onload function.
-
 The corrupting of links in Chrome was finally determined to be that Chrome re-arranges the attributes
 in a link tag, putting the href first and the class and title later, whereas fckgLite, depends on
 knowing the class before the url.   This version of editor.php corrects for this  problem by
 re-arranging the attributes in link tags for Chrome.
+
+14 May
+Support for interwiki links added to edit.php

@@ -1279,6 +1279,12 @@ function parse_wikitext(id) {
                          this.attr = ':' + this.attr;
                        }
                    }
+				  else if(this.link_class.match(/interwiki/)) {
+				     var iw_type = this.link_class.match(/iw_(\w+)/);
+					 var iw_title = this.link_title.split(/\//);
+					 this.attr = iw_type[1] + '>' +  iw_title[iw_title.length-1];
+				  }
+				  
                 if(this.link_class == 'urlextern') {
                     this.attr = save_url;
 					this.external_mime=false;  // prevents external links to images from being converted to image links
