@@ -1,4 +1,4 @@
-rev 12-May_14-08_56
+rev 12-May_16-14_13
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -172,5 +172,11 @@ in a link tag, putting the href first and the class and title later, whereas fck
 knowing the class before the url.   This version of editor.php corrects for this  problem by
 re-arranging the attributes in link tags for Chrome.
 
-14 May
+15 May
 Support for interwiki links added to edit.php
+
+16 May
+Improved interwiki link suport:  added fileicon to fckEditor; removed added url text: link format is now [wp>Wikipedia]] and
+not [wp>Wikipedia|Wikipedia]]
+
+Added required interwiki css to fckeditor_area.css.new_template
