@@ -918,7 +918,7 @@ function parse_wikitext(id) {
             this.footnote = false;
             var bottom_note = false; 
             this.id = "";
-            external_mime = false;
+            this.external_mime = false;
             var media_class=false;   
             this.export_code = false;
             this.code_snippet = false;
@@ -2471,7 +2471,7 @@ if(window.DWikifnEncode && window.DWikifnEncode == 'safe') {
  $patterns = $DOKU_PLUGINS['syntax'][$list[0]]->Lexer->_regexes['base']->_patterns;
  $labels = array();
  $regex = '~~NOCACHE~~';
- 
+ $regex .= "|\{\{rss>http:\/\/.*?\}\}";
 
  $exclusions = $this->getConf('xcl_plugins');
  $exclusions = trim($exclusions, " ,");
@@ -2498,7 +2498,7 @@ if(window.DWikifnEncode && window.DWikifnEncode == 'safe') {
           $regex .= "|$pattern";       
        }
     }
-
+    
  }
  $regex = ltrim($regex, '|'); 
 
@@ -2525,10 +2525,8 @@ if(window.DWikifnEncode && window.DWikifnEncode == 'safe') {
        }
     }
 
- //file_put_contents('exclusions.txt', print_r($regex_xcl,true));
  return array('plugins'=> $regex, 'xcl'=> $regex_xcl);
- return $regex; 
-
+ //return $regex; 
 
  }
 

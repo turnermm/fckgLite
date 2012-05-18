@@ -1,4 +1,4 @@
-rev 12-May_16-14_13
+rev 12-May_18-07_33
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -180,3 +180,6 @@ Improved interwiki link suport:  added fileicon to fckEditor; removed added url 
 not [wp>Wikipedia|Wikipedia]]
 
 Added required interwiki css to fckeditor_area.css.new_template
+
+17 May
+Support for Dokuwiki's native syntax implementation of rss feed.
