@@ -218,6 +218,10 @@ window.onload = function()
 	else
 		LoadToolbarSetup() ;
   top.FCKEditorWindowObj(window);
+  if(top.fckg_isRTL() ) {
+    FCKConfig.ContentLangDirection	= 'rtl'
+  }
+  
 }
 
 function LoadToolbarSetup()

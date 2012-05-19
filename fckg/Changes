@@ -1,4 +1,4 @@
-rev 12-May_18-07_33
+rev 12-May_19-07_27
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -183,3 +183,7 @@ Added required interwiki css to fckeditor_area.css.new_template
 
 17 May
 Support for Dokuwiki's native syntax implementation of rss feed.
+
+19 May
+Fix for some browsers (Chromse,Safari) which lost fckconfig.js language direction setting: added direction
+setting to fckeditor.html window.onload.
