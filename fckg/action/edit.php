@@ -906,6 +906,7 @@ function parse_wikitext(id) {
             var img_align = '';   
             var alt = "";                     
             this.is_smiley = false;
+			this.in_link = false;
         }
 
         if(tag == 'a') {
