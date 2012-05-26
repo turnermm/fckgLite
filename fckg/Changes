@@ -172,6 +172,10 @@ in a link tag, putting the href first and the class and title later, whereas fck
 knowing the class before the url.   This version of editor.php corrects for this  problem by
 re-arranging the attributes in link tags for Chrome.
 
+13 May
+Fix for Chrome which was not accessing image dialog's onload function.
+
+
 15 May
 Support for interwiki links added to edit.php
 
