@@ -23,19 +23,6 @@ if(!defined('DOKU_TAB')) define ('DOKU_TAB',"\t");
  */
 class syntax_plugin_fckg_specials extends DokuWiki_Syntax_Plugin {
 
-    /**
-     * return some info
-     */
-    function getInfo(){
-        return array(
-            'author' => 'Myron Turner',
-            'email'  => 'turnermm02@shaw.ca',
-            'date'   => '8 Sep 2008',
-            'name'   => 'fckg_specials',
-            'desc'   => 'Ouputs html for misc syntax patterns',
-            'url'    => 'http://mturner.org/fckgLite',
-        );
-    }
 
     /**
      * What kind of syntax are we?

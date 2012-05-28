@@ -22,21 +22,6 @@ if(isset($conf['lang'])) {
 class action_plugin_fckg_meta extends DokuWiki_Action_Plugin {
   var $session_id = false;    
   var $draft_file;
-  
-  /**
-   * return some info
-   */
-  function getInfo(){
-    return array(
-		 'author' => 'Myron Turner',
-		 'email'  => 'turnermm02@shaw.ca',
-		 'date'   => '2007-09-18',
-		 'name'   => 'meta',
-		 'desc'   => 'fckg  meta handler',
-		 'url'    => 'http://www.mturner.org/fckgLite',
-		 );
-  }
- 
 
   /*
    * Register its handlers with the dokuwiki's event controller

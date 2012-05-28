@@ -20,19 +20,7 @@ require_once(DOKU_PLUGIN.'syntax.php');
  */
 class syntax_plugin_fckg_font extends DokuWiki_Syntax_Plugin {
  
-    /**
-     * return some info
-     */
-    function getInfo(){
-        return array(
-            'author' => 'Myron Turner',
-            'email'  => 'turnermm02@shaw.ca',
-            'date'   => '2007-12-26',
-            'name'   => 'Font Plugin',
-            'desc'   => 'Changes font size and face',
-            'url'    => 'http://www.mturner.org/development/',
-        );
-    }
+
  
     function getType(){ return 'formatting'; }
     function getAllowedTypes() { return array('formatting', 'substition', 'disabled'); }   

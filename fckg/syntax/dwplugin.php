@@ -28,19 +28,7 @@ class syntax_plugin_fckg_dwplugin extends DokuWiki_Syntax_Plugin {
       $EVENT_HANDLER->register_hook('PARSER_CACHE_USE', 'AFTER', $this, 'cache_bypass_after');
    }
 
-    /**
-     * return some info
-     */
-    function getInfo(){
-        return array(
-            'author' => 'Myron Turner',
-            'email'  => 'turnermm02@shaw.ca',
-            'date'   => '2007-07-26',
-            'name'   => 'Plugin handler',
-            'desc'   => 'supports dokuwiki plugins',
-            'url'    => 'http://www.mturner.org/development/',
-        );
-    }
+
  
     function getType(){ return 'formatting'; }
     function getAllowedTypes() { return array('formatting','substition'); }   

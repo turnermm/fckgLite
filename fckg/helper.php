@@ -9,15 +9,7 @@ if (!defined('DOKU_INC')) die();
 
 class helper_plugin_fckg extends DokuWiki_Plugin {
  
-  function getInfo(){
-    return array(
-      'author' => 'Myron Turner',
-      'date'   => '2007-05-15',
-      'name'   => 'DokuWikiFCK/fckg',
-      'desc'   => 'Various Helper Functions',
-      'url'    => 'http://www.mturner.org',
-    );
-  }
+
  
   function getMethods(){
     $result = array();

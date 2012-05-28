@@ -14,15 +14,7 @@ class action_plugin_fckg_save extends DokuWiki_Action_Plugin {
     function action_plugin_fckg_save(){
     }
 
-    function getInfo() {
-        return array(
-            'author' => 'Myron Turner',
-            'email'  => 'turnermm02@shaw.ca',
-            'date'   => '2008-Aug-30',
-            'name'   => 'fckg_save',
-            'desc'   => 'Save Plugin for fcklite',
-            'url'    => 'http://www.mturner.org');
-    }
+
 
     function register(&$controller) {
   

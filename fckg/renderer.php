@@ -46,13 +46,7 @@ class renderer_plugin_fckg extends Doku_Renderer_xhtml
         }
       }
     }
-    /**
-     * return some info
-     */
-    function getInfo()
-    {
-        return confToHash(dirname(__FILE__).'/info.txt');
-    }
+
 
     /**
      * the format we produce

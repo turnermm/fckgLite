@@ -40,19 +40,6 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
         $this->helper =& plugin_load('helper', 'fckg');
     }
 
-    function getInfo()
-    {
-              return array(
-                 'author' => 'Myron Turner',
-                 'email'  => 'turnermm02@shaw.ca',
-                 'date'   => '2007-09-18',
-                 'name'   => 'edit.php',
-                 'desc'   => 'fckgLite parser',
-                 'url'    => 'http://www.mturner.org/fckgLite',
-                 );
-    }
-
-
 
     function register(&$controller)
     {

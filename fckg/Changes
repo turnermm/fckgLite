@@ -1,4 +1,4 @@
-rev 12-May_24-20_42
+rev 12-May_27-11_16
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -172,7 +172,6 @@ in a link tag, putting the href first and the class and title later, whereas fck
 knowing the class before the url.   This version of editor.php corrects for this  problem by
 re-arranging the attributes in link tags for Chrome.
 
-13 May
 Fix for Chrome which was not accessing image dialog's onload function.
 
 
@@ -201,3 +200,7 @@ Fixed permissions on fckeditor.html, which wasn't readable by web server if inst
 Restored markup to elements which follow images with links by setting this.in_link to false when an img
 tag occurs.  Instead of being applied in start(), markup in links is saved in an array and restored in 
 end function. But since these situations are not true links, the markup is thrown away.
+ 
+27 May
+Upgraded getInfo() implementation in all fckg files to enable the current Dokuwiki practice
+of loading plugin info from plugin.info.txt
