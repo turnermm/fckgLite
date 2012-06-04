@@ -131,6 +131,11 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
                  'src'=>DOKU_BASE.'lib/plugins/fckg/scripts/vki_kb.js'
             );
 
+      $ua = strtolower ($_SERVER['HTTP_USER_AGENT']);
+      if(strpos($ua, 'msie') !== false) {
+          echo "\n" . '<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />' ."\n";     
+      }
+            
         return;
     }
 
@@ -516,6 +521,7 @@ $DW_EDIT_hide = $this->dw_edit_displayed();
                    <?php echo $DW_EDIT_disabled; ?>
                    name="do[delete]" value="<?php echo $lang['btn_delete']?>"
                    title="<?php echo $fckg_lang['title_dw_delete'] ?>"
+                   style = "font-size: 100%;"
                    onmouseup="draft_delete();"
                    onclick = "return confirm('<?php echo $fckg_lang['confirm_delete']?>');"
             />
@@ -525,6 +531,7 @@ $DW_EDIT_hide = $this->dw_edit_displayed();
              <input class="button"  
                  <?php echo $DW_EDIT_disabled; ?>                 
                  <?php echo $DW_EDIT_hide; ?>
+                 style = "font-size: 100%;"
                  onclick ="setDWEditCookie(2, this);parse_wikitext('edbtn__save');this.form.submit();" 
                  type="submit" name="do[save]" value="<?php echo $fckg_lang['btn_dw_edit']?>"  
                  title="<?php echo $fckg_lang['title_dw_edit']?>"
@@ -545,6 +552,7 @@ global $INFO;
                  name="do[draftdel]" 
                  value="<?php echo $lang['btn_cancel']?>" 
                  onmouseup="draft_delete();" 
+                 style = "font-size: 100%;"
                  title = "<?php echo $fckg_lang['title_dw_cancel']?>"
              />
 

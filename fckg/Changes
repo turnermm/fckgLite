@@ -1,4 +1,4 @@
-rev 12-May_27-11_16
+rev 12-Jun_04-14_39
 
 8 Sep
 This distribution marks the changeover to a single distribution of fckgLite based on the jQuery branch of fckgLiteSafe.
@@ -204,3 +204,9 @@ end function. But since these situations are not true links, the markup is throw
 27 May
 Upgraded getInfo() implementation in all fckg files to enable the current Dokuwiki practice
 of loading plugin info from plugin.info.txt
+
+4 June
+Added inline 100% font-size style to edit window's input->submit button for IE when using new template;
+otherwise submit buttons are smaller than input->button buttons.
+
+Added meta tag to <head> that switches IE to compatibility mode (in edit.php->fckg_edit_meta).
