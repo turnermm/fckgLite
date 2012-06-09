@@ -1,4 +1,4 @@
-﻿/*
+﻿9/*
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
  * Copyright (C) 2003-2007 Frederico Caldeira Knabben
  *
@@ -23,6 +23,33 @@
  * Follow this link for more information:
  * http://wiki.fckeditor.net/Developer%27s_Guide/Configuration/Configurations_Settings
  */
+
+function test_cookie(name, value) {    
+    var allcookies = document.cookie;
+    var pos = allcookies.indexOf(name);
+    if(pos != -1) {
+        var start = pos + (name.length+1);
+        var end = allcookies.indexOf(";",start);
+        if(end == -1) end = allcookies.length;
+        var cookie_value = allcookies.substring(start,end);
+        cookie_value=decodeURIComponent(cookie_value);       
+        if(value) return (cookie_value == value);
+        return cookie_value;
+    }    
+    return false;
+}    
+
+var AdminSelectedSpellChecker = 'SpellerPages';
+if(test_cookie('SCAYT', 'on')) {
+     AdminSelectedSpellChecker = 'SCAYT';
+    if(test_cookie('FCK_SCAYT_AUTO', 'on')) {
+       FCKConfig.ScaytAutoStartup = true;
+    }   
+    AdminSelectedLang = test_cookie('FCK_SCAYT_LANG');
+    if(AdminSelectedLang) {
+       FCK.Config.ScaytDefLang = AdminSelectedLang;
+    }
+}
 
 FCKConfig.CustomConfigurationsPath = '' ;
 
@@ -189,7 +216,9 @@ FCKConfig.FontSizes		= '6pt;8pt;9pt;10pt;11pt;12pt;14pt;16pt;18pt;24pt;36pt' ;
 FCKConfig.StylesXmlPath		= FCKConfig.EditorPath + 'fckstyles.xml' ;
 FCKConfig.TemplatesXmlPath	= FCKConfig.EditorPath + 'fcktemplates.xml' ;
 
-FCKConfig.SpellChecker		= 'SpellerPages'; //	= 'ieSpell' ;	// 'ieSpell' | 'SpellerPages'
+//FCKConfig.SpellChecker		= 'SCAYT' ;//'SpellerPages'; //	= 'ieSpell' ;	// 'ieSpell' | 'SpellerPages'
+FCKConfig.SpellChecker = AdminSelectedSpellChecker;
+//FCKConfig.ScaytAutoStartup = true;
 FCKConfig.IeSpellDownloadUrl	= 'http://www.iespell.com/download.php' ;
 FCKConfig.SpellerPagesServerScript = 'server-scripts/spellchecker.php' ;	// Available extension: .php .cfm .pl
 FCKConfig.FirefoxSpellChecker	= false ;
@@ -532,3 +561,8 @@ FCKConfig.dokuSmileyImages	=
 FCK.get_FCK = function(){
   return FCK;
 }
+
+FCK.get_FCKConfig = function(){
+  return FCKConfig;
+}
+

@@ -28,4 +28,6 @@ $lang['nix_style'] = "For Windows Servers (Vista and Later).  This setting makes
 $lang['no_symlinks']  = "Disable automatic creation of symbolic links in fckg/userfiles.";            
 $lang['direction'] = 'Set Language direction in FCKeditor:  <b>nocheck</b>: fckgLite will make no changes to the default direction setting; ' 
                        . ' <b>dokuwiki</b>:  the current Dokuwiki language direction;  <b>ltr</b>: Left-to-right ; <b>rtl</b>: Right-to-left.';
-# $lang['direction_chk'] = "";
+$lang['scayt_auto'] = 'Automatically enable the SCAYT spellchecker. Defaults to "on". To turn off SCAYT select "off"';
+$lang['scayt'] = 'Use the SCAYT spellchecker. This defaults to "on"; selecting "off" will switch to the spellerpages checker';  
+$lang['scayt_lang']="Set SCAYT default language.";

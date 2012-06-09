@@ -546,7 +546,8 @@ global $INFO;
 
   $backup_btn = isset($fckg_lang['dw_btn_backup'])? $fckg_lang['dw_btn_backup'] : $fckg_lang['dw_btn_refresh'];
   $backup_title = isset($fckg_lang['title_dw_backup'])? $fckg_lang['title_dw_backup'] : $fckg_lang['title_dw_refresh'];   
- 
+  $using_scayt = ($this->getConf('scayt')) == 'on';
+  
 ?>
             <input class="button" type="submit" 
                  name="do[draftdel]" 
@@ -558,6 +559,7 @@ global $INFO;
 
   
             <input class="button" type="button" value = "<?php echo $fckg_lang['dw_btn_lang']?>"
+                  <?php if ($using_scayt) echo 'style = "display:none";'?>
                    title="<?php echo $fckg_lang['title_dw_lang']?>"
                    onclick="aspell_window();"  
                   /> 

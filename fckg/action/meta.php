@@ -331,9 +331,21 @@ function check_userfiles() {
 
           // $expire = time()+60*60*24*30;
            $expire = null;
-           setcookie('FCK_NmSp_acl',$session_string, $expire, '/'); 
-  
-        
+           setcookie('FCK_NmSp_acl',$session_string, $expire, '/');           
+
+           setcookie('FCK_SCAYT',$this->getConf('scayt'), $expire, '/');                
+           setcookie('FCK_SCAYT_AUTO',$this->getConf('scayt_auto'), $expire, '/'); 
+           $scayt_lang = $this->getConf('scayt_lang');
+           if(isset($scayt_lang)) {
+               list($scayt_lang_title,$scayt_lang_code) = explode('/',$scayt_lang);
+               if($scayt_lang_code!="en_US") {
+                  setcookie('FCK_SCAYT_LANG',$scayt_lang_code, $expire, '/'); 
+               }
+           }
+           
+               
+               
+                   
   }
 
   function file_type(&$event, $param) {	 
