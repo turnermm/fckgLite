@@ -1,7 +1,7 @@
 rev 12-Jun_09-08_00
 
 6 June
-Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
+Upgraded from FCKeditor 2.6.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
 2.6.6 is the final FCKeditor before the change-over to CKeditor.  The upgrade required bringing the ie and gecko 
 javascript files into sync, in particular so that the image and link dialogs open to a larger size.
 This upgrade will now be designated fckgLite 07.
