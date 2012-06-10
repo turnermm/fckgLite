@@ -1,7 +1,7 @@
-rev 12-Jun_09-08_00
+rev 12-Jun_10-10_33
 
 6 June
-Upgraded from FCKeditor 2.6.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
+Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
 2.6.6 is the final FCKeditor before the change-over to CKeditor.  The upgrade required bringing the ie and gecko 
 javascript files into sync, in particular so that the image and link dialogs open to a larger size.
 This upgrade will now be designated fckgLite 07.
@@ -12,3 +12,7 @@ Hide language selection button for SpellerPages spell checker when SCAYT is in e
 
 9 June
 Converted Arabic language file for fckg editing window from BOM to non-BOM (Corrupted image display).
+Enabled overflow and scrolling in SCAYT dialog.
+
+10 June
+Increased sizes of link and image dialog windows in gecko. Adjusted font sizes in link.html
