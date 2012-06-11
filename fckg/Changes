@@ -1,4 +1,4 @@
-rev 12-Jun_10-10_33
+rev 12-Jun_11-09_50
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -16,3 +16,6 @@ Enabled overflow and scrolling in SCAYT dialog.
 
 10 June
 Increased sizes of link and image dialog windows in gecko. Adjusted font sizes in link.html
+
+11 June 
+Corrected url in Anteater safe encodig message (meta.php)

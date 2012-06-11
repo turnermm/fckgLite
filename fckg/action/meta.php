@@ -500,7 +500,7 @@ function fnencode_check() {
       else if(!$rencode && file_exists(DOKU_PLUGIN . 'fckg/saferencode') && $this->is_safeUpgraded() )   {	    
 	    msg("This version of fckgLiteSafe requires a newer version of Dokuwiki (2011-05-25 Rincewind or later).  You risk corrupting your file system. "
 		 .   "To convert this distribution of fckgLite/fckgLiteSafe for use with earlier versions of Dokuwiki,  see the README file or " 
-		 . " <a style='color:blue' href='http://www.mturner.org/dwfck/fckgLite/doku.php?id=docs:upgrade_6&#anteater'>or the fckgLite web site</a>  ",
+		 . " <a style='color:blue' href='http://www.mturner.org/fckgLite/doku.php?id=docs:upgrade_6&#anteater'>or the fckgLite web site</a>  ",
 		-1);
     }	  
 }
