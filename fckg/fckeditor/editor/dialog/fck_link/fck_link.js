@@ -29,7 +29,7 @@ var FCKLang		= oEditor.FCKLang ;
 var FCKConfig	= oEditor.FCKConfig ;
 var FCKRegexLib	= oEditor.FCKRegexLib ;
 var FCKTools	= oEditor.FCKTools ;
-var ajax; 
+var fckg_ajax; 
 
 FCK.dwiki_browser = 'url';
 var DWIKI_User = FCK.dwiki_user;
@@ -59,7 +59,10 @@ if ( FCKConfig.LinkUpload )
 
 dialog.AddTab( 'Advanced', FCKLang.DlgAdvancedTag ) ;
 dialog.SetTabVisibility('Advanced',false); 
- 
+ //display_obj(FCK.EditingArea.Document,'win');
+// alert(FCK.EditingArea.Document.body.innerHTML);
+
+window.onunload =  remove_hold_a;
 
 // Function called when a dialog tag is selected.
 function OnDialogTabChange( tabCode )
@@ -323,6 +326,8 @@ oParser.CreateEMailUri = function( address, subject, body )
 var oLink = dialog.Selection.GetSelection().MoveToAncestorNode( 'A' ) ;
 if ( oLink )
 	FCK.Selection.SelectNode( oLink ) ;
+else {
+}
 
 window.onload = function()
 {
@@ -334,7 +339,7 @@ window.onload = function()
 
 	// Load the selected link information (if any).
 	LoadSelection() ;
-
+   
 	// Update the dialog box.
 	SetLinkType( GetE('cmbLinkType').value ) ;
 
@@ -478,9 +483,36 @@ function checkForQueryString(ns) {
     return ns;
 }
 
+function _getOffset( el ) {
+    var _x = 0;
+    var _y = 0;
+    while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+        _x += el.offsetLeft - el.scrollLeft;
+        _y += el.offsetTop - el.scrollTop;
+        el = el.offsetParent;
+    }
+    return { top: _y, left: _x };
+}
+
 function LoadSelection()
 {
-	if ( !oLink ) return ;
+    remove_hold_a();
+    if ( !oLink ) {     
+        if(window.document.documentMode && window.document.documentMode > 8) {
+            FCK.InsertHtml('&nbsp;<span id="hold_a" style="font-weight:bold">&nbsp;&nbsp;broken link insertion&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;'); 
+            var dom = oEditor.FCK.EditorDocument.getElementById("hold_a");      
+            var offset = _getOffset(dom);
+            if(offset.top < 1) {
+                remove_hold_a();
+            }
+     
+            if(FCK.screen_x && FCK.screen_y) {
+                oEditor.FCK.EditorDocument.parentWindow.scrollTo(FCK.screen_x,FCK.screen_y);
+            }
+       }
+       
+        return ;
+    }
 
 	var sType = 'url' ;
     
@@ -817,6 +849,7 @@ function Ok()
 	var sUri, sInnerHtml, internalInnerHTML ;  // internalInnerHTML is for urls that are in fact internal media
     var wikiQS;  // internal link query string (DW Anteater or later)
     var current_ns = false;  // if internal link has no leading colon current_ns = true
+    
 	oEditor.FCKUndo.SaveUndoStep() ;
 
 	switch ( GetE('cmbLinkType').value )
@@ -828,6 +861,7 @@ function Ok()
 			if ( sUri.length == 0 )
 			{
 				alert( FCKLang.DlnLnkMsgNoUrl ) ;
+                remove_hold_a();
 				return false ;
 			}
 
@@ -841,6 +875,7 @@ function Ok()
 			if ( sUri.length == 0 )
 			{
 				alert( FCKLang.DlnLnkMsgNoEMail ) ;
+                remove_hold_a();
 				return false ;
 			}
 
@@ -857,6 +892,7 @@ function Ok()
 			if ( sAnchor.length == 0 )
 			{
 				alert( FCKLang.DlnLnkMsgNoAnchor ) ;
+                remove_hold_a();                
 				return false ;
 			}
 
@@ -868,11 +904,15 @@ function Ok()
 			if ( wiki_id.length == 0 )
 			{
 				alert( FCKLang.DlgLnkIntText ) ;
+                remove_hold_a();                
 				return false ;
 			}
 
             wikiQS = GetE('txtDokuWikiQS').value;          
-            if((wikiQS=checkDokuQS(wikiQS)) === false) return;
+            if((wikiQS=checkDokuQS(wikiQS)) === false) { 
+                remove_hold_a();
+                return;
+            }
 
             var dwiki_dir = window.location.pathname;
       
@@ -898,6 +938,7 @@ function Ok()
 			if ( wiki_id.length == 0 )
 			{
 				alert( FCKLang.DlgLnkMimeText ) ;
+                remove_hold_a();                
 				return false ;
 			}
 
@@ -915,6 +956,7 @@ function Ok()
 			if ( share.length == 0 )
 			{
 				alert( FCKLang.DlgLnkSambaText ) ;
+                remove_hold_a();                
 				return false ;
 			}          
 
@@ -925,21 +967,26 @@ function Ok()
 	}
 
 	// If no link is selected, create a new one (it may result in more than one link creation - #220).
+    var document_body = null;
 	var aLinks = oLink ? [ oLink ] : oEditor.FCK.CreateLink( sUri, true ) ;
 
 	// If no selection, no links are created, so use the uri as the link text (by dom, 2006-05-26)
 	var aHasSelection = ( aLinks.length > 0 ) ;
-
+     
 	if ( !aHasSelection )
 	{
-	
+    
+     if(window.document.documentMode && window.document.documentMode > 8) {
+        document_body = FCK.EditingArea.Document.body
+      }
+	  
        if(sUri.match(/%[a-fA-F0-9]{2}/)  && (matches = sUri.match(/userfiles\/file\/(.*)/))) {
           matches[1] = matches[1].replace(/\//g,':');
           if(!matches[1].match(/^:/)) {      
              matches[1] = ':' + matches[1];
           }
           internalInnerHTML = decodeURIComponent ? decodeURIComponent(matches[1]) : unescape(matches[1]);                               
-          internalInnerHTML = decodeURIComponent ? decodeURIComponent(internalInnerHTML) : unescape(internalInnerHTML); 
+          intern2alInnerHTML = decodeURIComponent ? decodeURIComponent(internalInnerHTML) : unescape(internalInnerHTML); 
       
       }
  	  else	sInnerHtml = sUri;
@@ -1100,11 +1147,44 @@ function Ok()
 			SetAttribute( oLink, 'style', GetE('txtAttStyle').value ) ;
 		}
 	}
-         
-	// Select the (first) link.
-	oEditor.FCKSelection.SelectNode( aLinks[0] );
 
+
+    if(document_body) {  
+       var hold = FCK.EditingArea.Document.getElementById("hold_a");                  
+       if(hold) {
+          var hold_aParent = hold.parentNode;      
+          hold_aParent.replaceChild(aLinks[0],hold);           
+       }
+       else {
+            FCK.target.appendChild(aLinks[0]);
+       }
+
+       if(FCK.screen_x && FCK.screen_y) {
+           oEditor.FCK.EditorDocument.parentWindow.scrollTo(FCK.screen_x,FCK.screen_y);
+           FCK.screen_x=null; FCK.screen_y=null;
+           FCK.mouse_x=null; FCK.mouse_y=null;
+           
+       }
+       else {
+            FCK.target.scrollIntoView();
+       }    
+       
+       return true;
+    }
+   else {
+       oEditor.FCKSelection.SelectNode(aLinks[0] );
+       remove_hold_a();
+   }     
+    
 	return true ;
+}
+
+function remove_hold_a() {
+    var dom = oEditor.FCK.EditorDocument.getElementById("hold_a");
+    
+    if(dom) {     
+        dom.parentNode.removeChild(dom);
+    } 
 }
 
 function BrowseServer()
@@ -1204,6 +1284,7 @@ function CheckUpload()
 		( FCKConfig.LinkUploadDeniedExtensions.length > 0 && oUploadDeniedExtRegex.test( sFile ) ) )
 	{
 		OnUploadCompleted( 202 ) ;
+        remove_hold_a();
 		return false ;
 	}
 
@@ -1247,27 +1328,27 @@ function getHeaders(){
 			return false ;
 	 }
     
-    ajax = new sack();
-	ajax.requestFile = "get_headers.php";
-	ajax.method = 'GET';
-	ajax.onCompletion = whenCompleted;
-    ajax.setVar('dw_id',wiki_id);
-	ajax.runAJAX();
+    fckg_ajax = new sack();
+	fckg_ajax.requestFile = "get_headers.php";
+	fckg_ajax.method = 'GET';
+	fckg_ajax.onCompletion = whenCompleted;
+    fckg_ajax.setVar('dw_id',wiki_id);
+	fckg_ajax.runAJAX();
 }
 
 function whenCompleted(){
  
-	if (ajax.responseStatus){
-		var string = "<p>2 Status Code: " + ajax.responseStatus[0] + "</p><p>Status Message: " + ajax.responseStatus[1] + "</p><p>URLString Sent: " + ajax.URLString + "</p>";
+	if (fckg_ajax.responseStatus){
+		var string = "<p>2 Status Code: " + fckg_ajax.responseStatus[0] + "</p><p>Status Message: " + fckg_ajax.responseStatus[1] + "</p><p>URLString Sent: " + fckg_ajax.URLString + "</p>";
 	} else {
-		var string = "<p>1 URLString Sent: " + ajax.URLString + "</p>";
+		var string = "<p>1 URLString Sent: " + fckg_ajax.URLString + "</p>";
 	}
 
 
 
-    if(ajax.responseStatus && ajax.responseStatus[0] == 200) {
+    if(fckg_ajax.responseStatus && fckg_ajax.responseStatus[0] == 200) {
          
-         var str = decodeURIComponent(ajax.response);
+         var str = decodeURIComponent(fckg_ajax.response);
 
          if(str.match(/^\s*__EMPTY__\s*$/)) {
                 anchorOption.ini('No Headers Found');
@@ -1329,6 +1410,7 @@ function GetCurentNameSapce()
 	   if(ajax2.responseStatus && ajax2.responseStatus[0] == 200) {         
          var str = decodeURIComponent(ajax2.response);
 		 currentNameSpace = str; 		
+         //alert(currentNameSpace);
 		 // gotCurrentNameSpace = true;
 	    }
 	
@@ -1337,7 +1419,17 @@ function GetCurentNameSapce()
 	ajax2.runAJAX();
 }
 
-
+function display_obj(which, match_val) {
+    alert(match_val);
+       var regex = new RegExp(match_val,"i");
+        for(var i in which) {
+        if(match_val) {
+            if(!i.match(regex)) continue;
+        }
+         msg = i + '=' + which[i];
+         if(!confirm(msg)) break;
+    }
+}
 
 	
 

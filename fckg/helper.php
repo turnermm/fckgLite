@@ -157,7 +157,7 @@ var oldBeforeunload;
     *    assigned in fckeditor.html
   */
  function handlekeypress (e) {  
-   // alert(e);
+    //alert(e);
    if(ourLockTimerIsSet) {
          lockTimerRefresh();
    }
@@ -352,7 +352,7 @@ function dwfckKeypressInstallHandler() {
       oDokuWiki_FCKEditorInstance.EditorDocument.addEventListener('keyup', handlekeypress , false) ;
   }
   else {   
-     oDokuWiki_FCKEditorInstance.EditorDocument.attachEvent('onkeyup', handlekeypress ) ;
+     oDokuWiki_FCKEditorInstance.EditorDocument.attachEvent('onkeyup', handlekeypress ) ;   
   }
 }
 
@@ -392,12 +392,15 @@ function FCKeditor_OnComplete( editorInstance )
   document.getElementById('wiki__text___Frame').style.height = "450px";
   document.getElementById('size__ctl').innerHTML = document.getElementById('fck_size__ctl').innerHTML;
   
-  if(window.addEventListener){
+  if(window.addEventListener){  
     editorInstance.EditorDocument.addEventListener('keydown', CTRL_Key_Formats, false) ;
+    if(document.documentMode && document.documentMode > 7) {
+        editorInstance.EditorDocument.addEventListener('click', fckgMousePos, false) ;
+    }
   }
   else {
-   editorInstance.EditorDocument.attachEvent('onkeydown', CTRL_Key_Formats) ;
-  }  
+   editorInstance.EditorDocument.attachEvent('onkeydown', CTRL_Key_Formats) ;      
+   }
   dwfckKeypressInstallHandler();
   
   var index = navigator.userAgent.indexOf('Safari'); 
@@ -413,11 +416,21 @@ function FCKeditor_OnComplete( editorInstance )
 
 }
 
-
+function fckgMousePos(e) {
+      if(!e) e=event;
+      
+     if(document.documentMode && document.documentMode > 8) {    
+       oDokuWiki_FCKEditorInstance.get_FCK().mouse_x = e.clientX;
+       oDokuWiki_FCKEditorInstance.get_FCK().mouse_y = e.clientY;       
+       oDokuWiki_FCKEditorInstance.get_FCK().screen_x = e.screenX;
+       oDokuWiki_FCKEditorInstance.get_FCK().screen_y = e.screenY;       
+       oDokuWiki_FCKEditorInstance.get_FCK().target = e.target;
+     }
+}
 function CTRL_Key_Formats(parm) {
 
      if(!parm.ctrlKey) return;
-  
+ 
     if(parm.keyCode == 56) {
 		oDokuWiki_FCKEditorInstance.get_FCK().ToolbarSet.CurrentInstance.Commands.GetCommand('InsertUnorderedList').Execute();	
 		return;
