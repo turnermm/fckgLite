@@ -986,7 +986,7 @@ function Ok()
              matches[1] = ':' + matches[1];
           }
           internalInnerHTML = decodeURIComponent ? decodeURIComponent(matches[1]) : unescape(matches[1]);                               
-          intern2alInnerHTML = decodeURIComponent ? decodeURIComponent(internalInnerHTML) : unescape(internalInnerHTML); 
+          internalInnerHTML = decodeURIComponent ? decodeURIComponent(internalInnerHTML) : unescape(internalInnerHTML); 
       
       }
  	  else	sInnerHtml = sUri;
