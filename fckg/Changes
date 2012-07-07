@@ -1,4 +1,4 @@
-rev 12-Jul_06-12_24
+rev 12-Jul_07-13_19
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -21,6 +21,10 @@ Increased sizes of link and image dialog windows in gecko. Adjusted font sizes i
 Corrected url in Anteater safe encodig message (meta.php)
 
 5 July 2012
-Fix to FCKEditor link.js for IE9, where FCKeditor's Selection.SelectNode() fails to insert link at 
+Fix to FCKEditor fck_link.js for IE9, where FCKeditor's Selection.SelectNode() fails to insert link at 
 cursor position if text not previously selected. This only comes into play if fckgLite is prevent from
 auto-switching IE to IE8 compatibility while in editing mode.
+
+7 July 2012
+Fix to FCKeditor fck_image.js for IE9, where FCK.InsertElement failed to insert image at
+cursor. (See fck_link 5 July 2012).
