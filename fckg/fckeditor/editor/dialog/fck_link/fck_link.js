@@ -498,7 +498,7 @@ function LoadSelection()
 {
     remove_hold_a();
     if ( !oLink ) {     
-        if(window.document.documentMode && window.document.documentMode > 8) {
+        if(window.document.documentMode && window.document.documentMode == 9) {
             FCK.InsertHtml('&nbsp;<span id="hold_a" style="font-weight:bold">&nbsp;&nbsp;broken link insertion&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;'); 
             var dom = oEditor.FCK.EditorDocument.getElementById("hold_a");      
             var offset = _getOffset(dom);
@@ -976,7 +976,7 @@ function Ok()
 	if ( !aHasSelection )
 	{
     
-     if(window.document.documentMode && window.document.documentMode > 8) {
+     if(window.document.documentMode && window.document.documentMode == 9) {
         document_body = FCK.EditingArea.Document.body
       }
 	  

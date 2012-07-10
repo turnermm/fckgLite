@@ -1,4 +1,4 @@
-rev 12-Jul_07-13_19
+rev 12-Jul_10-07_06
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -28,3 +28,10 @@ auto-switching IE to IE8 compatibility while in editing mode.
 7 July 2012
 Fix to FCKeditor fck_image.js for IE9, where FCK.InsertElement failed to insert image at
 cursor. (See fck_link 5 July 2012).
+
+9 July
+Removed some unnecessary files from distribution and comproessed  old Changs files to zip.
+
+Confined IE image and link fixes to IE9 since FCKeditor will not load in IE10.  Users of IE10
+where templates force Standards Mode will have to manually switch to compatibilty mode.
+In other cases, fckgLite auto-switches to IE8 compatibility,

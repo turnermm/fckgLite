@@ -284,7 +284,7 @@ function Ok()
 	}
 
 	UpdateImage( oImage ) ;
-    if(window.document.documentMode && window.document.documentMode > 8) {   
+    if(window.document.documentMode && window.document.documentMode == 9) {   
        FCK.target.appendChild(oImage); 	
     }
 	var sLnkUrl = GetE('txtLnkUrl').value.Trim() ;

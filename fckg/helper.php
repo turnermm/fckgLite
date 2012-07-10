@@ -394,7 +394,7 @@ function FCKeditor_OnComplete( editorInstance )
   
   if(window.addEventListener){  
     editorInstance.EditorDocument.addEventListener('keydown', CTRL_Key_Formats, false) ;
-    if(document.documentMode && document.documentMode > 7) {
+    if(document.documentMode && document.documentMode == 9) {
         editorInstance.EditorDocument.addEventListener('click', fckgMousePos, false) ;
     }
   }
@@ -419,7 +419,7 @@ function FCKeditor_OnComplete( editorInstance )
 function fckgMousePos(e) {
       if(!e) e=event;
       
-     if(document.documentMode && document.documentMode > 8) {    
+     if(document.documentMode && document.documentMode == 9) {    
        oDokuWiki_FCKEditorInstance.get_FCK().mouse_x = e.clientX;
        oDokuWiki_FCKEditorInstance.get_FCK().mouse_y = e.clientY;       
        oDokuWiki_FCKEditorInstance.get_FCK().screen_x = e.screenX;
