@@ -1646,8 +1646,8 @@ function parse_wikitext(id) {
          return;   
      }
      if(this.is_smiley) {
-        this.is_smiley = false;
-        return;
+        this.is_smiley = false;    
+        if(tag !='li') return;
      }
 	 if(tag == 'span' && this.in_font) {
 	      tag = 'font';

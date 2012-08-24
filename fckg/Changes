@@ -1,4 +1,4 @@
-rev 12-Jul_10-07_06
+rev 12-Aug_23-21_03
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -35,3 +35,6 @@ Removed some unnecessary files from distribution and comproessed  old Changs fil
 Confined IE image and link fixes to IE9 since FCKeditor will not load in IE10.  Users of IE10
 where templates force Standards Mode will have to manually switch to compatibilty mode.
 In other cases, fckgLite auto-switches to IE8 compatibility,
+
+23 August
+Fix for smileys in lists where CR was lost if smiley was in li
