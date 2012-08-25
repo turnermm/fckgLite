@@ -145,3 +145,7 @@ FCKXml.prototype.SelectSingleNode = function( xpath )
 			return null ;
 	}
 }
+  if(window.document.documentMode && window.document.documentMode > 8) {
+     document.writeln( '<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />');
+      
+  }

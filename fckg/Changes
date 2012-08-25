@@ -1,4 +1,4 @@
-rev 12-Aug_24-17_48
+rev 12-Aug_25-09_36
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -41,3 +41,7 @@ Fixed for smileys in lists where CR was lost if smiley was in li
 
 24 August
 fckeditor/dwsmileys.php: set alternate path for ajax access to smiley.conf in debian and ubuntu
+
+25 August
+Set IE compatiblity mode to IE=EmulateIE8 in file browser when browserMode > 8 (used writeln in file: fckxml.js).
+This was needed by IE 10.
