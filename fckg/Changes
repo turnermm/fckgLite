@@ -1,4 +1,4 @@
-rev 12-Aug_25-09_36
+rev 12-Aug_28-10_17
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -45,3 +45,8 @@ fckeditor/dwsmileys.php: set alternate path for ajax access to smiley.conf in de
 25 August
 Set IE compatiblity mode to IE=EmulateIE8 in file browser when browserMode > 8 (used writeln in file: fckxml.js).
 This was needed by IE 10.
+
+28 August
+Implemented option to rewrite FCKeditor smiley URLs when pages are moved to new server. Regex at top of
+edit.php:_preprocess.  The URLs are reset on a page by page basis when loaded and saved.  The option
+should be turned off except when needed.

@@ -207,7 +207,12 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
                 //Check for text from template event handler
                  if(!$text && $this->page_from_template) $text = $this->page_from_template;
             }
-            
+
+    if($this->getConf('smiley_hack')) {
+        $new_addr = $_SERVER['SERVER_NAME'] . DOKU_BASE;
+        $text=preg_replace("#(?<=http://)(.*?)(?=lib/plugins/fckg/fckeditor/editor/images/smiley/msn)#s", $new_addr,$text);
+     }
+
       if(strpos($text, '%%') !== false) {     
          $text= preg_replace_callback(
             '/(<nowiki>)*(\s*)%%\s*([^%]+)\s*%%(<\/nowiki>)*(\s*)/ms',

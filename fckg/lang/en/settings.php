@@ -31,3 +31,5 @@ $lang['direction'] = 'Set Language direction in FCKeditor:  <b>nocheck</b>: fckg
 $lang['scayt_auto'] = 'Automatically enable the SCAYT spellchecker. Defaults to "on". To turn off SCAYT select "off"';
 $lang['scayt'] = 'Use the SCAYT spellchecker. This defaults to "on"; selecting "off" will switch to the spellerpages checker';  
 $lang['scayt_lang']="Set SCAYT default language.";
+$lang['smiley_hack'] = "Reset URL for FCKeditor's smilies when moving to new server. This is done on a page by page basis when page is loaded for editing and saved.  This option should normally be turned off.";
+

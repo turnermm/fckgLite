@@ -21,5 +21,5 @@ $conf['direction'] = 'nocheck';
 $conf['scayt'] = 'on';
 $conf['scayt_auto']= 'on';
 $conf['scayt_lang'] = "American English/en_US";
-
+$conf['smiley_hack'] = 0;
 
