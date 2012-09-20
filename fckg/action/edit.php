@@ -449,7 +449,7 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
 ?>
 
  
-   <form id="dw__editform" method="post" action="<?php echo script()?>"  "accept-charset="<?php echo $lang['encoding']?>">
+   <form id="dw__editform" method="post" action="<?php echo script()?>"  accept-charset="<?php echo $lang['encoding']?>">
     <div class="no">
       <input type="hidden" name="id"   value="<?php echo $ID?>" />
       <input type="hidden" name="rev"  value="<?php echo $REV?>" />
