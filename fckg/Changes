@@ -1,4 +1,4 @@
-rev 12-Sep_20-07_38
+rev 12-Oct_09-10_24
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -53,3 +53,6 @@ should be turned off except when needed.
 
 20 August
 Minor edit (removed stray quotation mark attached attribute name in edit.php form tag)
+
+9 October 2012
+Fixed bug where table markup inside code blocks dropped empty cells (edit.php::_preprocess)

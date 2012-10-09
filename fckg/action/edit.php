@@ -341,6 +341,16 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
 			  
        }
 
+        $this->xhtml = preg_replace_callback(
+            '/(<pre)(.*?)(>)(.*?)(<\/pre>)/ms',
+            create_function(
+                '$matches',                          
+                  '$matches[4] = preg_replace("/(\||\^)[ ]+(\||\^)/ms","$1 &nbsp; $2" , $matches[4]);                    
+                  return  $matches[1] . $matches[2] . $matches[3] . $matches[4] . $matches[5];'            
+            ),
+            $this->xhtml
+          );
+          
        $cname = getCacheName($INFO['client'].$ID,'.draft.fckl');
        if(file_exists($cname)) {
           $cdata =  unserialize(io_readFile($cname,false));
