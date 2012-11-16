@@ -87,7 +87,7 @@ FCKConfig.AutoGrowMax = 400 ;
 
 FCKConfig.AutoDetectLanguage	= true ;
 FCKConfig.DefaultLanguage		= 'en' ;
-if(top.fckg_isRTL() ) {
+if(parent.fckg_isRTL() ) {
   FCKConfig.ContentLangDirection	= 'rtl'
   FCKConfig.EditorAreaCSS = FCKConfig.fckgRTLCSS;
 }
