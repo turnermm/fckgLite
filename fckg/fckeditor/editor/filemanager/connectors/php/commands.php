@@ -577,6 +577,7 @@ function FileUpload( $resourceType, $currentFolder, $sCommand )
        $AUTH = auth_aclcheck($test, $_SESSION['dwfck_client'] , $_SESSION['dwfck_grps'],1);   
    
         if($AUTH < 8) {         
+            $msg="";
         	$sFileUrl = CombinePaths( GetResourceTypePath( $resourceType, $sCommand ) , $currentFolder ) ;
     	    $sFileUrl = CombinePaths( $sFileUrl, $_FILES['NewFile']['name']);       
             SendUploadResults( '203', $sFileUrl, $_FILES['NewFile']['name'],  $msg ) ;

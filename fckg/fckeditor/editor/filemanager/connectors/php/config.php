@@ -370,8 +370,12 @@ else {
         }
    } 
     
-   session_id($_COOKIE['FCK_NmSp_acl']);
-   session_start();      
+    $sess_id = session_id();
+    if(!isset($sess_id) || $sess_id != $_COOKIE['FCK_NmSp_acl']) {
+         session_id($_COOKIE['FCK_NmSp_acl']);
+         session_start();      
+    }
+   //file_put_contents('session.txt',print_r($_SESSION,true));
    if($_SESSION['dwfck_openfb'] == 'y') {
           $current__Folder = "";
    }
