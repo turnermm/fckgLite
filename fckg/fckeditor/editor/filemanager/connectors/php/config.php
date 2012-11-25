@@ -340,17 +340,17 @@ function setUpMediaPaths() {
   }
   else $usergrps = array();
 
-if(count($extensions) > 10) {
-   $Config['AllowedExtensions']['File'] = $extensions;
-}
-else {
+
    $Config['AllowedExtensions']['File']	= array('7z', 'aiff', 'asf', 'avi', 'bmp', 'csv',
       'doc', 'docx','fla', 'flv', 'gif', 'gz', 'gzip', 'jpeg', 'jpg',
       'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'ods', 'odt', 
       'pdf', 'png', 'ppt', 'psd', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb',
       'rtf', 'sdc', 'sitd', 'swf', 'sxc', 'sxw', 'tar', 'tgz', 'tif',
       'tiff', 'txt', 'vsd', 'wav', 'wma', 'wmv', 'xls', 'xml', 'zip') ;
-}
+    
+    if(count($extensions) ) {
+       $Config['AllowedExtensions']['File']	 = array_merge($Config['AllowedExtensions']['File'],$extensions);	
+    }
     $Config['DeniedExtensions']['File']		= array() ;
     $Config['AllowedExtensions']['Image']	= array_merge(array('bmp','gif','jpeg','jpg','png'),$image_extensions) ;
     $Config['DeniedExtensions']['Image']	= array() ;
@@ -369,11 +369,11 @@ else {
           $current__Folder=get_start_dir();           
         }
    } 
-    
+       
     $sess_id = session_id();
     if(!isset($sess_id) || $sess_id != $_COOKIE['FCK_NmSp_acl']) {
          session_id($_COOKIE['FCK_NmSp_acl']);
-         session_start();      
+         session_start();
     }
    //file_put_contents('session.txt',print_r($_SESSION,true));
    if($_SESSION['dwfck_openfb'] == 'y') {

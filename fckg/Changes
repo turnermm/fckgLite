@@ -1,4 +1,4 @@
-rev 12-Nov_20-18_21
+rev 12-Nov_25-14_58
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -64,3 +64,6 @@ an error.
 Added $mssg="" to FileUpload() in commands.php for SendUploadResults(), without which some systems freeze.
 
 Both of the above occurred on Windows with PHP 5.3
+
+25 Nov
+Removed stray character from top of fckconfig.js. Updated handling of mime types in config.php.
