@@ -953,8 +953,8 @@ function parse_wikitext(id) {
           var font_family = "arial";
           var font_size = "9pt";
           var font_weight = "normal";
-          var font_color = "inherit"; 
-          var font_bgcolor = "inherit";
+          var font_color;
+          var font_bgcolor;
        }
        
        if(tag == 'table') {
@@ -1053,7 +1053,7 @@ function parse_wikitext(id) {
                    if(matches) {
                       font_weight = matches[1];
                    }
-                   matches = attrs[i].value.match(/\bcolor:\s*([#\w\s\d,\(\)]+);?/);   
+                   matches = attrs[i].value.match(/[^\-]color:\s*([#\w\s\d,\(\)]+);?/);                      
                    if(matches) {
                       font_color = matches[1];
                    }
@@ -1572,8 +1572,15 @@ function parse_wikitext(id) {
 			   if(!font_family) {			 
 				   return;
 			   }
+               font_color = font_color.replace(/\s+/g,"");
+               font_bgcolor = font_bgcolor.replace(/\s+/g,"");
+               if(!font_color) font_color = "#000000";
+               if(!font_bgcolor) font_bgcolor = "#ffffff";
+             
                if(font_color) font_family = font_family + ';;'+ font_color;
-               if(font_bgcolor) font_family = font_family + ';;'+ font_bgcolor;
+               if(font_bgcolor)  {
+                   font_family = font_family + ';;'+ font_bgcolor;
+               }
                var font_tag = '<font ' + font_size + ':'+ font_weight + '/'+font_family+'>';
                results += font_tag ;   
                return;            

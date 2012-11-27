@@ -45,6 +45,12 @@ window.onload = function()
          }
 
           var style = font_node.getAttribute('style');
+          if(!style || (typeof style == 'object' && !style.cssText)) {          
+             //oEditor.FCK.InsertHtml('<font 12pt:bold/arial;;black;;white>' + FCKFonts.haveSelection() + '</font>');
+             FCKFonts.Insert ('bold', 'arial', '12pt;', 'black', 'white')
+             style = "font-size: 12pt; font-weight: bold; color:black; background-color: white;";
+             face='arial';
+          }
           if(style.cssText) style = style.cssText; //IE
           var sfound = false;
           matches = style.match(/font-size:\s*((\d+)(\w+|%))/i);

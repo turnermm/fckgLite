@@ -1,4 +1,4 @@
-rev 12-Nov_25-14_58
+rev 12-Nov_27-10_58
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -67,3 +67,6 @@ Both of the above occurred on Windows with PHP 5.3
 
 25 Nov
 Removed stray character from top of fckconfig.js. Updated handling of mime types in config.php.
+
+27 Nov
+Fixes in fckeditor plugin font.html and edit.php for current less permissive browsers.
