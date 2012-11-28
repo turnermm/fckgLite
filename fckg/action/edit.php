@@ -1572,8 +1572,8 @@ function parse_wikitext(id) {
 			   if(!font_family) {			 
 				   return;
 			   }
-               font_color = font_color.replace(/\s+/g,"");
-               font_bgcolor = font_bgcolor.replace(/\s+/g,"");
+               if(font_color)  font_color = font_color.replace(/\s+/g,"");
+               if(font_bgcolor) font_bgcolor = font_bgcolor.replace(/\s+/g,"");			   
                if(!font_color) font_color = "#000000";
                if(!font_bgcolor) font_bgcolor = "#ffffff";
              
