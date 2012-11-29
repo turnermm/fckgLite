@@ -1,4 +1,4 @@
-rev 12-Nov_27-10_58
+rev 12-Nov_29-10_07
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -70,3 +70,10 @@ Removed stray character from top of fckconfig.js. Updated handling of mime types
 
 27 Nov
 Fixes in fckeditor plugin font.html and edit.php for current less permissive browsers.
+
+27 Nov Update
+Minor edits to edit.php and fonts.html to accommodate stricter evaluation of undefines in IE10
+
+29 Nov
+Fixed regex which removed precent-escaped backslashes in plugin syntax so that backslashes are
+removed only around non-alpha characters, preserving sequences such as \r\n.

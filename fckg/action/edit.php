@@ -2043,7 +2043,7 @@ function parse_wikitext(id) {
           return brackets+block + ']]';
      }); 
 
-     results = results.replace(/%*\\%*([^\\%]{1})%*\\%*/g, "$1"); 
+     results = results.replace(/%*\\%*([^\w]{1})%*\\%*/g, "$1");      
      results=results.replace(/_SMB_/g, "\\");     
  
     if(id == 'test') {
