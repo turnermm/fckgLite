@@ -1,4 +1,4 @@
-rev 12-Nov_30-18_08
+rev 12-Nov_30-18_07
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -51,22 +51,8 @@ Implemented option to rewrite FCKeditor smiley URLs when pages are moved to new 
 edit.php:_preprocess.  The URLs are reset on a page by page basis when loaded and saved.  The option
 should be turned off except when needed.
 
-16 September 2012
-Added experimental handling of tables, attempting to solve problems in rendering complex tables that have multiple col and row spans.
-This uses a new configuration option which will turn on the experimenmtal algorithm for all pages, or it can be turned
-on, on a per-page basis, either by use of a checkbox or by adding a syntax plugin style switch to the top of the page:
-~~COMPLEX_TABLES~~.  Since ~~COMPLEX_TABLES~~ is implemented as a syntax plugin, it will come into effect only after the page
-has been saved; before the save, the user should check off the complex tables checkbox.  The logorithm is not perfect, but it is
-considerably superior to the standard table-handling parser.
-
-17 September 2012
-Minor edit to edit.php
-
-19 September
-Created loop in insert_table() that goes through all rows checking for rowspans. Rowspan property of rows array is set to 0 for
-all rows where rowspans have been processed, causing them to be ignored on subsequent passes of loop.
-
-Minor edit to edit.php editor form syntax
+20 September
+Minor edit (removed stray quotation mark attached attribute name in edit.php form tag)
 
 9 October 2012
 Fixed bug where table markup inside code blocks dropped empty cells (edit.php::_preprocess)
@@ -74,14 +60,19 @@ Fixed bug where table markup inside code blocks dropped empty cells (edit.php::_
 20 Nov
 Added session_id check to config.php:  in some system setting session which has already been set throws
 an error.
+
 Added $mssg="" to FileUpload() in commands.php for SendUploadResults(), without which some systems freeze.
+
 Both of the above occurred on Windows with PHP 5.3
 
-25
-Improved mime-type handling in config.php and fckconfig.js
+25 Nov
+Removed stray character from top of fckconfig.js. Updated handling of mime types in config.php.
 
-28 Nov
-Fixed font tool plugin to work with stricter define checking of current browsers.
+27 Nov
+Fixes in fckeditor plugin font.html and edit.php for current less permissive browsers.
+
+27 Nov Update
+Minor edits to edit.php and fonts.html to accommodate stricter evaluation of undefines in IE10
 
 29 Nov
 Fixed regex which removed precent-escaped backslashes in plugin syntax so that backslashes are
