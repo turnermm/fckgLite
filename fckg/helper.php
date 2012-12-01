@@ -435,8 +435,8 @@ function CTRL_Key_Formats(parm) {
 		oDokuWiki_FCKEditorInstance.get_FCK().ToolbarSet.CurrentInstance.Commands.GetCommand('InsertUnorderedList').Execute();	
 		return;
  	}
-	
-	if(parm.keyCode == 109) {	 
+    /* + or{ */
+	if(parm.keyCode == 61 || parm.keyCode == 219) {	 
 		oDokuWiki_FCKEditorInstance.get_FCK().ToolbarSet.CurrentInstance.Commands.GetCommand('InsertOrderedList').Execute();
 		return;
     }
