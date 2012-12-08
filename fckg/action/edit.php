@@ -1470,9 +1470,12 @@ function parse_wikitext(id) {
         }   // End Attributes Loop
 
            if(this.is_smiley) {
-                 results += alt + ' ';
-                 alt = "";
-                 return;
+                if(alt) {
+                     results += alt + ' ';                                 
+                     alt = "";
+                 }
+                this.is_smiley = false;
+                return;
            }
           if(this.link_only) tag = 'img';
           if(tag == 'br') {  

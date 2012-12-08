@@ -1,4 +1,4 @@
-rev 12-Nov_30-18_07
+rev 12-Dec_08-10_02
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -80,3 +80,8 @@ removed only around non-alpha characters, preserving sequences such as \r\n.
 
 30 Nov
 Added two  short-cut keys for numbered list: ctrl-+ and ctrl+{.  Both do the same thing.
+
+8 Dec
+In edit.php: insert this.is_smiley = false after alt (text form of smiley) is added to results;
+prevents corruption of text formats and insert javascript 'undefined' where alt is not found
+on next time through start()
