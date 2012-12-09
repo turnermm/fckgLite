@@ -83,5 +83,5 @@ Added two  short-cut keys for numbered list: ctrl-+ and ctrl+{.  Both do the sam
 
 8 Dec
 In edit.php: insert this.is_smiley = false after alt (text form of smiley) is added to results;
-prevents corruption of text formats and insert javascript 'undefined' where alt is not found
+prevents corruption of text formats and insertion of javascript 'undefined' when alt is not found
 on next time through start()
