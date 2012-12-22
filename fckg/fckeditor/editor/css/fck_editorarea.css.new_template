@@ -119,10 +119,29 @@ pre {
     border: 1px solid #ccc;
     padding: .75em 1em;
 }
-/* for code in <file> */
-pre.file {
+/* for code in <file>    */
+
+pre.code {
+    background-color:rgb(250,250,250);
+    background: -webkit-linear-gradient(top, #fff 0%, #eee 100%);
+    background: -o-linear-gradient(top, #fff 0%, #eee 100%);
+    background: -ms-linear-gradient( top, #fff 0%, #eee 100%);
+    background: linear-gradient(top, #fff 0%, #eee 100%);
+    color: inherit;     
+    border: 1px solid #ccc;
+    border-bottom-color: #eee;
+    border-top-left-radius: .4em;
+    border-bottom-left-radius: .4em;
+    border-top-right-radius: .4em;
+    border-bottom-right-radius: .4em;
+    padding: .3em .6em .1em;
+    margin-left: 4px; 
+    margin-right: 10px; 
 }
 
+ pre.file {
+    border-top-left-radius: 0em;
+ }
 /* filenames for downloadable file and code blocks */
 dl.code,
 dl.file {	
@@ -130,8 +149,9 @@ dl.file {
 
 dl.code dt,
 dl.file dt {
-    background-color: #eee;
-    /*background: -moz-linear-gradient(   top, #fff 0%, #eee 100%); see FS#2447 */
+    /*background-color: #eee;*/
+    margin-left: 4px; 
+     background-color:rgb(250,250,250);   
     background: -webkit-linear-gradient(top, #fff 0%, #eee 100%);
     background: -o-linear-gradient(     top, #fff 0%, #eee 100%);
     background: -ms-linear-gradient(    top, #fff 0%, #eee 100%);
@@ -143,6 +163,7 @@ dl.file dt {
     border-top-right-radius: .3em;
     padding: .3em .6em .1em;
     margin-bottom: -1px;
+    border-bottom: 0px;
     float: left;
 }
 dl.code dt a,
@@ -158,6 +179,11 @@ dl.code dd,
 dl.file dd {
     margin: 0;
     clear: left;
+}
+
+
+dl.file pre {
+    box-shadow: inset -4px -4px .5em -.3em  #ccc;
 }
 /* Code new tmpl ends */
 
@@ -277,18 +303,18 @@ a.mediafile,
 a.interwiki {
     background-repeat: no-repeat;
     background-position: 0 center;
-    padding: 0 0 0 20px;
+    padding: 0 0 0 18px;
 }
 
 a.windows {
-  background: transparent url(images/windows.gif) 0px 1px no-repeat;
+  background: transparent url(images/unc.gif) 0px 1px no-repeat;
   padding: 1px 0px 1px 16px;
   color: #436976 !important;
   text-decoration: none !important;
 }
 
 a.urlextern {
- background: transparent url(images/link_icon.gif) 0px 1px no-repeat;
+ background: transparent url(images/external-link.png) 0px 1px no-repeat;
  padding: 1px 0px 1px 16px;
  color: #436976 !important;
  text-decoration: none !important;
@@ -326,6 +352,7 @@ span.np_break {
 }
 
 
+
 /* syntax highlighting code */
 .code .br0  { color: #66cc66; }
 .code .co0  { color: #808080; font-style: italic; }
@@ -360,7 +387,7 @@ a.mediafile {
 
 /* email link */
 a.mail {
-  background: transparent url(images/mail_icon.gif) 0px 1px no-repeat;
+  background: transparent url(images/email.png) 0px 1px no-repeat;
   padding: 1px 0px 1px 16px;
   color: #436976 !important;
   text-decoration: none !important;
