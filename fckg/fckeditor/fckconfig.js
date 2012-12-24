@@ -54,6 +54,7 @@ if(test_cookie('SCAYT', 'on')) {
 FCKConfig.CustomConfigurationsPath = '' ;
 
 FCKConfig.EditorAreaCSS = FCKConfig.BasePath + 'css/fck_editorarea.css' ;
+FCKConfig.EditorAreaIEHackCSS = FCKConfig.BasePath + 'css/ie_hack.css' ;
 FCKConfig.EditorAreaStyles = '' ;
 FCKConfig.ToolbarComboPreviewCSS = '' ;
 

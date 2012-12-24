@@ -1,4 +1,4 @@
-rev 12-Dec_08-10_02
+rev 12-Dec_23-21_45
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -52,7 +52,7 @@ edit.php:_preprocess.  The URLs are reset on a page by page basis when loaded an
 should be turned off except when needed.
 
 20 September
-Minor edit (removed stray quotation mark attached attribute name in edit.php form tag)
+Minor edit (removed stray quotation mark attached to attribute name in edit.php form tag)
 
 9 October 2012
 Fixed bug where table markup inside code blocks dropped empty cells (edit.php::_preprocess)
@@ -85,3 +85,14 @@ Added two  short-cut keys for numbered list: ctrl-+ and ctrl+{.  Both do the sam
 In edit.php: insert this.is_smiley = false after alt (text form of smiley) is added to results;
 prevents corruption of text formats and insertion of javascript 'undefined' when alt is not found
 on next time through start()
+
+21 Dec 2012
+Updated css for new dokuwiki template.
+
+22 Dec
+Updated fck_editorarea.css.new_template for code blocks
+
+23 December
+Replaced default fck_editorarea.css with original that was accidentally exchanged for the new.
+
+Created an IE hack for geshi snippets
