@@ -434,9 +434,17 @@ FCKConfig.ToolbarSets["DokuwikiGuest"] = [
   ['About']  
 ] ;  
 
+var fckg_nested = '|';
+if(navigator.userAgent.toLowerCase().indexOf('webkit') == -1) {
+       fckg_nested = ['OrderedList','UnorderedList','insertHtml','insertHtmlunorderedList', 'insertHtmlCode' ];
+}   
+else {
+    fckg_nested = ['OrderedList','UnorderedList','Outdent','Indent', 'insertHtmlCode' ];
+}   
+
 FCKConfig.ToolbarSets["Dokuwiki"] = [   
   ['Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],   
-  ['OrderedList','UnorderedList','insertHtml','insertHtmlunorderedList', 'insertHtmlCode' ],
+  fckg_nested,
   ['Rule', 'Smiley', 'SpecialChar', 'Style'], [],['fonts'],  
   ['Cut','Copy','Paste','PasteText','PasteWord', 'SpellCheck', 'Find'],   
   ['FontFormat'], ['Undo','Redo','RemoveFormat', '-','Table' ],   

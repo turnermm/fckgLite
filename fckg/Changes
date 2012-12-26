@@ -1,4 +1,4 @@
-rev 12-Dec_23-21_45
+rev 12-Dec_26-13_56
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -95,4 +95,7 @@ Updated fck_editorarea.css.new_template for code blocks
 23 December
 Replaced default fck_editorarea.css with original that was accidentally exchanged for the new.
 
-Created an IE hack for geshi snippets
+Created an IE CSS hack for geshi snippets 
+
+26 December
+Fix for webkit nested lists
