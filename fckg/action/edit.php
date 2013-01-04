@@ -868,6 +868,7 @@ function parse_wikitext(id) {
     link_only: false,
 	in_font: false,
 	interwiki: false,
+    bottom_url: false,
 
     backup: function(c1,c2) {
         var c1_inx = results.lastIndexOf(c1);     // start position of chars to delete
@@ -940,6 +941,7 @@ function parse_wikitext(id) {
             this.link_only = false;
             save_url = ""; 		
             this.interwiki=false;
+            this.bottom_url=false;
         }
   
        if(tag == 'p') {         
@@ -1306,7 +1308,14 @@ function parse_wikitext(id) {
                     this.attr = save_url;
 					this.external_mime=false;  // prevents external links to images from being converted to image links
                 }                   
-                
+                   if(this.in_endnotes) {                              
+                        if(this.link_title) {
+                            this.bottom_url= this.link_title;  //save for bottom urls
+                        }
+                        else if(this.attr) {
+                            this.bottom_url= this.attr;
+                        }    
+                   }   
                    this.link_title = "";
                    this.link_class= "";
 
@@ -1968,10 +1977,18 @@ function parse_wikitext(id) {
     if(this.in_endnotes && HTMLParserTopNotes.length) {
      if(text.match(/\w/) && ! text.match(/\d\)/)) {
         var index = HTMLParserTopNotes.length-1; 
-        if(HTMLParserBottomNotes[HTMLParserTopNotes[index]])
+        if(this.bottom_url)  { 
+            text = '[[' + this.bottom_url + '|' +text +']]';           
+         }   
+        if(HTMLParserBottomNotes[HTMLParserTopNotes[index]]) {
            HTMLParserBottomNotes[HTMLParserTopNotes[index]] += ' ' + text;
-        else HTMLParserBottomNotes[HTMLParserTopNotes[index]] = text;
      }
+        else  {
+              HTMLParserBottomNotes[HTMLParserTopNotes[index]] = text;
+        }      
+          this.bottom_url = false;
+     }
+     
      return;    
     }
 
