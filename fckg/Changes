@@ -1,4 +1,4 @@
-rev 13-Jan_04-12_52
+rev 13-Jan_04-18_11
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -100,6 +100,10 @@ Created an IE CSS hack for geshi snippets
 26 December
 Fix for webkit nested lists
 
-2103 January 4
+2013 January 4
 Fix for urls in DW footnotes, which were lost on re-saves.
 Still-to-be-done: handling of media files in DW footnotes
+
+Jan 4
+fix to DW footnote handling to prevent url from being transferred to subsequent fotnote text
+after update to previous notes's url using link tool.

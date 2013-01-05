@@ -1986,9 +1986,8 @@ function parse_wikitext(id) {
         else  {
               HTMLParserBottomNotes[HTMLParserTopNotes[index]] = text;
         }      
-          this.bottom_url = false;
      }
-     
+     this.bottom_url = false;
      return;    
     }
 
