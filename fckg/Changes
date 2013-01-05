@@ -1,4 +1,4 @@
-rev 13-Jan_04-18_11
+rev 13-Jan_05-11_38
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -107,3 +107,6 @@ Still-to-be-done: handling of media files in DW footnotes
 Jan 4
 fix to DW footnote handling to prevent url from being transferred to subsequent fotnote text
 after update to previous notes's url using link tool.
+
+Jan 5
+Upgraded DW footnotes to handle links to media files
