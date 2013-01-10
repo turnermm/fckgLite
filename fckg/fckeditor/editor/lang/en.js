@@ -111,7 +111,7 @@ HiddenField		: "Hidden Field",
 Button			: "Button",
 SelectionField	: "Selection Field",
 ImageButton		: "Image Button",
-
+ScaytTitle              : "SpellCheck",
 FitWindow		: "Maximize the editor size",
 ShowBlocks		: "Show Blocks",
 
