@@ -145,7 +145,7 @@ function Ok()
     var font_weight = 'normal';
     var font_size = '';
     var fg_color = '#000000';
-    var bg_color = '#ffffff'; 
+    var bg_color = 'inherit'; 
     var color_set = false;
 
     var font_node = checkSelection(false);
@@ -182,7 +182,7 @@ function Ok()
           bg_color = formObj['fontbg'].value;
           color_set = true;  
     }
-    
+    else bg_color = 'inherit';
     if(selection < 1) {
        if(color_set) {
           selection = sel_opts.options.length-1;  
