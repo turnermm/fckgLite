@@ -188,7 +188,7 @@ class syntax_plugin_fckg_dwplugin extends DokuWiki_Syntax_Plugin {
             $save_match[] = $match;     
         }
 
-      $Renderer = & new Doku_Renderer_xhtml();
+      $Renderer =  new Doku_Renderer_xhtml();
       for($i=0; $i < count($save_state); $i++) {                
            $this->plugin_ref->render('xhtml', $Renderer, array($save_state[$i], $save_match[$i]));
       }
