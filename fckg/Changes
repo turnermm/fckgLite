@@ -1,4 +1,4 @@
-rev 13-Jan_14-07_59
+rev 13-Jan_17-12_06
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -118,3 +118,7 @@ Default font plugin background color to inherit
 
 Jan 14
 Removed "new by reference" assignment in fckg/syntax/dwplugin.php (line 191)
+
+Jan 17
+Made an exception for svg-edit svg images in php/connectors/php/util.php (l. 150), which
+rejected (function: DetectHtml) them because they contained a <title> tag.
