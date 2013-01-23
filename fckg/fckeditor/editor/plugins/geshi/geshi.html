@@ -2,13 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-	<title>insertHtml</title>
+    <title>insertHtml</title>
 
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="robots" content="noindex, nofollow" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex, nofollow" />
 
-
-		<script type="text/javascript">
+    <script type="text/javascript">
 
 var oEditor = window.parent.InnerDialogLoaded() ;
 
@@ -18,12 +17,11 @@ var selectedText="";
 window.onload = function()
 {
     oEditor.FCKLanguageManager.TranslatePage( document );
-	document.body.style.padding = '0px' ;	
-	window.parent.SetOkButton( true ) ;
-	window.parent.SetAutoSize( true ) ;	
+    document.body.style.padding = '0px' ;
+    window.parent.SetOkButton( true ) ;
+    window.parent.SetAutoSize( true ) ;
 
-   var sel_opts = document.getElementById('langs');
-
+    var sel_opts = document.getElementById('langs');
 
     if(oEditor.FCKConfig && oEditor.FCKConfig.Geshi_Types) {
        var lang_opts = oEditor.FCKConfig.Geshi_Types;
@@ -33,12 +31,15 @@ window.onload = function()
        }    
     }
 
+    var select = document.getElementById('langs');
+    var restoredLang = gshReadLang();
+    if (select && restoredLang) {
+        select.selectedIndex = restoredLang;
+    }
 }
 
 function Ok()
 {
-
-
     var select = document.getElementById('langs');
     var selection = select.selectedIndex;
     if(selection < 1) {
@@ -58,14 +59,65 @@ function Ok()
     else {
      code_type = formObj['gtype'][0].value;
     }
- 
-   
-   FCKGeshi.Insert(code_type, select.options[selection].value, fname);	
+    var strip_html = gshGetRadioValue(formObj['stripHtml']);
 
-	return true ;
+    gshSaveLang(selection);
+   
+    FCKGeshi.Insert(code_type, select.options[selection].value, fname, undefined, strip_html);
+
+    return true ;
 }
 
-		</script>
+function gshSaveLang(selection) {
+    gshCreateCookie("fckg_geshi_lang", selection, 365 * 3);
+}
+
+function gshReadLang() {
+    return gshReadCookie("fckg_geshi_lang");
+}
+
+function gshGetRadioValue(radioObj) {
+    if(!radioObj) {
+        return "";
+    }
+    var radioLength = radioObj.length;
+    if(radioLength == undefined)
+        if(radioObj.checked) {
+            return radioObj.value;
+        }
+        else {
+            return "";
+        }
+    for(var i = 0; i < radioLength; i++) {
+        if(radioObj[i].checked) {
+            return radioObj[i].value;
+        }
+    }
+    return "";
+}
+
+function gshCreateCookie(name,value,days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime()+(days*24*60*60*1000));
+        var expires = "; expires="+date.toGMTString();
+    }
+    else var expires = "";
+    document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function gshReadCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+</script>
 
 <style type="text/css">
 option, select { font-size: 9pt; }
@@ -77,28 +129,29 @@ option, select { font-size: 9pt; }
 <body style="padding-bottom: 0px">
 
 <div id='geshi_types' >
-          <P>    
-			<span fckLang="geshiHelp" id="geshiHelp">help</span> 
+    <p>    
+        <span fckLang="geshiHelp" id="geshiHelp">help</span>         
+    </p>
 
-		
-	            
-         </p>
-
-     <form name='geshi_form'>    
-     <b><span fckLang="DlgButtonType"></span>: </b><input type='radio' name='gtype' value='code' checked>
-        <span fckLang="GeshiCodeBlock"></span> 
-       <input type='radio' name='gtype' value='file'><span fckLang="GeshiDownloadable"></span> 
-
-       <br />
-       Snippet File Name: <input type="text" name="snip_fn">  
-     <p>
-			<select id="langs">
-             <!-- option value="none"><span fckLang='DlgCellBtnSelect'></span  -->
-
-           </select>
-   </p>
-     <br />
-
+    <form name='geshi_form'>    
+        <b><span fckLang="DlgButtonType"></span>: </b><input type='radio' name='gtype' value='code' checked>
+        <span fckLang="GeshiCodeBlock"></span> <input type='radio' name='gtype' value='file'><span fckLang="GeshiDownloadable"></span> 
+        <br />
+        Snippet File Name: <input type="text" name="snip_fn">  
+        <p>
+            <select id="langs">
+            <!-- option value="none"><span fckLang='DlgCellBtnSelect'></span  -->
+            </select>
+        </p>
+        <p>
+            Strip HTML is useful when pasting code from other site, even when it uses Geshi as well. 
+            It has similar effect to pasting clean text from text editor like Gedit or Notepad++. 
+            Just paste code from browser to fckgLite editor, select it and run Geshi with stripping HTML.<br> 
+            <input type='radio' name='stripHtml' value='none' checked> None
+            <input type='radio' name='stripHtml' value='re'> Regular expression
+            <input type='radio' name='stripHtml' value='dom'> DOM
+        </p>
+        <br />
     </form>
 </div>
 </body>
