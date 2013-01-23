@@ -17,6 +17,11 @@ var FCKLang = oEditor.FCKLang ;
 var selectedText="";
 window.onload = function()
 {
+    
+if(FCKGeshi.isIE) {  
+    document.getElementById('i_panel').style.width="400px";
+}   
+
     oEditor.FCKLanguageManager.TranslatePage( document );
 	document.body.style.padding = '0px' ;	
 	window.parent.SetOkButton( true ) ;
@@ -32,13 +37,19 @@ window.onload = function()
            sel_opts.options[sel_opts.options.length] = new Option(lang_opts[i],lang_opts[i],false,false);
        }    
     }
-
+   var text = FCKGeshi.CheckForText();
+   var formObj = document.geshi_form;
+   if(text) formObj.text_in.value = text;
+   
+    var select = document.getElementById('langs');
+    var restoredLang = gshReadLang();
+    if (select && restoredLang) {
+        select.selectedIndex = restoredLang;
+    }
 }
 
 function Ok()
 {
-
-
     var select = document.getElementById('langs');
     var selection = select.selectedIndex;
     if(selection < 1) {
@@ -58,33 +69,100 @@ function Ok()
     else {
      code_type = formObj['gtype'][0].value;
     }
- 
-   
-   FCKGeshi.Insert(code_type, select.options[selection].value, fname);	
+     gshSaveLang(selection);
+     
+   //alert(formObj.text_in.value);
+   if(formObj.text_in.value)  {
+      FCKGeshi.InsertText(code_type, select.options[selection].value, fname,formObj.text_in.value);
+   }   
+   else {
+     FCKGeshi.Insert(code_type, select.options[selection].value, fname);	
+   } 
 
 	return true ;
+}
+
+function gshSaveLang(selection) {
+    gshCreateCookie("fckg_geshi_lang", selection, 365 * 3);
+}
+
+
+function gshReadLang() {
+    return gshReadCookie("fckg_geshi_lang");
+}
+
+function toggle_i_panel(which) {
+    var p = document.getElementById('i_panel');
+    p.style.display=which;
+    var i_help =  document.getElementById('i_help');
+    if(which == 'block') {
+       i_help.style.display = 'none';
+    }
+    else i_help.style.display = 'block';
+}    
+
+
+function gshCreateCookie(name,value,days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime()+(days*24*60*60*1000));
+        var expires = "; expires="+date.toGMTString();
+    }
+    else var expires = "";
+    document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function gshReadCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
 }
 
 		</script>
 
 <style type="text/css">
 option, select { font-size: 9pt; }
-#geshi_types { padding: 20px; font-size: 9pt; }
+#geshi_types,#i_panel { padding: 10px; font-size: 9pt; margin:0; }
+#i_panel {
+   border: 2px solid silver;
+   position: fixed; top: 40px; left: 20px;
+   background-color: #fff; width: 460px;
+   display: none;
+}
+#i_help { display: inline; }
 </style>
 
 
 </head>
 <body style="padding-bottom: 0px">
 
-<div id='geshi_types' >
-          <P>    
-			<span fckLang="geshiHelp" id="geshiHelp">help</span> 
-
-		
-	            
-         </p>
+<div id='geshi_types' > 
+      
+     <div id="i_panel">     
+      <button onclick="toggle_i_panel('none');">close</button><br />
+      <span fckLang="geshiHelp" id="geshiHelp">help</span> 	                
+      
+       There are two ways to create Geshi code blocks. 
+       <OL>
+       <LI>
+       You can paste your code directly into the editor, select it with mouse
+       or keyboard, then open this dialog.  Your text will appear in the text window below.  In some cases, in particular where the text has
+       already been marked up as a Geshi code block, the parser will not be able deal with the markup and this method will fail.
+       <LI>
+       You can open this dialog and paste the code into the text window below.   This method is <b>preferred</b> and will accept all forms
+       and styles of code.
+       </OL>
+       You can then edit your code and when finished, click OK.
+       </div>      
+       <button id="i_help" onclick="toggle_i_panel('block');"><span fckLang="geshiHelpButton" id="geshiHelpButton">Instructions</span></button><br />
 
      <form name='geshi_form'>    
+     <br />
      <b><span fckLang="DlgButtonType"></span>: </b><input type='radio' name='gtype' value='code' checked>
         <span fckLang="GeshiCodeBlock"></span> 
        <input type='radio' name='gtype' value='file'><span fckLang="GeshiDownloadable"></span> 
@@ -98,7 +176,9 @@ option, select { font-size: 9pt; }
            </select>
    </p>
      <br />
-
+     <center>
+    <textarea name = "text_in" rows="15" cols = "60"></textarea>
+     </center>
     </form>
 </div>
 </body>

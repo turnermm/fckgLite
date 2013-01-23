@@ -9,4 +9,4 @@ FCKLang.geshiHelp           = 'With this tool you can create either a "Code Bloc
 	                       + 'For a snippet you must also enter a file name for the download. Then '
 	                       +' select the language type from the drop down menu and click OK. '; 
 
-
+FCKLang.geshiHelpButton = 'Instructions';

@@ -1,4 +1,4 @@
-rev 13-Jan_17-12_06
+rev 13-Jan_23-09_54
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -122,3 +122,6 @@ Removed "new by reference" assignment in fckg/syntax/dwplugin.php (line 191)
 Jan 17
 Made an exception for svg-edit svg images in php/connectors/php/util.php (l. 150), which
 rejected (function: DetectHtml) them because they contained a <title> tag.
+
+Jan 23
+Updgraded Geshi plugin for FCKeditor with contributions from Kamil Demecki.
