@@ -232,16 +232,15 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
             );   
       }
         /* convert indented code blocks into tagged code blocks*/
- 
- 
        $text= preg_replace_callback(
-          '/(?<!<code>)(\n  )((?![\*\-]).*?)(\n)+(?!\s)<?!<\/code>/ms',
+          '/(<code>\n*)*(\n  )((?![\*\-]).*?)(\n)(?!\s)/ms',
           create_function(
             '$matches',
-            ' return "\n<code>\n" . $matches[2] . "\n</code>\n";  '
+            'if(preg_match("/<code>/",$matches[1])) return $matches[0];
+            return "\n<code>" . $matches[2]  . $matches[3] . "\n</code>\n";  '
           ), $text
-        );   
-        
+        );  
+       
        $pos = strpos($text, '<');
 
        if($pos !== false) {
