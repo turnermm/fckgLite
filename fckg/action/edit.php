@@ -231,7 +231,18 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
              $text
             );   
       }
-
+      
+       /* convert html tags to entities in indented code blocks*/
+       $text= preg_replace_callback(
+          '/(\n  )((?![\*\-]).*?)(\n)(?!\s)/ms',
+          create_function(
+            '$matches',
+            '$matches[0] = preg_replace("/<(?!\s)/ms", "&lt;", $matches[0]); 
+            $matches[0] = preg_replace("/(?<!\s)>/ms", "&gt;", $matches[0]);    
+            return $matches[0];  '
+          ), $text
+        );  
+       
        $pos = strpos($text, '<');
 
        if($pos !== false) {
@@ -255,7 +266,7 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
                  'if(preg_match("/\w+/",$matches[2])) {
                    $matches[4] = str_replace("CHEVRONescC", ">>",$matches[4]);
                    $matches[4] = str_replace("CHEVRONescO", "<<",$matches[4]);
-                   $matches[4] = preg_replace("/<(?!\s)/ms", "__GESHI_OPEN__", $matches[4]); 
+                   $matches[4] = preg_replace("/<(?!\s)/ms", "__GESHI_OPEN__", $matches[4]);                    
                   }
                   else {
                   if( preg_match("/MULTI/",$matches[0])) {
@@ -2578,5 +2589,5 @@ if(window.DWikifnEncode && window.DWikifnEncode == 'safe') {
 
 } //end of action class
 
-
+ 
 ?>

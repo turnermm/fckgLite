@@ -1,4 +1,4 @@
-rev 13-Feb_01-07_16
+rev 13-Feb_01-16_47
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -127,6 +127,5 @@ Jan 23
 Updgraded Geshi plugin for FCKeditor with contributions from Kamil Demecki.
 
 Feb 1
-Create tagged <code>. . .</code> blocks from code blocks marked 
-up by indentation.  This insures that the code blocks are correctly processed in the fckgLite parser.
+convert html tag markup < and > to entities in indented code blocks
 (In edit.php:_preprocess())
