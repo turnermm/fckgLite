@@ -27,7 +27,7 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
     var $helper = false;
     var $fckg_bak_file = "";
     var $debug = false;
-    var $test = 1; //false;
+    var $test =  false;
     var $page_from_template;
     var $draft_found = false;
     var $draft_text;
