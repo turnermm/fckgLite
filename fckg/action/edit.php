@@ -1904,7 +1904,12 @@ function parse_wikitext(id) {
 	
 	if(this.interwiki && results.match(/>\w+\s*\|$/)) 	{	 
 	    this.interwiki=false;
+        if(this.attr) {          
+          results+= text;
+        }
+	    else  {
 	    results=results.replace(/>\w+\s*\|$/,'>'+text);	
+        }   
 		return;
 	  }
 	
