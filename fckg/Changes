@@ -1,4 +1,4 @@
-rev 13-Feb_13-12_43
+rev 13-Feb_14-11_20
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -132,3 +132,8 @@ convert html tag markup < and > to entities in indented code blocks
 
 Feb 13
 Fix interwiki markup which was lost in above conversion
+
+Removed new by reference warning in edit.php on line 2347
+
+Feb 14
+Upgraded handling of interwiki links in edit.php

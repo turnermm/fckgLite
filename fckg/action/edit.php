@@ -1314,7 +1314,16 @@ function parse_wikitext(id) {
 				  else if(this.link_class.match(/interwiki/)) {
 				     var iw_type = this.link_class.match(/iw_(\w+)/);
 					 var iw_title = this.link_title.split(/\//);
-					 this.attr = iw_type[1] + '>' +  iw_title[iw_title.length-1];
+                     var interwiki_label = iw_title[iw_title.length-1];
+                     if(interwiki_label.match(/\=/)) {
+                        var elems = interwiki_label.split(/\=/);
+                        interwiki_label = elems[elems.length-1];
+                     }
+                     else if(interwiki_label.match(/\?/)) {
+                        var elems = interwiki_label.split(/\?/);
+                        interwiki_label = elems[elems.length-1];                     
+                     }                     
+                    this.attr = iw_type[1] + '>' +  interwiki_label;
 					 this.interwiki=true;
 				  }
 				  
@@ -2344,7 +2353,7 @@ if(window.DWikifnEncode && window.DWikifnEncode == 'safe') {
                 msg("Renderer for $mode not valid",-1);
                 return null;
             }
-            $Renderer = & new $rclass();
+            $Renderer = new $rclass();
         }
         else{
             // Maybe a plugin is available?
