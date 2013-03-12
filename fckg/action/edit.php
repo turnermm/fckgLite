@@ -323,7 +323,17 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
                  ); 
          $text = str_replace('</plugin>','</plugin> ', $text);           
        }  
-                 
+	   if($this->getConf('duplicate_notes')) {
+			$text = preg_replace_callback('/\(\(/ms',
+				  create_function(
+				   '$matches',
+				   'static $count = 0;
+				   $count++;
+				   $ins = "FNoteINSert" . $count;
+				   return "(($ins";'
+				 ), $text
+			);			 
+		}
        $text = str_replace('>>','CHEVRONescC',$text);
        $text = str_replace('<<','CHEVRONescO',$text);
        $text = preg_replace('/(={3,}.*?)(\{\{.*?\}\})(.*?={3,})/',"$1$3\n$2",$text);
@@ -333,6 +343,10 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
        $text = preg_replace('/{{(.*)\.swf(\s*)}}/ms',"SWF$1.swf$2FWS",$text);
        $this->xhtml = $this->_render_xhtml($text);
 
+	   if($this->getConf('duplicate_notes')) {
+			$this->xhtml = preg_replace("/FNoteINSert\d+/ms", "",$this->xhtml);
+	   }
+	  
        $this->xhtml = str_replace("__GESHI_QUOT__", '&#34;', $this->xhtml);        
        $this->xhtml = str_replace("__GESHI_OPEN__", "&#60; ", $this->xhtml); 
        $this->xhtml = str_replace('CHEVRONescC', '>>',$this->xhtml);
