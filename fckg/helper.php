@@ -84,7 +84,8 @@ class helper_plugin_fckg extends DokuWiki_Plugin {
   if($INFO['isadmin'] || $INFO['ismanager']) {    
      $client = "";
   }
-
+  $user_name = $USERINFO['name'];
+  $user_email = $USERINFO['mail'];
   $ver_anteater = mktime(0,0,0,11,7,2010); 
   $dwiki_version=mktime(0,0,0,01,01,2008);
 
@@ -371,8 +372,7 @@ return direction == 'rtl';
 
 var oDokuWiki_FCKEditorInstance;
 function FCKeditor_OnComplete( editorInstance )
-{
-
+{  
   oDokuWiki_FCKEditorInstance = editorInstance;
 
   var f = document.getElementById('wiki__text');
@@ -413,7 +413,10 @@ function FCKeditor_OnComplete( editorInstance )
   if(FCK.EditorDocument && FCK.EditorDocument.body  && !ourFCKEditorNode) {
      ourFCKEditorNode = FCK.EditorDocument.body;     
   }
-
+   var FCKConfig = editorInstance.get_FCKConfig();
+   FCKConfig.fckgUserName = "$user_name";
+   FCKConfig.fckgUserMail="$user_email";
+  // alert(FCKConfig.name);
 }
 
 function fckgMousePos(e) {

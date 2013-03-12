@@ -1,4 +1,4 @@
-rev 13-Mar_07-23_15
+rev 13-Mar_12-10_32
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -150,3 +150,6 @@ delete them so that the links can be created.
 
 7 Mar
 Fix for XPATH/httRequest in fckxml.js
+
+12 March
+Added user signature item to the context menu.

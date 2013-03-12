@@ -141,7 +141,7 @@ FCKConfig.Plugins.Add('plugintool', 'en,fr,nl') ;
 FCKConfig.Plugins.Add( 'paradelete' ) ;
 // FCKConfig.Plugins.Add( 'autogrow' ) ;
 FCKConfig.Plugins.Add( 'range' ) ;
-FCKConfig.Plugins.Add( 'breakdel' ) ;
+//FCKConfig.Plugins.Add( 'breakdel' ) ;
 FCKConfig.Plugins.Add('insertHtml', 'en,nl');
 // FCKConfig.Plugins.Add('footnote', 'en,de');
 FCKConfig.Plugins.Add( 'insertHtmlCode' ) ;
@@ -152,6 +152,7 @@ FCKConfig.insertHtml_buttonTooltip = 'Insert Nested Ordered List';
 FCKConfig.Plugins.Add( 'geshi', 'en') ;
 FCKConfig.Plugins.Add( 'fonts', 'en') ;
 FCKConfig.Plugins.Add('keyboard', 'en') ;
+FCKConfig.Plugins.Add('signature') ;
 
 FCKConfig.ToolbarSets["Default"] = [
 	['Source','DocProps','-','Save','NewPage','Preview','-','Templates'],
@@ -499,7 +500,8 @@ function get_image_extensions(){
 		    var image_types = ajx.response;		
 		    if(image_types)
 		        FCKConfig.ImageUploadAllowedExtensions	= '.(' + image_types+ ')$' ;		
-		} 
+		    } 		    
+		
 	};
 	ajx.runAJAX();
 }
