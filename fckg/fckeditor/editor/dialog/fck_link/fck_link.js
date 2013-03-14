@@ -966,6 +966,10 @@ function Ok()
 
 	}
 
+      var ftp = false;      
+      if(sUri.match(/^ftp:\/\//)) {
+          ftp = true;
+      }
 	// If no link is selected, create a new one (it may result in more than one link creation - #220).
     var document_body = null;
 	var aLinks = oLink ? [ oLink ] : oEditor.FCK.CreateLink( sUri, true ) ;
@@ -1001,6 +1005,7 @@ function Ok()
 
 			// url: try to get path
 			case 'url':
+                if(ftp) break;
 				var oLinkPathRegEx = new RegExp("//?([^?\"']+)([?].*)?$") ;
 				var asLinkPath = oLinkPathRegEx.exec( sUri ) ;
 				if (asLinkPath != null)
@@ -1040,6 +1045,8 @@ function Ok()
 
 		if ( aHasSelection )
 			sInnerHtml = oLink.innerHTML ;		// Save the innerHTML (IE changes it if it is like an URL).
+            if(ftp) sInnerHtml = sUri;
+            }
 
 		oLink.href =  sUri;
         if(internalInnerHTML) {
