@@ -1043,7 +1043,7 @@ function Ok()
 	{
 		oLink = aLinks[i] ;
 
-		if ( aHasSelection )
+		if ( aHasSelection) {
 			sInnerHtml = oLink.innerHTML ;		// Save the innerHTML (IE changes it if it is like an URL).
             if(ftp) sInnerHtml = sUri;
             }
