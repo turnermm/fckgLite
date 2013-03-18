@@ -1,4 +1,4 @@
-rev 13-Mar_13-21_03
+rev 13-Mar_18-14_16
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -158,3 +158,7 @@ Handles multiple footnotes with identical texts.
 13 March
 Added ftp option to link dialog
 Put some controls into creating ftp links.
+
+18 March
+Removed file size from link titles, which caused corrupted urls in Weatherwax, which now appends file size
+to title.

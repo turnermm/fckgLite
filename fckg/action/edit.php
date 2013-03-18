@@ -1126,7 +1126,8 @@ function parse_wikitext(id) {
 
             if(tag == 'a') {
                if(attrs[i].name == 'title') {
-                  this.link_title = attrs[i].escaped;        
+                  this.link_title = attrs[i].escaped;     
+                  this.link_title =  this.link_title.replace(/\s+.*$/,"") ;               
                }
                else if(attrs[i].name == 'class') {
                   if(attrs[i].value.match(/fn_top/)) {
