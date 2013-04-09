@@ -1,7 +1,12 @@
 <?php 
 if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../../../../../../../').'/');
-if(!defined('DOKU_CONF')) define('DOKU_CONF',DOKU_INC.'conf/');
-
+$CONF_DIR = DOKU_INC.'conf';
+if(file_exists($CONF_DIR)) {
+   if(!defined('DOKU_CONF')) define('DOKU_CONF',DOKU_INC.'conf/');
+}
+else {
+    require_once(DOKU_INC. 'inc/preload.php');
+ }
 require_once DOKU_INC.'inc/utf8.php';
 
 // some ACL level defines
@@ -19,7 +24,7 @@ require_once DOKU_INC.'inc/utf8.php';
   global $Dwfck_conf_values; 
   $AUTH_ACL = array();
  //load ACL into a global array XXX
-  $AUTH_ACL = file(DOKU_INC . '/conf/acl.auth.php');
+  $AUTH_ACL = file(DOKU_CONF . '/acl.auth.php');
  
  
 /**

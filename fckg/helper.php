@@ -127,12 +127,11 @@ var oldonload = window.onload;
 var ourLockTimerINI = false;
 var oldBeforeunload;
 
-  var fckg_onload = function() { $js };
-  if(window.jQuery && jQuery.bind) {
-      jQuery(window).bind('load',{},fckg_onload);
-  }
-  else window.addEvent(window, 'load', fckg_onload);
- function fckgEditorTextChanged() {
+  var fckg_onload = function() { $js };  
+ 
+  jQuery(window).bind('load',{},fckg_onload);
+  
+   function fckgEditorTextChanged() {
    window.textChanged = false;   
    oldBeforeunload(); 
    if(window.dwfckTextChanged) {        
@@ -372,7 +371,8 @@ return direction == 'rtl';
 
 var oDokuWiki_FCKEditorInstance;
 function FCKeditor_OnComplete( editorInstance )
-{  
+{
+
   oDokuWiki_FCKEditorInstance = editorInstance;
 
   var f = document.getElementById('wiki__text');

@@ -546,6 +546,7 @@ function SetUrl( url, width, height, alt )
 	{  
 
         GetE('txtUrl').value = dwikiUTF8_encodeFN(url,DWIKI_fnencode);
+		GetE('txtUrlDisp').value = url;
 	    GetE('txtUrl').value = encodeURI(GetE('txtUrl').value); 
 		GetE('txtWidth').value = width ? width : '' ;
 		GetE('txtHeight').value = height ? height : '' ;

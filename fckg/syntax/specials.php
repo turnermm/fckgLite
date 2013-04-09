@@ -55,6 +55,7 @@ class syntax_plugin_fckg_specials extends DokuWiki_Syntax_Plugin {
                                                      
           $this->Lexer->addSpecialPattern('~~MULTI_PLUGIN_OPEN~~',$mode,'plugin_fckg_specials');
           $this->Lexer->addSpecialPattern('~~MULTI_PLUGIN_CLOSE~~',$mode,'plugin_fckg_specials');
+          $this->Lexer->addSpecialPattern('~~COMPLEX_TABLES~~',$mode,'plugin_fckg_specials');
     }
 
 
@@ -73,6 +74,10 @@ class syntax_plugin_fckg_specials extends DokuWiki_Syntax_Plugin {
         elseif(preg_match('/CLOSE/', $match)) {
               return array($state, "<span class='multi_p_close'></span>" );
         }       
+        elseif(preg_match('/TABLES/', $match)) {
+              return array($state, "" );
+        }       
+       
          return array($state, "" );
        
     }

@@ -1,4 +1,4 @@
-rev 13-Mar_20-09_01
+rev 13-Apr_09-12_36
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -51,8 +51,22 @@ Implemented option to rewrite FCKeditor smiley URLs when pages are moved to new 
 edit.php:_preprocess.  The URLs are reset on a page by page basis when loaded and saved.  The option
 should be turned off except when needed.
 
-20 September
-Minor edit (removed stray quotation mark attached to attribute name in edit.php form tag)
+16 September 2012
+Added experimental handling of tables, attempting to solve problems in rendering complex tables that have multiple col and row spans.
+This uses a new configuration option which will turn on the experimenmtal algorithm for all pages, or it can be turned
+on, on a per-page basis, either by use of a checkbox or by adding a syntax plugin style switch to the top of the page:
+~~COMPLEX_TABLES~~.  Since ~~COMPLEX_TABLES~~ is implemented as a syntax plugin, it will come into effect only after the page
+has been saved; before the save, the user should check off the complex tables checkbox.  The logorithm is not perfect, but it is
+considerably superior to the standard table-handling parser.
+
+17 September 2012
+Minor edit to edit.php
+
+19 September
+Created loop in insert_table() that goes through all rows checking for rowspans. Rowspan property of rows array is set to 0 for
+all rows where rowspans have been processed, causing them to be ignored on subsequent passes of loop.
+
+Minor edit to edit.php editor form syntax
 
 9 October 2012
 Fixed bug where table markup inside code blocks dropped empty cells (edit.php::_preprocess)
@@ -60,19 +74,14 @@ Fixed bug where table markup inside code blocks dropped empty cells (edit.php::_
 20 Nov
 Added session_id check to config.php:  in some system setting session which has already been set throws
 an error.
-
 Added $mssg="" to FileUpload() in commands.php for SendUploadResults(), without which some systems freeze.
-
 Both of the above occurred on Windows with PHP 5.3
 
-25 Nov
-Removed stray character from top of fckconfig.js. Updated handling of mime types in config.php.
+25
+Improved mime-type handling in config.php and fckconfig.js
 
-27 Nov
-Fixes in fckeditor plugin font.html and edit.php for current less permissive browsers.
-
-27 Nov Update
-Minor edits to edit.php and fonts.html to accommodate stricter evaluation of undefines in IE10
+28 Nov
+Fixed font tool plugin to work with stricter define checking of current browsers.
 
 29 Nov
 Fixed regex which removed precent-escaped backslashes in plugin syntax so that backslashes are
@@ -86,19 +95,20 @@ In edit.php: insert this.is_smiley = false after alt (text form of smiley) is ad
 prevents corruption of text formats and insertion of javascript 'undefined' when alt is not found
 on next time through start()
 
-21 Dec 2012
-Updated css for new dokuwiki template.
+Dec 21 2012
+Updated css for new template
 
-22 Dec
+Dec 22
 Updated fck_editorarea.css.new_template for code blocks
 
-23 December
-Replaced default fck_editorarea.css with original that was accidentally exchanged for the new.
 
-Created an IE CSS hack for geshi snippets 
+23 December
+Replaced default fck_editorarea.css with original that was accidentally exchanged for the new
+
+Created an IE CSS hack for geshi snippets in IE8+ and HTML5
 
 26 December
-Fix for webkit nested lists
+Fix for nested lists in webkit browsers
 
 2013 January 4
 Fix for urls in DW footnotes, which were lost on re-saves.
@@ -111,10 +121,8 @@ after update to previous notes's url using link tool.
 Jan 5
 Upgraded DW footnotes to handle links to media files
 
-Jan 10
+10 Jan
 Added tooltip for Scayt
-
-Default font plugin background color to inherit
 
 Jan 14
 Removed "new by reference" assignment in fckg/syntax/dwplugin.php (line 191)
@@ -124,44 +132,65 @@ Made an exception for svg-edit svg images in php/connectors/php/util.php (l. 150
 rejected (function: DetectHtml) them because they contained a <title> tag.
 
 Jan 23
-Updgraded Geshi plugin for FCKeditor with contributions from Kamil Demecki.
+Upgraded Geshi plugin (input from Kamil Demecki). 
 
-Feb 1
+Jan 28
+This version of the ctables distribution combines with and replaces the unbuntu-debian distribution.
+
+Jan 31
+In preprocessor, edit.php ca. 235ff:  Create tagged <code>. . .</code> blocks from code blocks marked
+up by indentation.  This insures that the code blocks are correctly processed in the fckgLite parser.
+
+Feb 2
 convert html tag markup < and > to entities in indented code blocks
 (In edit.php:_preprocess())
 
 Feb 13
-Fix interwiki markup which was lost in above conversion
+replace '>' in interwiki markup in lists, removed in above.
 
-Removed new by reference warning in edit.php on line 2347
+Removed new by reference warning  in edit.php on line 2552
 
 Feb 14
-Upgraded handling of interwiki links in edit.php
-
-Captures missing link text in interwiki links.
-
-Feb 18
-Synched edit.php with github.
+Upgraded handling of interwiki links
 
 6 March
-Check for files and/or directories in userfiles that have not been created into the
-links to media or have been converted to directories (Weatherwas). If found
+Check for files and/or directories in userfiles that have not been converted into 
+links to data/media or have been converted to directories (Weatherwas). If found
 delete them so that the links can be created.
 
-7 Mar
-Fix for XPATH/httRequest in fckxml.js
+8 March
+fix for missing XPATH functions in fckxml.js
 
 12 March
-Added user signature item to the context menu.
-Handles multiple footnotes with identical texts.
+Added Dokuwiki-style signature item to context menu.
+Handle multiple footnotes with identical texts.
 
 13 March
 Added ftp option to link dialog
-Put some controls into creating ftp links.
+Put some controls into ftp liink creation.
+
+16 March
+Added missing smiley_hack metadata entry
 
 18 March
-Removed file size from link titles, which caused corrupted urls in Weatherwax, which now appends file size
-to title.
+Fixed broken internal media links in Weatherwax, which now appends file size to titl attr,
+from which fckgL takes the urls.
 
 19 March
-Updated entities file.
+Update to entities file.
+
+22 March
+Automated insertion of ~~COMPLEX_TABLES~~ macro when complex tables checkbox is set to true,
+if not already inserted.
+
+28 March
+Fixed IE 10 JS incompatiblity
+Fixed URL display line in image dialog: now  displays file name as saved, instead of encoded format.
+
+29 March double urlencode image names for filebrowser thumbnails, which otherwise do not display in Windows.
+
+30 March
+Restored aspell Language button (when Scayt is turned off).
+
+9 April
+Removed compatibility support for pre-jquery functions.

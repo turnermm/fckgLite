@@ -306,7 +306,10 @@ function setUpMediaPaths() {
 	$isWindows = false;
   }
   $ALLOWED_MIMES = DOKU_INC . 'conf/mime.conf';
-  
+  if(!file_exists($ALLOWED_MIMES)) {
+      $ALLOWED_MIMES = DOKU_CONF . '/mime.conf';
+      $MIMES_LOCAL = DOKU_CONF . '/mime.local.conf';
+  }
   $out=@file($ALLOWED_MIMES,FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
   
   if(file_exists(DOKU_INC . 'conf/mime.local.conf'))
@@ -314,7 +317,10 @@ function setUpMediaPaths() {
   	$out_local = @file(DOKU_INC . 'conf/mime.local.conf',FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);  	
   	$out = array_merge($out,$out_local);
   }
-  
+  elseif(isset($MIMES_LOCAL) && file_exists($MIMES_LOCAL)) {
+   	$out_local = @file($MIMES_LOCAL,FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);  	   
+  	$out = array_merge($out,$out_local);
+  }
   $extensions = array();
   $image_extensions = array();
   foreach($out as $line) {
@@ -350,7 +356,7 @@ function setUpMediaPaths() {
     
     if(count($extensions) ) {
        $Config['AllowedExtensions']['File']	 = array_merge($Config['AllowedExtensions']['File'],$extensions);	
-    }
+}
     $Config['DeniedExtensions']['File']		= array() ;
     $Config['AllowedExtensions']['Image']	= array_merge(array('bmp','gif','jpeg','jpg','png'),$image_extensions) ;
     $Config['DeniedExtensions']['Image']	= array() ;
@@ -369,11 +375,11 @@ function setUpMediaPaths() {
           $current__Folder=get_start_dir();           
         }
    } 
-       
+    
     $sess_id = session_id();
     if(!isset($sess_id) || $sess_id != $_COOKIE['FCK_NmSp_acl']) {
-         session_id($_COOKIE['FCK_NmSp_acl']);
-         session_start();
+        session_id($_COOKIE['FCK_NmSp_acl']);
+        session_start();      
     }
    //file_put_contents('session.txt',print_r($_SESSION,true));
    if($_SESSION['dwfck_openfb'] == 'y') {

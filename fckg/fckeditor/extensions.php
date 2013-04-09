@@ -2,6 +2,13 @@
 $mimes = realpath(dirname(__FILE__).'/../../../../').'/conf/mime.conf';
 $mimes_local = realpath(dirname(__FILE__).'/../../../../').'/conf/mime.local.conf';
 
+if(!file_exists($mimes)){
+    $preload = realpath(dirname(__FILE__).'/../../../../') . '/inc/preload.php';         
+    require($preload);
+   $mimes = DOKU_CONF . 'mime.conf';
+   $mimes_local = DOKU_CONF .'mime.local.conf';
+ }   
+ 
 $out=@file($mimes,FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
   
 if(file_exists($mimes_local))
