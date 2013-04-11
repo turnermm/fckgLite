@@ -115,17 +115,9 @@ if($_REQUEST['fck_preview_mode'] != 'nil' && !isset($_COOKIE['FCKW_USE']) && !$F
   global $INFO;
   $cname =  $INFO['draft'];   
     
- $url = DOKU_URL . 'lib/plugins/fckg/scripts/jq_alt.js';    
- 
   echo <<<SCRIPT
     <script type="text/javascript">
     //<![CDATA[ 
-    
-      if(!window.jQuery){
-        LoadScript("$url"); 
-      }
- 
-        
     
     function setDWEditCookie(which, e) { 
        var cname = "$cname";       
