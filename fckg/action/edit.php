@@ -1357,6 +1357,12 @@ function parse_wikitext(id)
                     else if(attrs[i].escaped.match(/exe\/fetch.php/)) {
                        this.image_link_type = 'direct';
                     }
+                    else {   // nice urls using .htaccess
+                        var regex = new RegExp(DOKU_BASE + '_detail');
+                        if(attrs[i].escaped.match(regex)) {
+                            this.image_link_type = 'detail';
+                        }                                            
+                    }
 
                     // required to distinguish external images from external mime types 
                     // that are on the wiki which also use {{url}}

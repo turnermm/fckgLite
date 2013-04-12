@@ -197,3 +197,6 @@ Removed compatibility support for pre-jquery functions.
 
 10 April
 Removed missed jquery compatibility script.
+
+12 April
+In edit.php fix for images with detail urls using .htaccess nice urls
