@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 global $fckg_lang;
 
 $fckg_lang['btn_dw_edit'] = "DW編輯";

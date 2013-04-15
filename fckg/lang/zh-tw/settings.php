@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $lang['groups'] = "設定無視鎖定編輯時間的群組";
 $lang['middot'] = "為 &amp;nbsp; 用逗號區隔使用 &amp;middot; 的群組清單";
 $lang['big_files'] = "允許修改過大的檔案";
