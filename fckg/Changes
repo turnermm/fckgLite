@@ -1,4 +1,4 @@
-rev 13-Apr_10-20_06
+rev 13-Apr_29-17_30
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -200,3 +200,7 @@ Removed missed jquery compatibility script.
 
 12 April
 In edit.php fix for images with detail urls using .htaccess nice urls
+
+29 April
+Fixed regex for recognizing indented code blocks.
+Fixed handlng of footnotes containing parentheses.
