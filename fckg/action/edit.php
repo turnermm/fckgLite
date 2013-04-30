@@ -239,9 +239,9 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
             );   
       }
 
-        /* convert html tags to entities in indented code blocks*/
+      /* convert html tags to entities in indented code blocks*/
        $text= preg_replace_callback(
-          '/^\s{2,}[^\*\-].*?$/ms',
+          '/(\n  )((?![\*\-]).*?)(\n)(?!\s)/ms',
           create_function(
             '$matches',
             '$matches[0] = preg_replace("/(\[\[\w+)>/ms","$1__IWIKI__",$matches[0]);
@@ -250,8 +250,7 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
             $matches[0] = preg_replace("/__IWIKI__/ms", ">", $matches[0]);    
             return $matches[0];  '
           ), $text
-        );  
-
+        );
         
        $pos = strpos($text, '<');
 
