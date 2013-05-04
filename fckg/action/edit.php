@@ -43,12 +43,10 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
 
     function register(&$controller)
     {
+        if(method_exists($this->helper, 'is_outOfScope') &&  $this->helper->is_outOfScope()) return;
+        
         global $FCKG_show_preview;
         $FCKG_show_preview = true;
-
-        if(isset($_REQUEST['do']) && $_REQUEST['do'] == 'draft') {
-          //return;
-        }
 
         if(isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'dwiki') {
           $FCKG_show_preview = true;
@@ -2778,7 +2776,7 @@ if(window.DWikifnEncode && window.DWikifnEncode == 'safe') {
  $data =  $DOKU_PLUGINS['syntax'][$list[0]]->Lexer->_regexes['base']->_labels; 
  $patterns = $DOKU_PLUGINS['syntax'][$list[0]]->Lexer->_regexes['base']->_patterns;
  $labels = array();
- $regex = '~~NOCACHE~~';
+ $regex = '~~NOCACHE~~|~~NOTOC~~';
  $regex .= "|\{\{rss>http:\/\/.*?\}\}";
 
  $exclusions = $this->getConf('xcl_plugins');
