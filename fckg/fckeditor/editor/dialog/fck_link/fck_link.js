@@ -965,7 +965,7 @@ function Ok()
 
 
 	}
-
+ 
       var ftp = false;      
       if(sUri.match(/^ftp:\/\//)) {
           ftp = true;
@@ -1047,7 +1047,7 @@ function Ok()
 			sInnerHtml = oLink.innerHTML ;		// Save the innerHTML (IE changes it if it is like an URL).
             if(ftp) sInnerHtml = sUri;
             }
-
+  
 		oLink.href =  sUri;
         if(internalInnerHTML) {
            sInnerHtml = internalInnerHTML;
@@ -1154,7 +1154,7 @@ function Ok()
 			SetAttribute( oLink, 'style', GetE('txtAttStyle').value ) ;
 		}
 	}
-
+   
 
     if(document_body) {  
        var hold = FCK.EditingArea.Document.getElementById("hold_a");                  
