@@ -1,4 +1,4 @@
-rev 13-May_04-08_14
+rev 13-May_30-10_02
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -208,3 +208,9 @@ Fixed handlng of footnotes containing parentheses.
 3 May
 Synced switch/edit.php with master/edit.php
 Added support for ~~NOTOC~~ macro
+
+15 May
+Added PHP's file upload errors to filebrowser.
+
+30 May
+Accept image copy and paste with https urls.

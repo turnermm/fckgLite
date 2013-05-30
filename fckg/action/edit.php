@@ -1628,7 +1628,7 @@ function parse_wikitext(id)
                             var uri = elems[1];
                             src = decodeURIComponent ? decodeURIComponent(uri) : unescape(uri); 
                         }
-                         if(!src.match(/http:/)  && !src.match(/^:/)) src = ':' + src;  
+                         if(!src.match(/https?:/)  && !src.match(/^:/)) src = ':' + src;  
                      } 
                      else if(attrs[i].escaped.match(/http:\/\//)){
                               src = attrs[i].escaped;
