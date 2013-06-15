@@ -212,7 +212,7 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
      }
 
       global $useComplexTables;
-      if($this->getConf('complex_tables') || strpos($text, '~~COMPLEX_TABLES~~') !== false) {     
+      if($this->getConf('complex_tables') || strrpos($text, '~~COMPLEX_TABLES~~') !== false) {     
           $useComplexTables=true;
       }
       else {
@@ -2445,7 +2445,7 @@ function parse_wikitext(id)
     
     if(embedComplexTableMacro) {
         if(results.indexOf('~~COMPLEX_TABLES~~') == -1) {
-           results = "~~COMPLEX_TABLES~~\n" + results;
+           results += "~~COMPLEX_TABLES~~\n"; 
         }
     }
     

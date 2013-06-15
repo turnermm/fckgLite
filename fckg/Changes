@@ -1,4 +1,4 @@
-rev 13-May_30-10_02
+rev 13-Jun_15-13_03
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -214,3 +214,6 @@ Added PHP's file upload errors to filebrowser.
 
 30 May
 Accept image copy and paste with https urls.
+
+15 June
+Removed duplicate ~~COMPLEX_TABLES~~ macros
