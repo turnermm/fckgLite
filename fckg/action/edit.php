@@ -739,14 +739,13 @@ var fckgLPluginPatterns = new Array();
    global $fckgLPluginPatterns; 
    foreach($fckgLPluginPatterns as $pat) {  
      $pat[0] = preg_replace('/\s+$/',"",$pat[0]);  
-    // $pat[0] = preg_quote($pat[0], "/");    
      $pat[1] = str_replace('&','&amp;', $pat[1]);    
      $pat[0] = str_replace('&','&amp;',$pat[0]);    
      $pat[0] = str_replace('>', '&gt;',$pat[0]);    
      $pat[0] = str_replace('<', '&lt;',$pat[0]);    
      $pat[1] = str_replace('>', '&gt;',$pat[1]);    
      $pat[1] = str_replace('<', '&lt;',$pat[1]);    
-     $pat[0] = str_replace(' ', '\s+',$pat[0]);    
+     $pat[0] = preg_replace('/\s+/', '\s+',$pat[0]);    
      $pat[0] = str_replace('*', '%%\*%%',$pat[0]);    
      $pat[0] = preg_quote($pat[0], "/");   
      echo "fckgLPluginPatterns.push({'pat': '$pat[0]', 'orig': '$pat[1]' });\n"; 
@@ -2309,7 +2308,7 @@ function parse_wikitext(id)
     //show_rowspans(CurrentTable);
     for(var i=0; i < fckgLPluginPatterns.length; i++) {
       fckgLPluginPatterns[i].pat = fckgLPluginPatterns[i].pat.replace(/\|/g,"\\|");
-      fckgLPluginPatterns[i].pat = fckgLPluginPatterns[i].pat.replace(/([\.\?\[\]])/g, "\\$1");
+      fckgLPluginPatterns[i].pat = fckgLPluginPatterns[i].pat.replace(/([\(\)\{\}\.\?\[\]])/g, "\\$1");      
       var pattern = new RegExp(fckgLPluginPatterns[i].pat,"gm");     
       results = results.replace(pattern, fckgLPluginPatterns[i].orig);
     }
@@ -2445,7 +2444,7 @@ function parse_wikitext(id)
     
     if(embedComplexTableMacro) {
         if(results.indexOf('~~COMPLEX_TABLES~~') == -1) {
-           results += "~~COMPLEX_TABLES~~\n"; 
+           results += "\n~~COMPLEX_TABLES~~\n"
         }
     }
     
