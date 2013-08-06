@@ -221,6 +221,7 @@ DlgImgAlignTop		: "Top",
 DlgImgPreview		: "Preview",
 DlgImgAlertUrl		: "Please type the image URL",
 DlgImgLinkTab		: "Link",
+DlgImgRemoveAlign : 'Remove Alignment',
 
 // Flash Dialog
 DlgFlashTitle		: "Flash Properties",

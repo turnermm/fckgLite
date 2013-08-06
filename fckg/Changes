@@ -1,4 +1,4 @@
-rev 13-Jul_25-13_43
+rev 13-Aug_06-09_25
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -227,3 +227,10 @@ Dutch language files for settings.php and action/lang
 
 25 Jul
 Corrects bug which deletes final monospace markup from list items
+
+28 Jul
+Fixed corrupted links to media from userfiles and bad file mode set for edit.php
+  --occurred only in fackgLite/dailies versions--
+
+6 Aug
+Added language variable to image dialog's align list for "remove alignment"
