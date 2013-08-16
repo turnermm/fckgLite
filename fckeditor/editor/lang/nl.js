@@ -97,6 +97,8 @@ SpellCheck			: "Spellingscontrole",
 UniversalKeyboard	: "Universeel toetsenbord",
 PageBreakLbl		: "Pagina-einde",
 PageBreak			: "Pagina-einde invoegen",
+NestedNumberedList  : "Invoegen geneste genummerde lijst",
+InsertFootnote      : "Aanmaken/Bewerken Voetnota\'s",
 
 Form			: "Formulier",
 Checkbox		: "Aanvinkvakje",
@@ -218,6 +220,19 @@ DlgImgPreview		: "Voorbeeld",
 DlgImgAlertUrl		: "Geef de URL van de afbeelding",
 DlgImgLinkTab		: "Link",
 
+DlgImgNote          : "<b>Opmerking:</b> De DokuWiki Mediamanager kan alleen voor upload gebruikt worden en kan geen beelden in je tekst invoegen.",
+DlgImgHelp          : "<b>Beeld uitlijning:</b> De uitlijningstool plaatst de beelden in relatie tot de tekst zoals in het voorbeeldscherm getoond wordt. Je kan dit ook gebruiken om beeldmateriaal uit te lijnen in relatie tot elkaar:",
+DlgImgHelpLiLeft    : "Gebruik <b>linkse</b> uitlijning om een horizontale rij beelden te tonen.",
+DlgImgHelpLiBase    : "Gebruik <b>basislijn</b> om een vertikale kolom beelden te tonen aan de linker kant marge.",
+DlgImgHelpLiRight   : "Gebruik <b>rechts</b> en <b>midden</b> om gecentreerde of rechts uitgelijnde kolommen te creëren.",
+DlgImgHelpNote      : "<b>Opmerking:</b> Een kolom beelden aan de linker kantlijn zonder de basislijn uitlijningseigenschap zal als een horizontale rij beelden getoond worden.",
+
+DlgImgAlertSucess	: "Bestand is succesvol opgeladen.",
+DlgImgAlertInvalid	: "Foutief bestandstype",
+DlgImgAlertName		: "Een bestand met dezelfde naam bestaat reeds. Het opgeladen bestand is hernoemd naar: ",
+DlgImgAlertSecurity	: "Veiligheidsfout. Je hebt wellicht onvoldoende rechten om op te laden. Controleer uw server.",
+DlgImgRemoveAlign   : 'Uitlijning verwijderen',
+
 // Flash Dialog
 DlgFlashTitle		: "Eigenschappen Flash",
 DlgFlashChkPlay		: "Automatisch afspelen",
@@ -237,6 +252,9 @@ DlgLnkType			: "Linktype",
 DlgLnkTypeURL		: "URL",
 DlgLnkTypeAnchor	: "Interne link in pagina",
 DlgLnkTypeEMail		: "E-mail",
+DlgLnkTypeInternal	: "DokuWiki interne link",
+DlgLnkTypeMime		: "Non-DokuWiki Interne Bestanden",
+DlgLnkTypeSamba		: "SMB gedeeld",
 DlgLnkProto			: "Protocol",
 DlgLnkProtoOther	: "<anders>",
 DlgLnkURL			: "URL",
@@ -278,6 +296,61 @@ DlnLnkMsgNoEMail	: "Geef een e-mailadres",
 DlnLnkMsgNoAnchor	: "Selecteer een interne link",
 DlnLnkMsgInvPopName	: "De naam van de popup moet met een alfa-numerieke waarde beginnen, en mag geen spaties bevatten.",
 
+DlgLnkQS            : "Zoekopdracht String (tekenreeks) (Voorbeeld: value_1=1&value_2='abc')",
+DlgnLnkMsgNoWikiFile: "Geef bestandsnaam voor je interne link",
+DlgnLnkMsgQSErr     : "Foutief opgemaakte zoekopdracht String element(en). Druk Annuleren om te corrigeren:",
+
+DlgLnkIntText		: "Geef DokuWiki naamruimte of selecteer in de bestandsverkenner.",
+DlgLnkIntExample	: "Voorbeeld: <i>:directory:directory:file</i>",
+DlgLnkMimeText		: "Geef DokuWiki naamruimte of selecteer in de bestandsverkenner.",
+DlgLnkMimeExample	: "Voorbeeld: <i>:directory:directory:zipfile.zip",
+DlgLnkSambaText		: "Geef de gedeelde naam.",
+DlgLnkSambaExample	: "Voorbeeld: \\\\Server\\\directory_path\\file",
+
+//File Browser
+DlgFileBrowserSelect: "Selecteer een bestand op je computer",
+DlgFileBrowserUpPrg : "Laad een nieuw bestand in deze map (Oplaadproces in uitvoering, even geduld...)",
+DlgFileBrowserUpMsg : "Laad een nieuw bestand in deze map",
+DlgFileBrowserRead  : "alleen lezen",
+DlgFileBrowserWrite : "oplaadbaar",
+DlgFileBrowserBrowse: "verken",
+DlgFileBrowserNewFolder: "Map aanmaken",
+DlgFileBrowserResourceType: "Bron Type",
+DlgFileBrowserThumbnail: 'miniatuur',
+DlgFileBrowserMagnify: 'vergroot',
+
+// The following 4 are the labels at upper left corner of file browser
+DlgFileBrowserResSelectFile: "Bestand",  
+DlgFileBrowserResSelectFlash: "Flash",
+DlgFileBrowserResSelectMedia: "Media",
+DlgFileBrowserResSelectImage: "Beelden",
+
+DlgFileBrowserFolderPrompt: 'Tijp de nieuwe mapnaam:',
+DlgFileBrowserFolderWarning: 'Tijp de mapnaam' ,
+
+
+// File Browser Errors
+FileBrowserError_101:	'Map bestaat reeds.', 
+FileBrowserError_102:	'Ongeldige mapnaam', 
+FileBrowserError_103:   'Je hebt geen rechten om deze map aan te maken.',
+FileBrowserError_110:   'Onbekende fout bij aanmaak map',
+FileBrowserError_201:   'Een bestand met dezelfde naam bestaat reeds. Het opgeladen bestand is hernoemd naar: ',
+FileBrowserError_202:   'Ongeldig bestand',
+FileBrowserError_203:   'Je hebt geen rechten om bestanden op te laden in deze map. Als je meent dat dit ten onrechte zo is verwittig dan je systeembeheerder.',
+FileBrowserError_204:   'Onmogelijk om het geselecteerd bestand te schrappen', 
+FileBrowserError_205:  'Onmogelijk om het geselecteerd bestand te hernoemen; check je map/schrijfrechten', 
+FileBrowserError_206: ' bestaat reeds; ofwel hernoemen ofwel schrappen. ',
+FileBrowserError_default: 'Fout op je verzoek. Foutnummer: ',
+FileBrowserError_Ajax: 'Je browser ondersteunt geen AJAX.',
+FileBrowserError_XML:  'De server replikeerde niet met de correcte XML data. Controleer je configuratie.',
+FileBrowserError_Folder_Submit: 'Tijp de mapnaam.',
+FileBrowserError_File_Submit:  'Selecteer een bestand op je computer',
+FileBrowserError_Upload: 'Fout tijdens opladen. Foutnummer: ',
+FileBrowserError_Connector: 'De connector is uitgeschakeld. Check editor/filemanager/connectors/php/config.php', 
+FileBrowserError_Command: 'Niet gesupporteerd commando: ',
+FileBrowserError_Type: 'Ongeldig type gespecifiëerd: ',
+FolderMoveWarning: 'Je kan bestanden enkel 1 niveau lager verplaatsen dan de huidige map',	
+
 // Color Dialog
 DlgColorTitle		: "Selecteer kleur",
 DlgColorBtnClear	: "Opschonen",
@@ -289,6 +362,9 @@ DlgSmileyTitle		: "Smiley invoegen",
 
 // Special Character Dialog
 DlgSpecialCharTitle	: "Selecteer speciaal teken",
+DlgSpecialExplaination : "Klik op een teken of tijp een decimale code in de tekstkader. Test het en klik op invoegen",
+DlgSpecialTest         : "test",
+DlgSpecialInsert       : "invoegen",
 
 // Table Dialog
 DlgTableTitle		: "Eigenschappen tabel",
@@ -308,11 +384,11 @@ DlgTableCellSpace	: "Afstand tussen cellen",
 DlgTableCellPad		: "Afstand vanaf rand cel",
 DlgTableCaption		: "Naam",
 DlgTableSummary		: "Samenvatting",
-DlgTableHeaders		: "Headers",	//MISSING
-DlgTableHeadersNone		: "None",	//MISSING
-DlgTableHeadersColumn	: "First column",	//MISSING
-DlgTableHeadersRow		: "First Row",	//MISSING
-DlgTableHeadersBoth		: "Both",	//MISSING
+DlgTableHeaders		: "Hoofding",	
+DlgTableHeadersNone		: "Geen",	
+DlgTableHeadersColumn	: "Eerste Kolom",	
+DlgTableHeadersRow		: "Eerste Rij",	
+DlgTableHeadersBoth		: "Beide",	
 
 // Table Cell Dialog
 DlgCellTitle		: "Eigenschappen cel",
@@ -335,9 +411,9 @@ DlgCellVerAlignTop	: "Boven",
 DlgCellVerAlignMiddle	: "Midden",
 DlgCellVerAlignBottom	: "Beneden",
 DlgCellVerAlignBaseline	: "Basislijn",
-DlgCellType		: "Cell Type",	//MISSING
-DlgCellTypeData		: "Data",	//MISSING
-DlgCellTypeHeader	: "Header",	//MISSING
+DlgCellType		: "Cel Type",	
+DlgCellTypeData		: "Data",	
+DlgCellTypeHeader	: "Hoofding",	
 DlgCellRowSpan		: "Overkoepeling rijen",
 DlgCellCollSpan		: "Overkoepeling kolommen",
 DlgCellBackColor	: "Achtergrondkleur",
@@ -372,6 +448,66 @@ DlgPasteMsg2	: "Plak de tekst in het volgende vak gebruik makend van uw toetsenb
 DlgPasteSec		: "Door de beveiligingsinstellingen van uw browser is het niet mogelijk om direct vanuit het klembord in de editor te plakken. Middels opnieuw plakken in dit venster kunt u de tekst alsnog plakken in de editor.",
 DlgPasteIgnoreFont		: "Negeer \"Font Face\"-definities",
 DlgPasteRemoveStyles	: "Verwijder \"Style\"-definities",
+
+//Footnote Dialog
+DlgFootnoteTitle              : "Voetnota Editor",
+DlgFootnoteExplaination       : "Gebruik de tekstzone voor zowel aanmaken als herwerken van je voetnota\'s.",
+DlgFootnoteId                 : "Voetnota ID ",
+DlgFootnoteLoad               : "Laad Nota in Editor",
+DlgFootnoteExplainationBottom : "Om een voetnota te herwerken tijp de ID en klik \"Laad Note in Editor\"",
+
+// Plugin Tool
+Abbr	      		: "Plugin",
+AbbrBtn      		: "Syntax Plugin Invoegen",
+AbbrDlgTitle 		: "Syntax Plugin Naam Invoegen",
+AbbrDlgHLCreate		: "<b>Plugin aanmaken</b>",
+AbbrDlgHLStet		: "<b>Stet Plugin</b>",
+AbbrDlgHLEdit		: "<b>Bewerk Dokuwiki Plugin</b>",
+AbbrDlgClick		: "<b>Klik OK wanneer klaar. Of Annuleer.</b>",
+AbbrDlgStet			: "Aanmaken van een tekst die een reeks tekens bevat met HTML en/of Dokuwiki Markup tekens.",
+AbbrDlgEditPlugin	: "Bewerk een plugin die niet aangemaakt is via de plugin tool.",
+AbbrDlgName  		: "Geef de Plugin Naam--probeer correct in te geven",
+AbbrDlgRemove		: "Verwijder het plugin-merkteken (inhoud blijft bestaan)",
+AbbrDlgSelectFirst	: "Je moet eerst de plugin syntax selecteren!",
+DlgNotAvail         : "Afgeschreven. Niet langer beschikbaar. ",
+DlgPluginUseNowiki  : "Gebruik &lt;nowiki&gt; in de plaats.",
+
+//Break To Paragraph
+BreakToParagraph :	"<BR> naar <P>",
+
+//Paragraph to Break
+ParagraphToBreak :	"<P> naar <BR>",
+
+//Geshi plugin
+geshiHelp           : 'Met deze tool kan je ofwel een "Code Block" of "Downloadable Code Snippet" aanmaken.' 
+	               + 'Voor een snippet moet je ook de bestandsnaam ingeven voor de download.'
+	               +' Vervolgens selecteer je het taal type in de keuzemenu en klik OK. ' ,
+
+GeshiToolTip        : "Invoegen Geshi Code Block",
+GeshiCodeBlock      : 'Code Block',
+GeshiDownloadable   : 'Downloadbare Code Snippet',
+GeshiDlgTitle       : 'Geshi Selectie Tool',
+
+//Smileys
+FckEditorSmileys    : "FCKEditor Smileys",
+DokuwikiSmileys     : "Dokuwiki Smileys", 
+SmileysDlgInfo      : "FCKeditor smileys worden ingevoegd als afgeelding. Dokuwiki smileys worden ingevoegd als tekst en tonen het beeld in de browser.",
+
+//VKI Keyboard Plugin
+KeyboardToolTip:  'Open Virtueel Toetsenbord',
+KeyboardDlgTitle: 'Virtueel Toetsenbord',
+startVKeyboard:   'Open Virtueel Toetsenbord',
+VKkeyboardHelp:     'Klik op de "Open Virtueel Toetsenbord" knop om het Virtueel Toetsenbord te starten. '
+                  + ' Een Toetsenbord icoon wordt links onder in het bewerkingsvenster getoond. '
+                  + ' Als je er op klikt wordt het toetsenbord geopend. Klik op "Illustraties" voor meer uitleg '
+                  + ' over de verschillende functies die toegankelijk zijn op de bovenste toetsenrij.'  ,
+
+VKIllustrationText: '<b>Functies op de bovenste rij van links naar rechts</b><br />' 
+                    + '1. Klikken op de taal of de neerwaartse pijl ernaast opent een keuzemenu met talen. Selecteer je een taal dan wijzigt het toetsenbord onmiddellijk in de geselecteerde taal. Een illustratie van de keuzemenu vindt je onderaan deze pagina.<br /> '
+                    + '2. Klikken op het spoorwegteken (#) opent en sluit het numeriek toetsenbord<br />'
+                    + '3. De opwaartse en neerwaartse pijlen rechts naast het spoorwegteken wijzigen de grootte van het toetsenbord en het lettertype<br />'
+                    + '4. In fckgLite heeft de "Clear" knop geen functie.',
+
 
 // Color Picker
 ColorAutomatic	: "Automatisch",
@@ -532,3 +668,4 @@ DlgDivAdvancedTab	: "Geavanceerd",
 DlgDivStyle		: "Style",
 DlgDivInlineStyle	: "Inline Style"
 };
+

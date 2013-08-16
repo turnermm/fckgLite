@@ -150,7 +150,7 @@ FCKConfig.insertHtml_snippet = '<ol><li>&nbsp;</li></ol>';
 //FCKConfig.insertHtml_showDialog = true;
 FCKConfig.insertHtml_buttonTooltip = 'Insert Nested Ordered List';
 FCKConfig.Plugins.Add( 'geshi', 'en') ;
-FCKConfig.Plugins.Add( 'fonts', 'en') ;
+FCKConfig.Plugins.Add( 'fonts', 'en,nl') ;
 FCKConfig.Plugins.Add('keyboard', 'en') ;
 FCKConfig.Plugins.Add('signature') ;
 
