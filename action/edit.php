@@ -1137,6 +1137,7 @@ function parse_wikitext(id)
             save_url = ""; 		
             this.interwiki=false;
             this.bottom_url=false;
+            this.link_class="";
         }
   
        if(tag == 'p') {         
