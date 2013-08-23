@@ -1357,13 +1357,14 @@ function whenCompleted(){
          
          var str = decodeURIComponent(fckg_ajax.response);
 
-         if(str.match(/^\s*__EMPTY__\s*$/)) {
-                anchorOption.ini('No Headers Found');
+         
+         if(str.match(/^\s*__EMPTY__\s*$/) || !str.match(/@@/)) {        
+                anchorOption.ini(FCKLang.DlgLnkNoHeadersFound);
                 anchorOption.selection = "";
                 return;
          }
-           anchorOption.ini('Headings Menu')
-           anchorOption.push('Cancel Selection',"");
+           anchorOption.ini(FCKLang.DlgLnkHeadersMenuTitle)
+           anchorOption.push(FCKLang.DlgLnkCancelHeaders,"");
              var pairs = str.split('@@');
              for (var i in pairs) {
                   var elems = pairs[i].split(/;;/);

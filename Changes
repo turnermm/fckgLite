@@ -1,4 +1,4 @@
-rev 13-Aug_15-21_24
+rev 13-Aug_22-12_17
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -240,3 +240,6 @@ Preserve plain text samba share syntax
 
 15 Aug
 Dutch language updates for fckeditor lang.nl.js and fonts/lang/nl.js
+
+22 Aug
+Updates to language strings in link dialog

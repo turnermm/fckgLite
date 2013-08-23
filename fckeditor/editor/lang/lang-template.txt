@@ -37,9 +37,15 @@ DlgLnkIntText		: "Enter DokuWiki namespace Or Select from File Browser.",
 DlgLnkIntExtras     : "To create a query string and/or to set a page anchor from Dokuwiki headers, click the <b>Advanced</b> tab.",
 DlgLnkIntExample	: "For example: <i>:directory:directory:file</i>",
 DlgLnkMimeText		: "Enter DokuWiki namespace Or Select from, File Browser.",
-DlgLnkMimeExample	: "For example: <i>:directory:directory:zipfile.zip",
+DlgLnkMimeExample	: "For example: <i>:directory:directory:zipfile.zip</i>",
 DlgLnkSambaText		: "Enter the share name.",
 DlgLnkSambaExample	: "For example: \\\\Server\\\directory_path\\file",
+DlgLnkCreateAnchors: "Create Page Anchors from Dokuwiki Headers",
+DlgLnkQSExample:   "Query String (for example: value_1=1&value_2=2)",
+DlgLnkGetHeaders: "Get Headers",
+DlgLnkCancelHeaders: " . .cancel",
+DlgLnkHeadersMenuTitle: "Headings Menu",
+DlgLnkNoHeadersFound: "No Headings Found",
 
 
 // File Browser
