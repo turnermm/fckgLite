@@ -557,6 +557,7 @@ GeshiDownloadable: 'Downloadable Code Snippet',
 GeshiDlgTitle:       'Geshi Selection Tool',
 
 //VKI Keyboard Plugin
+VKeyboardIllustrations: "Illustrations",
 KeyboardToolTip:  'Open Virtual Keyboard',
 KeyboardDlgTitle: 'Virtual Keyboard',
 startVKeyboard:   'Start Virtual Keyboard',
@@ -581,8 +582,10 @@ DokuwikiSmileys     : "Dokuwiki Smileys",
 SmileysDlgInfo      : "FCKeditor smileys are inserted as images. Dokuwiki smileys are inserted as text and display as images in the browser.",
 
 // Toolbar tooltips
-NestedNumberedList  : "Insert Nested Ordered List",
+NestedNumberedList  : "Nested Ordered List",
 InsertFootnote      : "Create/Edit Footnotes",
+NestedBulletList    :  "Nested Bullet List",
+ScaytTitle              : "SpellCheck",
 
 // Image Dialog
 DlgImgNote          : "<b>Note:</b> The DokuWiki Mediamangager can be used only for uploading.  It cannot insert images into your text.",

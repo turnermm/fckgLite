@@ -1,4 +1,4 @@
-rev 13-Aug_23-13_01
+rev 13-Aug_24-22_42
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -247,3 +247,6 @@ Updates to language strings in link dialog
 23 Aug
 Fixed error in edit.php that caused external links on initial creation to be converted to internal if links were
 created in internal-external order.
+
+24 Aug
+Supplied missing fckeditor language strings and JS FCKLang references.

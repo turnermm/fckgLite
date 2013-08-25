@@ -18,7 +18,7 @@
 	FCKCommands.RegisterCommand('insertHtml', new insertHtmlToolbarCommand());
 
 	// create the toolbar  button
-	var insertHtmlButton = new FCKToolbarButton('insertHtml', FCKConfig.insertHtml_buttonTooltip || FCKLang.inserHTML_buttonTooltip);
+	var insertHtmlButton = new FCKToolbarButton('insertHtml', FCKLang.NestedNumberedList || FCKLang.inserHTML_buttonTooltip);
 	insertHtmlButton.IconPath = FCKPlugins.Items['insertHtml'].Path + 'images/ol_ins.png'; // or pick any other in folder 'images'
 	FCKToolbarItems.RegisterItem('insertHtml', insertHtmlButton);
 

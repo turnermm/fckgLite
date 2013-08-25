@@ -716,11 +716,11 @@ function SetLinkType( linkType )
       FCK.dwiki_browser = 'local';
       FCK.islocal_dwikibrowser = true;  
       if(anchorOption.selection) {
-           anchorOption.ini('Headings Menu')
-           anchorOption.push('Cancel Selection',""); 
+           anchorOption.ini(FCKLang.DlgLnkHeadersMenuTitle)
+           anchorOption.push(FCKLang.DlgLnkCancelHeaders,""); 
            anchorOption.push(anchorOption.selection,anchorOption.selection); 
       }
-      else anchorOption.ini('Headings Menu');
+      else anchorOption.ini(FCKLang.DlgLnkHeadersMenuTitle);
    }
    else { 
      dialog.SetTabVisibility('Advanced',false); 

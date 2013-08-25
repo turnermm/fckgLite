@@ -9,7 +9,7 @@ FCKCommands.RegisterCommand( 'Delete_P' , new FCKParagraphToLineBreak('paragraph
 
 
 // Create a toolbar button 
-var oDelPara		= new FCKToolbarButton( 'Delete_P', '<P> to <BR>' ) ;
+var oDelPara		= new FCKToolbarButton( 'Delete_P',FCKLang.ParagraphToBreak ) ;
 oDelPara.IconPath	= FCKConfig.PluginsPath + 'paradelete/delete_p.gif' ;
 
 FCKToolbarItems.RegisterItem( 'Delete_P', oDelPara ) ;	
@@ -20,7 +20,7 @@ FCK.ContextMenu.RegisterListener( {
 		// when the option is displayed, show a separator then the command
 		menu.AddSeparator() ;
 		// the command needs the registered command name, the title for the context menu, and the icon path
-		menu.AddItem( 'Delete_P', '<P> to <BR>', oDelPara.IconPath) ;
+		menu.AddItem( 'Delete_P', FCKLang.ParagraphToBreak, oDelPara.IconPath) ;
 	}
 }
 );

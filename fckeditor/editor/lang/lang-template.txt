@@ -7,6 +7,8 @@
 // Toolbar tooltips
 NestedNumberedList  : "Insert Nested Ordered List",
 InsertFootnote      : "Create/Edit Footnotes",
+ScaytTitle              : "Spell Check",
+NestedBulletList    :  "Nested Bullet List",
 
 // Image Dialog
 DlgImgNote          : "<b>Note:</b> The DokuWiki Mediamangager can be used only for uploading.  It cannot insert images into your text.",
@@ -120,8 +122,6 @@ AbbrDlgSelectFirst	: "You have to select the plugin syntax first!",
 DlgNotAvail            : "Deprecated. No longer available. ",
 DlgPluginUseNowiki : 'Use &lt;nowiki&gt; instead',
 
-//Break To Paragraph
-BreakToParagraph :	"<BR> to <P>",
 
 //Paragraph to Break
 ParagraphToBreak :	"<P> to <BR>",
@@ -148,6 +148,7 @@ Style               : "Code Types",
 FontFormats         : "Headers",
 
 //VKI Keyboard Plugin
+VKeyboardIllustrations: "Illustrations",
 KeyboardToolTip:  'Open Virtual Keyboard',
 KeyboardDlgTitle: 'Virtual Keyboard',
 startVKeyboard:   'Start Virtual Keyboard',

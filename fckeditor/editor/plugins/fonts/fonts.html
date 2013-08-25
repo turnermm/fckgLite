@@ -536,7 +536,7 @@ td.colorchart
     <div id="example"></div>
     <input type='text' value ='' size='7' name = 'fontfg'  id = 'fontfg'>
     <input type='text' size = '7' value ='' name = 'fontbg' id = 'fontbg'>
-    <span id = 'fontcolor_sample'>Color Sample</span>
+    <span id = 'fontcolor_sample'  fckLang="fontColorSample">ColorSample</span>
    </p>
 
 
@@ -549,15 +549,15 @@ td.colorchart
      <option value="remove" fckLang="FontsColorOptionsRemoveColors">remove colors</option>     
     </select>
     </form>
-   <button onclick="samples(true);">Show Samples</button>
-   <button onclick="colorChart(true);">Show Colors</button>    
+   <button onclick="samples(true);"><span fckLang="fontSamples">Show Samples</span></button>
+   <button onclick="colorChart(true);"><span fckLang="fontColors">Show Colors</span></button>    
 </div>
 
 <div></div>
 
 <div id="sample_texts">
 
-<table><tr><td><button onclick="samples(false);">Hide Samples</button></td></tr>
+<table><tr><td><button onclick="samples(false);"><span fckLang="fontSamplesHide">Hide Samples</span></button></td></tr>
 		<script type="text/javascript">
 //<![CDATA[
    lang_opts = oEditor.FCKConfig.FontNamesArray;
@@ -567,12 +567,12 @@ td.colorchart
 
 //]]>
    </script>
-<tr><td><button onclick="samples(false);">Hide Samples</button></td></tr>
+<tr><td><button onclick="samples(false);"><span fckLang="fontSamplesHide">Hide Samples</span></button></td></tr>
 </table>
 
 </div>
 <div id = 'chart'>
- <button onclick="colorChart(false);">Hide Colors</button>
+ <button onclick="colorChart(false);"><span fckLang="fontColorsHide">Hide Colors</span></button>
  <br />
 <form>
 <input type = "radio" name="color_sel" id="fgcolor"> <span class='buttext_1'>text color</span>

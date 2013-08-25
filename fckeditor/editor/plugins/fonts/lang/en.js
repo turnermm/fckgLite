@@ -21,7 +21,12 @@ FCKLang.fontsHelp           = 'With this tool you can select a font, its size an
 	                        
 
 //Color Options Menu
-
+FCKLang.fontSamples = "Show Samples";
+FCKLang.fontColorSample = "Color Sample";
+FCKLang.fontColors = "Show Colors";
+FCKLang.fontSamplesHide = "Hide Samples";
+FCKLang.fontColorsHide = "Hide Colors";
+FCKLang.fontColorSampleHeader = "Color Samples",
 FCKLang.FontsColorOptions = 'Color Options';   
 FCKLang.FontsColorOptionsFGColor= 'Original text color';
 FCKLang.FontsColorOptionsBGColor= 'Original background color';
