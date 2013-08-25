@@ -5,11 +5,9 @@
 */
 
 // Toolbar tooltips
-NestedNumberedList  : "Insert Nested Ordered List",
+
 InsertFootnote      : "Create/Edit Footnotes",
 ScaytTitle              : "Spell Check",
-NestedBulletList    :  "Nested Bullet List",
-
 // Image Dialog
 DlgImgNote          : "<b>Note:</b> The DokuWiki Mediamangager can be used only for uploading.  It cannot insert images into your text.",
 DlgImgHelp          : "<b>Image Alignment</b> The align property will place your images in text contexts as illustrated in the preview box. It can also be used to align images with respect to one another:",
@@ -23,7 +21,8 @@ DlgImgAlertInvalid	: "Invalid file type",
 DlgImgAlertName		: "A file with the same name is already available. The uploaded file has been renamed to ",
 DlgImgAlertSecurity	: "Security error. You probably don't have enough permissions to upload. Please check your server.",
 DlgImgRemoveAlign : 'Remove Alignment',
-
+DecreaseIndent		: "Nested List Return",
+IncreaseIndent		: "Nested List",
 
 // Link Dialog
 DlgLnkTypeInternal	: "DokuWiki internal link",

@@ -135,20 +135,10 @@ FCKConfig.ToolbarLocation = 'In' ;
 
 
 FCKConfig.Plugins.Add('tableformat') ;
-// FCKConfig.Plugins.Add('trim') ;
-// FCKConfig.Plugins.Add('blockquote') ;
 FCKConfig.Plugins.Add('plugintool', 'en,fr,nl') ;
 FCKConfig.Plugins.Add( 'paradelete' ) ;
-// FCKConfig.Plugins.Add( 'autogrow' ) ;
 FCKConfig.Plugins.Add( 'range' ) ;
-//FCKConfig.Plugins.Add( 'breakdel' ) ;
-FCKConfig.Plugins.Add('insertHtml');
-// FCKConfig.Plugins.Add('footnote', 'en,de');
-FCKConfig.Plugins.Add( 'insertHtmlCode' ) ;
-FCKConfig.Plugins.Add( 'insertHtmlunorderedList' ) ;
-FCKConfig.insertHtml_snippet = '<ol><li>&nbsp;</li></ol>';
-//FCKConfig.insertHtml_showDialog = true;
-//FCKConfig.insertHtml_buttonTooltip = 'Insert Nested Ordered List';
+FCKConfig.Plugins.Add( 'insertHtmlCode') ;  // this is the footnote plugin
 FCKConfig.Plugins.Add( 'geshi', 'en') ;
 FCKConfig.Plugins.Add( 'fonts', 'en,nl') ;
 FCKConfig.Plugins.Add('keyboard', 'en') ;
@@ -435,17 +425,10 @@ FCKConfig.ToolbarSets["DokuwikiGuest"] = [
   ['About']  
 ] ;  
 
-var fckg_nested = '|';
-if(navigator.userAgent.toLowerCase().indexOf('webkit') == -1) {
-       fckg_nested = ['OrderedList','UnorderedList','insertHtml','insertHtmlunorderedList', 'insertHtmlCode' ];
-}   
-else {
-    fckg_nested = ['OrderedList','UnorderedList','Outdent','Indent', 'insertHtmlCode' ];
-}   
 
 FCKConfig.ToolbarSets["Dokuwiki"] = [   
   ['Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],   
-  fckg_nested,
+  ['OrderedList','UnorderedList','Outdent','Indent', 'insertHtmlCode' ],  // insertHtmlCode is footnote plugin
   ['Rule', 'Smiley', 'SpecialChar', 'Style'], [],['fonts'],  
   ['Cut','Copy','Paste','PasteText','PasteWord', 'SpellCheck', 'Find'],   
   ['FontFormat'], ['Undo','Redo','RemoveFormat', '-','Table' ],   

@@ -1,4 +1,4 @@
-rev 13-Aug_24-22_42
+rev 13-Aug_25-12_31
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -250,3 +250,6 @@ created in internal-external order.
 
 24 Aug
 Supplied missing fckeditor language strings and JS FCKLang references.
+
+25 Aug
+cleaned up fckeditor unused plugins and replaced nested list plugins with FCKeditor's indent and outdent.
