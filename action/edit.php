@@ -211,6 +211,12 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
         $text=preg_replace("#(?<=http://)(.*?)(?=lib/plugins/fckg/fckeditor/editor/images/smiley/msn)#s", $new_addr,$text);
      }
 
+    $text = preg_replace_callback('/\[\[\w+>.*?\]\]/ms',
+    create_function(
+        '$matches',
+        'return str_replace("/", "__IWIKI_FSLASH__" ,$matches[0]);'
+    ), $text);
+    
       global $useComplexTables;
       if($this->getConf('complex_tables') || strrpos($text, '~~COMPLEX_TABLES~~') !== false) {     
           $useComplexTables=true;
@@ -347,6 +353,7 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
        $text = preg_replace('/{{(.*)\.swf(\s*)}}/ms',"SWF$1.swf$2FWS",$text);
        $this->xhtml = $this->_render_xhtml($text);
 	 
+       $this->xhtml = str_replace("__IWIKI_FSLASH__", "&frasl;", $this->xhtml);       
 	   if($this->getConf('duplicate_notes')) {
 			$this->xhtml = preg_replace("/FNoteINSert\d+/ms", "",$this->xhtml);
 	   }
@@ -1016,6 +1023,7 @@ function parse_wikitext(id)
     var HTMLParserParaInsert = markup['p_insert'];
  //   var geshi_classes = 'br0|co0|co1|co2|co3|coMULTI|es0|kw1|kw2|kw3|kw4|kw5|me1|me2|nu0|re0|re1|re2|re3|re4|st0|sy0|sy1|sy2|sy3|sy4';
       var geshi_classes = '(br|co|coMULTI|es|kw|me|nu|re|st|sy)[0-9]';
+   String.frasl = new RegExp("⁄\|&frasl;\|&#8260;\|&#x2044;",'g');
 
    geshi_classes = new RegExp(geshi_classes);
    HTMLParser(oDokuWiki_FCKEditorInstance.GetData( true ), {
@@ -1531,14 +1539,7 @@ function parse_wikitext(id)
                     var iw_type = this.link_class.match(/iw_(\w+)/);
                     var iw_title = this.link_title.split(/\//);                     
                      var interwiki_label = iw_title[iw_title.length-1];
-                     if(interwiki_label.match(/\=/)) {
-                        var elems = interwiki_label.split(/\=/);
-                        interwiki_label = elems[elems.length-1];
-                     }
-                     else if(interwiki_label.match(/\?/)) {
-                        var elems = interwiki_label.split(/\?/);
-                        interwiki_label = elems[elems.length-1];                     
-                     }                     
+                     interwiki_label = interwiki_label.replace(String.frasl,"\/");    
                     this.attr = iw_type[1] + '>' +  interwiki_label;
                     this.interwiki=true;
 				  }
@@ -2128,6 +2129,7 @@ function parse_wikitext(id)
     chars: function( text ) {
 	
 	if(this.interwiki && results.match(/>\w+\s*\|$/)) 	{    
+        text = text.replace(String.frasl,"\/");  
 	    this.interwiki=false;
         if(this.attr) {          
           results+= text;
@@ -2137,7 +2139,9 @@ function parse_wikitext(id)
         }   
 		return;
 	  }
-	
+      else if(this.interwiki) {
+        text = text.replace(String.frasl,"\/");  
+      }	
       //adjust spacing on multi-formatted strings
     results=results.replace(/([\/\*_])_FORMAT_SPACE_([\/\*_]{2})_FORMAT_SPACE_$/,"$1$2");
     if(text.match(/^&\w+;/)) {
