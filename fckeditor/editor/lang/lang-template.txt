@@ -15,6 +15,7 @@ DlgImgHelpLiLeft    : "Use <b>left</b> alignment to create a horizontal row of i
 DlgImgHelpLiBase    : "Use <b>baseline</b> to create a vertical column of images at the left-hand margin.",
 DlgImgHelpLiRight   : "Use <b>right</b> and <b>middle</b> to create columns at the center and right.",
 DlgImgHelpNote      : "<b>Note</b>: Placing a column of images in the left margin without the baseline property will result in a horizontal row of images.",
+DlgImgInsert: 'insert into document',
 
 DlgImgAlertSucess	: "Your file has been successfully uploaded.",
 DlgImgAlertInvalid	: "Invalid file type",
@@ -66,10 +67,10 @@ DlgFileBrowserResSelectFile: "File",
 DlgFileBrowserResSelectFlash: "Flash",
 DlgFileBrowserResSelectMedia: "Media",
 DlgFileBrowserResSelectImage: "Image",
-
+DlgFileBrowserMoveLabel: 'Move',
 DlgFileBrowserFolderPrompt: 'Type the name of the new folder:',
 DlgFileBrowserFolderWarning: 'Please type the folder name' ,
-
+DlgLnkUpload: 'Upload',
 
 // File Browser Errors
 FileBrowserError_101:	'Folder already exists.', 
@@ -92,6 +93,7 @@ FileBrowserError_Connector: 'The connector is disabled. Check editor/filemanager
 FileBrowserError_Command: 'Unsupported command: ',
 FileBrowserError_Type: 'Invalid type specified: ',
 FolderMoveWarning: 'You can only move files to a folder one level below the current directory',	
+FolderMovePrompt: 'Subdirectory of current directory to which you want to move ',
 
 //Special Characters
 DlgSpecialExplaination : "Click on a character or Enter an entity number or code in the text box, test it and then click insert",

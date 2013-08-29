@@ -22,7 +22,12 @@ FCKLang.fontsHelp           = 'Met deze tool kan je een lettertype, de grootte e
 
 //Color Options Menu
 
-FCKLang.FontsColorOptions = 'Kleur Opties';   
+FCKLang.fontSamples = "Voorbeelden Tonen";
+FCKLang.fontColorSample = "Kleur Voorbeeld";
+FCKLang.fontColors = "Kleuren Tonen";
+FCKLang.fontSamplesHide = "Voorbeelden Verbergen";
+FCKLang.fontColorsHide = "Kleuren Verbergen";
+FCKLang.fontColorSampleHeader = "Kleur Voorbeelden",FCKLang.FontsColorOptions = 'Kleur Opties';   
 FCKLang.FontsColorOptionsFGColor= 'Originele tekstkleur';
 FCKLang.FontsColorOptionsBGColor= 'Originele achtergrondkleur';
 FCKLang.FontsColorOptionsOriginalColors= 'Originele tekst en achtergrond';     

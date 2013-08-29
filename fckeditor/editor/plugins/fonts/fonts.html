@@ -549,15 +549,15 @@ td.colorchart
      <option value="remove" fckLang="FontsColorOptionsRemoveColors">remove colors</option>     
     </select>
     </form>
-   <button onclick="samples(true);"><span fckLang="fontSamples">Show Samples</span></button>
-   <button onclick="colorChart(true);"><span fckLang="fontColors">Show Colors</span></button>    
+   <button onclick="samples(true);"><span fckLang="fontSamples">show samples</span></button>
+   <button onclick="colorChart(true);"><span fckLang="fontColors">show colors</span></button>    
 </div>
 
 <div></div>
 
 <div id="sample_texts">
 
-<table><tr><td><button onclick="samples(false);"><span fckLang="fontSamplesHide">Hide Samples</span></button></td></tr>
+<table><tr><td><button onclick="samples(false);"><span fckLang="fontSamplesHide">hide samples</span></button></td></tr>
 		<script type="text/javascript">
 //<![CDATA[
    lang_opts = oEditor.FCKConfig.FontNamesArray;
@@ -567,18 +567,18 @@ td.colorchart
 
 //]]>
    </script>
-<tr><td><button onclick="samples(false);"><span fckLang="fontSamplesHide">Hide Samples</span></button></td></tr>
+<tr><td><button onclick="samples(false);"><span fckLang="fontSamplesHide">hide samples</span></button></td></tr>
 </table>
 
 </div>
 <div id = 'chart'>
- <button onclick="colorChart(false);"><span fckLang="fontColorsHide">Hide Colors</span></button>
+ <button onclick="colorChart(false);"><span fckLang="fontColorsHide">hide colors</span></button>
  <br />
 <form>
-<input type = "radio" name="color_sel" id="fgcolor"> <span class='buttext_1'>text color</span>
-<input type = "radio" name="color_sel" id="bgcolor"> <span class='buttext_1'>background color</span>
+<input type = "radio" name="color_sel" id="fgcolor"> <span class='buttext_1' fckLang="fontFGColorBut">text color</span>
+<input type = "radio" name="color_sel" id="bgcolor"> <span class='buttext_1'fckLang="fontBGColorBut">background color</span>
 <br />
-<input type = "text" name="color_sample" id="color_sample" value = "Color Sample">
+<input type = "text" name="color_sample" id="color_sample"  fckLang="fontColorSample" value = "Color Sample">
 </form>
 
 <table cellspacing="1" align="center" cellpadding="0" style="margin-top:6px;margin-bottom:0px;background-color:#444444;">

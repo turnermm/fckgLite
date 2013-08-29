@@ -32,4 +32,7 @@ FCKLang.FontsColorOptionsFGColor= 'Original text color';
 FCKLang.FontsColorOptionsBGColor= 'Original background color';
 FCKLang.FontsColorOptionsOriginalColors= 'Original text and background';     
 FCKLang.FontsColorOptionsRemoveColors='Remove colors';
+FCKLang.fontFGColorBut="Text color";
+FCKLang.fontBGColorBut="Background color";
+
 

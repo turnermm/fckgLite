@@ -594,7 +594,7 @@ DlgImgHelpLiLeft    : "Use <b>left</b> alignment to create a horizontal row of i
 DlgImgHelpLiBase    : "Use <b>baseline</b> to create a vertical column of images at the left-hand margin.",
 DlgImgHelpLiRight   : "Use <b>right</b> and <b>middle</b> to create columns at the center and right.",
 DlgImgHelpNote      : "<b>Note</b>: Placing a column of images in the left margin without the baseline property will result in a horizontal row of images.",
-
+DlgImgInsert : "insert into document",
 DlgImgAlertSucess	: "Your file has been successfully uploaded.",
 DlgImgAlertInvalid	: "Invalid file type",
 DlgImgAlertName		: "A file with the same name is already available. The uploaded file has been renamed to ",
@@ -633,6 +633,7 @@ DlgFileBrowserFolderPrompt: 'Type the name of the new folder:',
 DlgFileBrowserFolderWarning: 'Please type the folder name' ,
 DlgFileBrowserThumbnail: 'thumbnail',
 DlgFileBrowserMagnify: 'mangify',
+DlgFileBrowserMoveLabel: 'Move',
 
 // File Browser Errors
 FileBrowserError_101:	'Folder already exists.', 
@@ -653,6 +654,7 @@ FileBrowserError_Connector: 'The connector is disabled. Check editor/filemanager
 FileBrowserError_Command: 'Unsupported command: ',
 FileBrowserError_Type:  'Invalid type specified: ',
 FolderMoveWarning: 'You can only move files to a folder one level below the current directory',	
+FolderMovePrompt: 'Subdirectory of current directory to which you want to move ',
 FileBrowserError_205:  'Unable to rename the selected file; check your directory/write permisssions', 
 FileBrowserError_206: ' already exists; you must either delete or rename it. ',
 
