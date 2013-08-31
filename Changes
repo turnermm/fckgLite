@@ -1,4 +1,4 @@
-rev 13-Aug_29-08_40
+rev 13-Aug_31-11_04
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -259,3 +259,6 @@ Interwiki links: preserve lost forward slashes and query strings
 
 28 Aug
 Added language strings and FCKLang refs for file browser
+
+31 Aug
+Prevent Alt from accessing CTRL short-cuts when Alt Gr key is hit( in helper.php)

@@ -433,16 +433,7 @@ function fckgMousePos(e) {
 function CTRL_Key_Formats(parm) {
 
      if(!parm.ctrlKey) return;
- 
-    if(parm.keyCode == 56) {
-		oDokuWiki_FCKEditorInstance.get_FCK().ToolbarSet.CurrentInstance.Commands.GetCommand('InsertUnorderedList').Execute();	
-		return;
- 	}
-    /* + or{ */
-	if(parm.keyCode == 61 || parm.keyCode == 219) {	 
-		oDokuWiki_FCKEditorInstance.get_FCK().ToolbarSet.CurrentInstance.Commands.GetCommand('InsertOrderedList').Execute();
-		return;
-    }
+     if(parm.altKey) return;  // for alt GR key, where ctrl might be set to true
 		
     /* h1 - h5 */
      if(parm.keyCode >=49 && parm.keyCode <=53) {
