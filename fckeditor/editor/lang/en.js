@@ -691,6 +691,9 @@ DlgPluginUseNowiki : 'Use &lt;nowiki&gt; instead',
 BreakToParagraph :	"<BR> to <P>",
 
 //Paragraph to Break
-ParagraphToBreak :	"<P> to <BR>"
+ParagraphToBreak :	"<P> to <BR>",
+
+//Signature
+DokuwikiSignature:  "Signature",
 
 };

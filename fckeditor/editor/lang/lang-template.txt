@@ -148,6 +148,9 @@ SmileysDlgInfo      : "FCKeditor smileys are inserted as images. Dokuwiki smiley
 Style               : "Code Types",
 FontFormats         : "Headers",
 
+//Signature
+DokuwikiSignature:  "Signature",
+
 //VKI Keyboard Plugin
 VKeyboardIllustrations: "Illustrations",
 KeyboardToolTip:  'Open Virtual Keyboard',

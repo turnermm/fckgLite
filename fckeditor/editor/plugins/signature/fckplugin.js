@@ -5,7 +5,7 @@ function FCKInsertSignature(p) {
 FCKCommands.RegisterCommand( 'InsertSignature' , new FCKInsertSignature('insertDokuwikiSignature') ) ; 
 
 // Create a toolbar button 
-var oInsertSignature		= new FCKToolbarButton( 'InsertSignature', 'Signature' ) ;
+var oInsertSignature		= new FCKToolbarButton( 'InsertSignature', FCKLang.DokuwikiSignature) ;
 oInsertSignature.IconPath	= FCKConfig.PluginsPath + 'signature/sig.png' ;
 //oInsertSignature.IconPath = "";
 FCKToolbarItems.RegisterItem( 'InsertSignature', oInsertSignature ) ;	
@@ -16,7 +16,7 @@ FCK.ContextMenu.RegisterListener( {
 		// when the option is displayed, show a separator then the command
 		menu.AddSeparator() ;
 		// the command needs the registered command name, the title for the context menu, and the icon path
-		menu.AddItem( 'InsertSignature', 'Signature', oInsertSignature.IconPath) ;
+		menu.AddItem( 'InsertSignature', FCKLang.DokuwikiSignature, oInsertSignature.IconPath) ;
 	}
 }
 );
