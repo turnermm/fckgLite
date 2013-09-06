@@ -679,7 +679,7 @@ global $INFO;
      <?php  //global $useComplexTables;  if(!$useComplexTables) { ?>               
         <input type="checkbox" name="complex_tables" value="complex_tables"  id = "complex_tables"                      
                           onclick="setComplexTables(1);"                      
-                     /><span id='complex_tables_label'> Enable Complex Tables (<a href="https://www.dokuwiki.org/plugin:fckglite#table_handling" target='_blank'><?php echo $fckg_lang['whats_this']?></a>)</span> 
+                     /><span id='complex_tables_label'> <?php echo $fckg_lang['complex_tables'];?> (<a href="https://www.dokuwiki.org/plugin:fckglite#table_handling" target='_blank'><?php echo $fckg_lang['whats_this']?></a>)</span> 
      <?php //} ?>              
 
       <input style="display:none;" class="button" id="edbtn__save" type="submit" name="do[save]" 

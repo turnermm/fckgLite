@@ -1,4 +1,4 @@
-rev 13-Sep_05-08_02
+rev 13-Sep_06-07_18
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -263,5 +263,8 @@ Added language strings and FCKLang refs for file browser
 31 Aug
 Prevent Alt from accessing CTRL short-cuts when Alt Gr key is hit( in helper.php)
 
-5 Sept
+5 Sep
 New language strings for Signature plugin and "what's this" in editing window
+
+6 Sep
+New lang string-- 'complex_tables'-- for editing window
