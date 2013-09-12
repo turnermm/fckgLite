@@ -555,6 +555,13 @@ GeshiToolTip: "Insert Geshi Code Block",
 GeshiCodeBlock: 'Code Block',
 GeshiDownloadable: 'Downloadable Code Snippet',
 GeshiDlgTitle:       'Geshi Selection Tool',
+geshiHelpButton:  'instructions',
+GeshiInstructionList:   "There are two ways to create Geshi code blocks. <OL><LI>You can paste your code directly into the editor, "
+       + "select it with mouse  or keyboard, then open this dialog.  Your text will appear in the text window below.  In some cases, "
+       +"  in particular where the text has  already been marked up as a Geshi code block, the parser will not be able deal with "
+       + " the markup and this method will fail. "
+       + "<LI>You can open this dialog and paste the code into the text window below.   This method is <b>preferred</b> and will accept all forms "
+       + " and styles of code. </OL> You can then edit your code and when finished, click OK",
 
 //VKI Keyboard Plugin
 VKeyboardIllustrations: "Illustrations",
