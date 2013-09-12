@@ -115,6 +115,19 @@ ScaytTitle              : "SpellCheck",
 FitWindow		: "Maximize the editor size",
 ShowBlocks		: "Show Blocks",
 
+//Scayt
+ScaytOptionsTab: 'Options',
+ScaytLangsTab : 'Languages',
+ScaytDictTab : 'Dictionary',
+ScaytAboutTab: 'About',
+ScaytTitleOptions: 'Options',
+ScaytTitleAbout: 'About',
+ScaytTitleLangs: 'Languages',
+ScaytallCaps: 'Ignore All-Caps Words',
+ScaytignoreDomainNames: 'Ignore Domain Names ',
+ScaytmixedCase: 'Ignore Words with Mixed Case',
+ScaytmixedWithDigits: 'Ignore Words with Numbers',
+
 // Context Menu
 EditLink			: "Edit Link",
 CellCM				: "Cell",

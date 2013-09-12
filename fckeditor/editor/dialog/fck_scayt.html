@@ -255,10 +255,10 @@
 
 
 			// Add the dialog tabs.
-			tabs[0] == 1 && dialog.AddTab( 'options', 'Options' ) ;
-			tabs[1] == 1 && dialog.AddTab( 'langs', 'Languages' ) ;
-			tabs[2] == 1 && dialog.AddTab( 'dictionary', 'Dictionary' ) ;
-			tabs[3] == 1 && dialog.AddTab( 'about', 'About' ) ;
+            tabs[0] == 1 && dialog.AddTab( 'options', FCKLang.ScaytOptionsTab||'Options' ) ;            
+			tabs[1] == 1 && dialog.AddTab( 'langs', FCKLang.ScaytLangsTab || 'Languages' ) ;
+			tabs[2] == 1 && dialog.AddTab( 'dictionary', FCKLang.ScaytDictTab || 'Dictionary' ) ;
+			tabs[3] == 1 && dialog.AddTab( 'about', FCKLang.ScaytAboutTab ||'About' ) ;
 
 			// Function called when a dialog tab is selected.
 			function OnDialogTabChange( tabCode )
@@ -452,17 +452,21 @@
 				for ( i in labels )
 				{
 					var label = 'label_' + labels[ i ],
+                        fckLangStr = 'Scayt' +  labels[ i ];           
 						labelElement = document.getElementById( label );
 
 					if (  'undefined' != typeof labelElement
 					   && 'undefined' != typeof captions[ label ] && captions[ label ] !== ""
 					   && 'undefined' != typeof options[labels[ i ]] )
 					{
-						labelElement.innerHTML = captions[ label ];
+                         
+                        var label_text = FCKLang[fckLangStr] || captions[ label ];                      
+						labelElement.innerHTML = label_text;
 						var labelParent = labelElement.parentNode;
 						labelParent.style.display = "block";
 					}
 				}
+    
 				// fill dictionary section
 				for ( var i in buttons )
 				{

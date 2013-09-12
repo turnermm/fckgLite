@@ -8,6 +8,21 @@
 
 InsertFootnote      : "Create/Edit Footnotes",
 ScaytTitle              : "Spell Check",
+
+
+//Scayt
+ScaytOptionsTab: 'Options',
+ScaytLangsTab : 'Languages',
+ScaytDictTab : 'Dictionary',
+ScaytAboutTab: 'About',
+ScaytTitleOptions: 'Options',
+ScaytTitleAbout: 'About',
+ScaytTitleLangs: 'Languages',
+ScaytallCaps: 'Ignore All-Caps Words',
+ScaytignoreDomainNames: 'Ignore Domain Names ',
+ScaytmixedCase: 'Ignore Words with Mixed Case',
+ScaytmixedWithDigits: 'Ignore Words with Numbers',
+
 // Image Dialog
 DlgImgNote          : "<b>Note:</b> The DokuWiki Mediamangager can be used only for uploading.  It cannot insert images into your text.",
 DlgImgHelp          : "<b>Image Alignment</b> The align property will place your images in text contexts as illustrated in the preview box. It can also be used to align images with respect to one another:",
