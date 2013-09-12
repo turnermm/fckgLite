@@ -1,4 +1,4 @@
-rev 13-Sep_06-07_18
+rev 13-Sep_12-08_31
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -268,3 +268,6 @@ New language strings for Signature plugin and "what's this" in editing window
 
 6 Sep
 New lang string-- 'complex_tables'-- for editing window
+
+12 Sep
+Corrected fckconfig.js to use editor/lang/<iso.js> files for geshi and keyboard plugins.

@@ -139,9 +139,9 @@ FCKConfig.Plugins.Add('plugintool', 'en,fr,nl') ;
 FCKConfig.Plugins.Add( 'paradelete' ) ;
 FCKConfig.Plugins.Add( 'range' ) ;
 FCKConfig.Plugins.Add( 'insertHtmlCode') ;  // this is the footnote plugin
-FCKConfig.Plugins.Add( 'geshi', 'en') ;
+FCKConfig.Plugins.Add( 'geshi') ;
 FCKConfig.Plugins.Add( 'fonts', 'en,nl') ;
-FCKConfig.Plugins.Add('keyboard', 'en') ;
+FCKConfig.Plugins.Add('keyboard') ;
 FCKConfig.Plugins.Add('signature') ;
 
 FCKConfig.ToolbarSets["Default"] = [
