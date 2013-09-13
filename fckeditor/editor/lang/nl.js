@@ -29,6 +29,19 @@ Dir					: "ltr",
 ToolbarCollapse		: "Menubalk inklappen",
 ToolbarExpand		: "Menubalk uitklappen",
 
+//Scayt
+ScaytOptionsTab: 'Opties',
+ScaytLangsTab : 'Talen',
+ScaytDictTab : 'Woordenboek',
+ScaytAboutTab: 'Over',
+ScaytTitleOptions: 'Opties',
+ScaytTitleAbout: 'Over',
+ScaytTitleLangs: 'Talen',
+ScaytallCaps: 'Negeer Woorden in Hoofdletters',
+ScaytignoreDomainNames: 'Negeer Domein Namen ',
+ScaytmixedCase: 'Negeer Woorden met hoofd- en kleine Letters',
+ScaytmixedWithDigits: 'Negeer Woorden met Getallen',
+
 // Toolbar Items and Context Menu
 Save				: "Opslaan",
 NewPage				: "Nieuwe pagina",
@@ -86,7 +99,6 @@ ShowTableBorders	: "Randen tabel weergeven",
 ShowDetails			: "Details weergeven",
 Style				: "Stijl",
 FontFormat			: "Opmaak",
-FontFormats			: "Hoofdingen",
 Font				: "Lettertype",
 FontSize			: "Grootte",
 TextColor			: "Tekstkleur",
@@ -227,6 +239,7 @@ DlgImgHelpLiLeft    : "Gebruik <b>linkse</b> uitlijning om een horizontale rij b
 DlgImgHelpLiBase    : "Gebruik <b>basislijn</b> om een vertikale kolom beelden te tonen aan de linker kant marge.",
 DlgImgHelpLiRight   : "Gebruik <b>rechts</b> en <b>midden</b> om gecentreerde of rechts uitgelijnde kolommen te creëren.",
 DlgImgHelpNote      : "<b>Opmerking:</b> Een kolom beelden aan de linker kantlijn zonder de basislijn uitlijningseigenschap zal als een horizontale rij beelden getoond worden.",
+DlgImgInsert        : 'invoegen in document',
 
 DlgImgAlertSucess	: "Bestand is succesvol opgeladen.",
 DlgImgAlertInvalid	: "Foutief bestandstype",
@@ -241,7 +254,7 @@ DlgFlashChkLoop		: "Herhalen",
 DlgFlashChkMenu		: "Flashmenu\'s inschakelen",
 DlgFlashScale		: "Schaal",
 DlgFlashScaleAll	: "Alles tonen",
-DlgFlashScaleNoBorder	: "Geen rand",
+DlgFlashScaleNoBorder: "Geen rand",
 DlgFlashScaleFit	: "Precies passend",
 
 // Link Dialog
@@ -266,7 +279,7 @@ DlgLnkNoAnchors		: "(Geen interne links in document gevonden)",
 DlgLnkEMail			: "E-mailadres",
 DlgLnkEMailSubject	: "Onderwerp bericht",
 DlgLnkEMailBody		: "Inhoud bericht",
-DlgLnkUpload		: "Upload",
+DlgLnkUpload		: "Opladen",
 DlgLnkBtnUpload		: "Naar de server versturen",
 
 DlgLnkTarget		: "Doel",
@@ -332,7 +345,7 @@ DlgFileBrowserResSelectFile: "Bestand",
 DlgFileBrowserResSelectFlash: "Flash",
 DlgFileBrowserResSelectMedia: "Media",
 DlgFileBrowserResSelectImage: "Beelden",
-
+DlgFileBrowserMoveLabel: 'Verplaats',
 DlgFileBrowserFolderPrompt: 'Tijp de nieuwe mapnaam:',
 DlgFileBrowserFolderWarning: 'Tijp de mapnaam' ,
 
@@ -358,6 +371,7 @@ FileBrowserError_Connector: 'De connector is uitgeschakeld. Check editor/fileman
 FileBrowserError_Command: 'Niet gesupporteerd commando: ',
 FileBrowserError_Type: 'Ongeldig type gespecifiëerd: ',
 FolderMoveWarning: 'Je kan bestanden enkel 1 niveau lager verplaatsen dan de huidige map',	
+FolderMovePrompt: 'Submap van huidige map waar je bestand naar toe wil verplaatsen. Bestand: ',
 
 // Color Dialog
 DlgColorTitle		: "Selecteer kleur",
@@ -369,7 +383,7 @@ DlgColorSelected	: "Geselecteerd",
 DlgSmileyTitle		: "Smiley invoegen",
 
 // Special Character Dialog
-DlgSpecialCharTitle	: "Selecteer speciaal teken",
+DlgSpecialCharTitle	   : "Selecteer speciaal teken",
 DlgSpecialExplaination : "Klik op een teken of tijp een decimale code in de tekstkader. Test het en klik op invoegen",
 DlgSpecialTest         : "test",
 DlgSpecialInsert       : "invoegen",
@@ -422,8 +436,8 @@ DlgCellVerAlignBaseline	: "Basislijn",
 DlgCellType		: "Cel Type",	
 DlgCellTypeData		: "Data",	
 DlgCellTypeHeader	: "Hoofding",	
-DlgCellRowSpan		: "Overkoepeling rijen",
-DlgCellCollSpan		: "Overkoepeling kolommen",
+DlgCellRowSpan		: "Samenvoegen rijen",
+DlgCellCollSpan		: "Samenvoegen kolommen",
 DlgCellBackColor	: "Achtergrondkleur",
 DlgCellBorderColor	: "Randkleur",
 DlgCellBtnSelect	: "Selecteren...",
@@ -491,18 +505,35 @@ geshiHelp           : 'Met deze tool kan je ofwel een "Code Block" of "Downloada
 	               + 'Voor een snippet moet je ook de bestandsnaam ingeven voor de download.'
 	               +' Vervolgens selecteer je het taal type in de keuzemenu en klik OK. ' ,
 
-GeshiToolTip        : "Invoegen Geshi Code Block",
-GeshiCodeBlock      : 'Code Block',
-GeshiDownloadable   : 'Downloadbare Code Snippet',
+GeshiToolTip        : "Geshi Selectie Tool",
+GeshiCodeBlock      : 'Code Blok',
+GeshiDownloadable   : 'Downloadbare Code Fragment',
 GeshiDlgTitle       : 'Geshi Selectie Tool',
+
+GeshiInstructionList:   "Er zijn 2 manieren om Geshi code blokken aan te maken. <OL><LI>Je kan je code direct in de tekstverwerker plakken, "
+       + "selecteer het met de muis of toetsenbord, open dan deze dialoog.  Je tekst zal in het venster hieronder verschijnen.  In sommige gevallen, "
+       +"  in het bijzonder waar tekst reeds gemarkeerd is als als een Geshi code blok, zal de parser (ontleder) hier niet mee om kunnen gaan "
+       + " en zal deze methode falen. "
+       + "<LI>Je kan deze dialoog openen en de tekst in het venster hieronder plakken.  Deze methode is <b>aan te raden</b> en aanvaardt alle vormen "
+       + " en codestijlen. </OL> Je kan dan je code bewerken en wanneer in orde, klik je OK",
+geshiHelpButton:  'Instructies',
+
 
 //Smileys
 FckEditorSmileys    : "FCKEditor Smileys",
 DokuwikiSmileys     : "Dokuwiki Smileys", 
 SmileysDlgInfo      : "FCKeditor smileys worden ingevoegd als afgeelding. Dokuwiki smileys worden ingevoegd als tekst en tonen het beeld in de browser.",
 
+//These two are for the toolbar and are already included in the language js files
+//so they should be edited rather than added to the file
+Style               : "Stijl",
+
+//Signature
+DokuwikiSignature   :  "Handtekening",
+
 //VKI Keyboard Plugin
-KeyboardToolTip:  'Open Virtueel Toetsenbord',
+VKeyboardIllustrations: "Illustraties",
+KeyboardToolTip :  'Open Virtueel Toetsenbord',
 KeyboardDlgTitle: 'Virtueel Toetsenbord',
 startVKeyboard:   'Open Virtueel Toetsenbord',
 VKkeyboardHelp:     'Klik op de "Open Virtueel Toetsenbord" knop om het Virtueel Toetsenbord te starten. '
@@ -665,7 +696,7 @@ DlgTemplatesReplace	: "Vervang de huidige inhoud",
 
 // About Dialog
 DlgAboutAboutTab	: "Over",
-DlgAboutBrowserInfoTab	: "Browserinformatie",
+DlgAboutBrowserInfoTab: "Browserinformatie",
 DlgAboutLicenseTab	: "Licentie",
 DlgAboutVersion		: "Versie",
 DlgAboutInfo		: "Voor meer informatie ga naar ",
@@ -673,7 +704,7 @@ DlgAboutInfo		: "Voor meer informatie ga naar ",
 // Div Dialog
 DlgDivGeneralTab	: "Algemeen",
 DlgDivAdvancedTab	: "Geavanceerd",
-DlgDivStyle		: "Style",
+DlgDivStyle		    : "Style",
 DlgDivInlineStyle	: "Inline Style"
 };
 

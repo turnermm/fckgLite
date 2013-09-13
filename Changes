@@ -1,4 +1,4 @@
-rev 13-Sep_12-14_24
+rev 13-Sep_12-21_50
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -275,3 +275,5 @@ Corrected fckconfig.js to use editor/lang/<iso.js> files for geshi and keyboard 
 Updated language strings for Geshi plugin.
 
 Updated language strings and code for Scayt
+
+Dutch language updates.

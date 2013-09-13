@@ -23,6 +23,6 @@ $fckg_lang['btn_exit_draft'] = "Stop ontwerp";
 $fckg_lang['title_draft'] = "Bekijk, Toon, Bewerk ontwerp";
 $fckg_lang['title_exit_draft'] = "Keer terug naar huidig document";
 $fckg_lang['draft_msg']= "Dit document heeft een ontwerp bestand. De ontwerp knop schakelt tussen dit document en het ontwerp. Je kan een van beide bewerken en bewaren." ;
-
-
+$fckg_lang['whats_this'] = "Wat betekent dit?";
+$fckg_lang['complex_tables'] = "Complexe Tabellen Activeren";
 
