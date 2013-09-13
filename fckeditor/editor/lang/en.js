@@ -714,6 +714,6 @@ BreakToParagraph :	"<BR> to <P>",
 ParagraphToBreak :	"<P> to <BR>",
 
 //Signature
-DokuwikiSignature:  "Signature",
+DokuwikiSignature:  "Signature"
 
 };

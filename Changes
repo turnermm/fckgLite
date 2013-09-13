@@ -1,4 +1,4 @@
-rev 13-Sep_12-21_50
+rev 13-Sep_13-14_37
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -277,3 +277,7 @@ Updated language strings for Geshi plugin.
 Updated language strings and code for Scayt
 
 Dutch language updates.
+
+13 Sep
+Removed trailing comma from en.js (FCKLang) which failed in earlier versions of IE;  fixed
+missing span tag in geshi plugin.

@@ -190,5 +190,5 @@ VKIllustrationText: '<b>Top row functions from left-to-right</b><br />'
                     + '1. Clicking on the language identifier or the down arrow to its right opens a drop-down menu of languages; selecting one of these immediately changes the keyboard to the selected language. For an illustration of the drop-down menu scroll to the image at the bottom of this page.<br /> '
                     + '2. Clicking the hash symbol(#)opens and closes the numeric keypad <br />'
                     + '3. The up and down arrows to the right of the hash change the size of the keyboard and its fonts <br />'
-                    + '4. In fckgLite the "Clear" button has no function.',
+                    + '4. In fckgLite the "Clear" button has no function.'
 
