@@ -677,9 +677,10 @@ global $INFO;
                     style = 'display:none'>Disable editor time-out messsages </span> 
 
      <?php  //global $useComplexTables;  if(!$useComplexTables) { ?>               
+     <label class="nowrap" for="complex_tables" >     
         <input type="checkbox" name="complex_tables" value="complex_tables"  id = "complex_tables"                      
                           onclick="setComplexTables(1);"                      
-                     /><span id='complex_tables_label'> <?php echo $fckg_lang['complex_tables'];?> (<a href="https://www.dokuwiki.org/plugin:fckglite#table_handling" target='_blank'><?php echo $fckg_lang['whats_this']?></a>)</span> 
+                     /><span id='complex_tables_label'> <?php echo $fckg_lang['complex_tables'];?> (<a href="https://www.dokuwiki.org/plugin:fckglite#table_handling" target='_blank'><?php echo $fckg_lang['whats_this']?></a>)</span></label> 
      <?php //} ?>              
 
       <input style="display:none;" class="button" id="edbtn__save" type="submit" name="do[save]" 
@@ -2527,9 +2528,7 @@ if(window.DWikifnEncode && window.DWikifnEncode == 'safe') {
         <div class="summary">
            <label for="edit__summary" class="nowrap"><?php echo $lang['summary']?>:</label>
            <input type="text" class="edit" name="summary" id="edit__summary" size="50" value="<?php echo formText($SUM)?>" tabindex="2" />
-           
-           <input type="checkbox" id="minoredit" name="minor" value="1" tabindex="3" /><span>
-           <?php echo $fckg_lang['minor_changes'] ?></span>
+          <label class="nowrap" for="minoredit"><input type="checkbox" id="minoredit" name="minor" value="1" tabindex="3" /> <span><?php echo $fckg_lang['minor_changes'] ?></span></label>
         </div>
       <?php }?>
   </div>
