@@ -2527,7 +2527,9 @@ if(window.DWikifnEncode && window.DWikifnEncode == 'safe') {
         <div class="summary">
            <label for="edit__summary" class="nowrap"><?php echo $lang['summary']?>:</label>
            <input type="text" class="edit" name="summary" id="edit__summary" size="50" value="<?php echo formText($SUM)?>" tabindex="2" />
-           <label class="nowrap" for="minoredit"><input type="checkbox" id="minoredit" name="minor" value="1" tabindex="3" /> <span>Minor Changes</span></label>
+           
+           <input type="checkbox" id="minoredit" name="minor" value="1" tabindex="3" /><span>
+           <?php echo $fckg_lang['minor_changes'] ?></span>
         </div>
       <?php }?>
   </div>

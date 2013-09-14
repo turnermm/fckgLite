@@ -575,6 +575,9 @@ GeshiInstructionList:   "There are two ways to create Geshi code blocks. <OL><LI
        + " the markup and this method will fail. "
        + "<LI>You can open this dialog and paste the code into the text window below.   This method is <b>preferred</b> and will accept all forms "
        + " and styles of code. </OL> You can then edit your code and when finished, click OK",
+geshiAlertLanguage: 'Please select a language',
+geshiAlertSnippet: 'Please enter a file name for this snippet',
+geshiSnippetFileName: 'Snippet File Name:',
 
 //VKI Keyboard Plugin
 VKeyboardIllustrations: "Illustrations",

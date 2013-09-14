@@ -25,4 +25,5 @@ $fckg_lang['title_exit_draft'] = "Return to current document";
 $fckg_lang['draft_msg']= "This document has a draft file. The draft button toggles between the this document and the draft. You can edit and save either of the two." ;
 $fckg_lang['whats_this'] = "what's this?";
 $fckg_lang['complex_tables'] = "Enable Complex Tables";
+$fckg_lang['minor_changes'] = "Minor changes";
 

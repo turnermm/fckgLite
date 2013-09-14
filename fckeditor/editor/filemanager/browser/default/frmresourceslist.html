@@ -383,7 +383,9 @@ function GetFoldersAndFilesCallBack( fckXml )
 
 	oHtml.Append( '<\/table>' ) ;
     var big = '<center><div id="big_imagewin"><div id="bigwin_display"></div>' +
-              '<div id="big_iwin_close"><button onclick="close_bigImgwin();"  class="bigwin_close_but">close</button>&nbsp;&nbsp;&nbsp;</div></div></center>';
+              '<div id="big_iwin_close"><button onclick="close_bigImgwin();"  class="bigwin_close_but">'
+               + translateItem('DlgBtnClose', 'close') +
+              '</button>&nbsp;&nbsp;&nbsp;</div></div></center>';
 	document.body.innerHTML = big + oHtml.ToString() ;
   
    
