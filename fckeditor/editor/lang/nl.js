@@ -509,6 +509,9 @@ GeshiToolTip        : "Geshi Selectie Tool",
 GeshiCodeBlock      : 'Code Blok',
 GeshiDownloadable   : 'Downloadbare Code Fragment',
 GeshiDlgTitle       : 'Geshi Selectie Tool',
+geshiAlertLanguage  : 'Selecteer taal aub',
+geshiAlertSnippet   : 'Geef bestandsnaam voor dit fragment',
+geshiSnippetFileName: 'Fragment Bestandsnaam:',
 
 GeshiInstructionList:   "Er zijn 2 manieren om Geshi code blokken aan te maken. <OL><LI>Je kan je code direct in de tekstverwerker plakken, "
        + "selecteer het met de muis of toetsenbord, open dan deze dialoog.  Je tekst zal in het venster hieronder verschijnen.  In sommige gevallen, "

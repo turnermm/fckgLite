@@ -25,4 +25,4 @@ $fckg_lang['title_exit_draft'] = "Keer terug naar huidig document";
 $fckg_lang['draft_msg']= "Dit document heeft een ontwerp bestand. De ontwerp knop schakelt tussen dit document en het ontwerp. Je kan een van beide bewerken en bewaren." ;
 $fckg_lang['whats_this'] = "Wat betekent dit?";
 $fckg_lang['complex_tables'] = "Complexe Tabellen Activeren";
-
+$fckg_lang['minor_changes'] = " Kleine wijzigingen";

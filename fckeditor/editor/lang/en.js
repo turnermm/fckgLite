@@ -617,6 +617,7 @@ DlgImgHelpLiLeft    : "Use <b>left</b> alignment to create a horizontal row of i
 DlgImgHelpLiBase    : "Use <b>baseline</b> to create a vertical column of images at the left-hand margin.",
 DlgImgHelpLiRight   : "Use <b>right</b> and <b>middle</b> to create columns at the center and right.",
 DlgImgHelpNote      : "<b>Note</b>: Placing a column of images in the left margin without the baseline property will result in a horizontal row of images.",
+DlgImgHelpBrowseUpload : "Uploads are done by clicking on <b>Browse Server/Upload</b>",
 DlgImgInsert : "insert into document",
 DlgImgAlertSucess	: "Your file has been successfully uploaded.",
 DlgImgAlertInvalid	: "Invalid file type",
