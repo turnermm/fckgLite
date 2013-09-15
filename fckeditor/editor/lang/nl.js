@@ -240,6 +240,7 @@ DlgImgHelpLiBase    : "Gebruik <b>basislijn</b> om een vertikale kolom beelden t
 DlgImgHelpLiRight   : "Gebruik <b>rechts</b> en <b>midden</b> om gecentreerde of rechts uitgelijnde kolommen te creëren.",
 DlgImgHelpNote      : "<b>Opmerking:</b> Een kolom beelden aan de linker kantlijn zonder de basislijn uitlijningseigenschap zal als een horizontale rij beelden getoond worden.",
 DlgImgInsert        : 'invoegen in document',
+DlgImgHelpBrowseUpload : "Voor opladen klik op <b>Bladeren op Server/Opladen</b>",
 
 DlgImgAlertSucess	: "Bestand is succesvol opgeladen.",
 DlgImgAlertInvalid	: "Foutief bestandstype",
