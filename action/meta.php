@@ -170,10 +170,13 @@ function check_userfiles() {
 // msg('REL='. DOKU_REL);
     if(!preg_match('#^\.\/data$#',$save_dir)) {
         $data_media = $conf['savedir']  . '/media/';
-        
+        $is_domain = trim('/',DOKU_BASE);        
         $expire = null;        
         list($prefix,$mdir) = explode(trim(DOKU_BASE, '/'),$userfiles);
+        if($mdir && !$is_domain) {
         $media_dir = DOKU_BASE . $mdir . 'image/';
+        }
+        else $media_dir =  DOKU_URL .'lib/plugins/fckg/fckeditor/userfiles/image/';        
         setcookie('FCK_media',$media_dir, $expire, '/');           
 
      }

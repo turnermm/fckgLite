@@ -147,21 +147,40 @@ if(!isset($Config['UserFilesAbsolutePath']) || !isset($Config['UserFilesPath']))
          $Config['UserFilesAbsolutePath'] = str_replace('\\media', '\\pages', $Config['UserFilesAbsolutePath']);
      }
      else {
-        $Config['UserFilesAbsolutePath'] = str_replace('/media', '/pages', $Config['UserFilesAbsolutePath']);
+         if($Dwfck_conf_values['fckg_savedir']) {     
+             $Config['UserFilesAbsolutePath'] = $Dwfck_conf_values['fckg_savedir'] . '/pages/';
+         }     
+         else $Config['UserFilesAbsolutePath'] = str_replace('/media', '/pages/', $Config['UserFilesAbsolutePath']);
      }
+     }
+    if($DWFCK_con_dbg && $isWindows) {
+          DWFCK_cfg_dbg('win_paths.txt');
+       }
+       else {
+          if($DWFCK_con_dbg) DWFCK_cfg_dbg('nix_paths.txt');   
     }
-    if($DWFCK_con_dbg) DWFCK_cfg_dbg('win_paths.txt');
    }
    else {
      setupBasePathsNix();
      if($DWFCK_con_dbg) DWFCK_cfg_dbg('nix_paths.txt');   
    }
-
-  
 }
-//$isWindows=false;
+else {  //if both UserFilesPath and UserFilesAbsolutePath are set
+   if($isWindows || $useWinStyle) {  
+    if($dwfck_local) {
+     $Config['UserFilesPath'] = str_replace('/media', '/pages', $Config['UserFilesPath']);
+     if($isWindows) {
+         $Config['UserFilesAbsolutePath'] = str_replace('\\media', '\\pages', $Config['UserFilesAbsolutePath']);
+     }
+     else {
+        $Config['UserFilesAbsolutePath'] = str_replace('/media', '/pages', $Config['UserFilesAbsolutePath']);
+     }
+    }
+    if($DWFCK_con_dbg) DWFCK_cfg_dbg('win_paths.txt');
+   }
+}
+
 setUpMediaPaths();
-//$isWindows=true; 
 
 // Due to security issues with Apache modules, it is recommended to leave the
 // following setting enabled.
@@ -464,13 +483,20 @@ function DWFCK_is_OS($os) {
 
 function DWFCK_cfg_dbg($fname) {
    global $Config;
+   global $Dwfck_conf_values;
    $request = print_r($_REQUEST,true);
+   $request .= "\n" .  print_r($Dwfck_conf_values,true);
    file_put_contents($fname, $Config['UserFilesAbsolutePath'] . "\r\n" . $Config['UserFilesPath'] . "\r\n" .$request ."\r\n");
 }
 
 function doku_config_values() {
   $dwphp = DOKU_INC . 'conf/dokuwiki.php';
-  $localphp = DOKU_INC . 'conf/local.php';
+  if(!file_exists($dwphp)) {
+     $dwphp = DOKU_CONF . 'dokuwiki.php';
+     $localphp = DOKU_CONF . 'local.php';
+  }
+  else $localphp = DOKU_INC . 'conf/local.php';
+  
   if(file_exists($dwphp))
   {
   	include($dwphp);
@@ -478,6 +504,10 @@ function doku_config_values() {
     {
       include($localphp);
     }
+   if(trim($conf['savedir'],'/.\/') != 'data') {
+     $conf['fckg_savedir']= $conf['savedir'];
+   }
+   else $conf['fckg_savedir'] =DOKU_INC . 'data';
     return $conf;
   }
 

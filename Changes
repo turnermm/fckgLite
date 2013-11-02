@@ -292,3 +292,6 @@ Final Dutch lang update
 
 24 Oct
 Removed from Aug 13 fix for handling plain text samaba shares; it corrupts some plugin markup.
+
+2 Nov
+Updates to config.php and meta.php to handle non-default savedir
