@@ -2232,9 +2232,8 @@ function parse_wikitext(id)
                               // don't touch samba share or Windows path backslashes
         if(!results.match(/\[\[\\\\.*?\|$/) && !text.match(/\w:(\\(\w?))+/ ))
          {
-             if(!text.match(/\\\\[\w\.\-\_]+\\[\w\.\-\_]+/)) {          
-                text = text.replace(/([\\])/g, '%%$1%%');            
-             }
+             text = text.replace(/([\*\\])/g, '%%$1%%');  
+          
          }
     }
 
