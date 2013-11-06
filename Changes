@@ -1,4 +1,4 @@
-rev 13-Oct_25-09_02
+rev 13-Nov_06-11_35
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -291,4 +291,7 @@ Updates to language strings in fckeditor
 Final Dutch lang update
 
 24 Oct
-Removed from Aug 13 fix for handling plain text samaba shares; it corrupts some plugin markup.
+Removed Aug 13 fix for handling plain text samaba shares; it corrupts some plugin markup.
+
+6 Nov
+replace utf8 chars in plugin regexes with entities (edit.php)

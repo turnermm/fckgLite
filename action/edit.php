@@ -745,6 +745,9 @@ var fckgLPluginPatterns = new Array();
 
 <?php
    global $fckgLPluginPatterns; 
+   $utf8Chars = array('À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'Æ', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ð', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'Ù', 'Ú', 'Û', 'Ü', 'Ý', 'Þ', 'ß', 'à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ð', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'þ', 'ÿ', 'Œ', 'œ', 'Š', 'š', 'Ÿ', 'ƒ');
+   $utf8Replacments = array( '&Agrave;',  '&Aacute;',  '&Acirc;',  '&Atilde;',  '&Auml;',  '&Aring;',  '&AElig;',  '&Ccedil;',  '&Egrave;',  '&Eacute;',  '&Ecirc;',  '&Euml;',  '&Igrave;',  '&Iacute;',  '&Icirc;',  '&Iuml;',  '&ETH;',  '&Ntilde;',  '&Ograve;',  '&Oacute;',  '&Ocirc;',  '&Otilde;',  '&Ouml;',  '&Oslash;',  '&Ugrave;',  '&Uacute;',  '&Ucirc;',  '&Uuml;',  '&Yacute;',  '&THORN;',  '&szlig;',  '&agrave;',  '&aacute;',  '&acirc;',  '&atilde;',  '&auml;',  '&aring;',  '&aelig;',  '&ccedil;',  '&egrave;',  '&eacute;',  '&ecirc;',  '&euml;',  '&igrave;',  '&iacute;',  '&icirc;',  '&iuml;',  '&eth;',  '&ntilde;',  '&ograve;',  '&oacute;',  '&ocirc;',  '&otilde;',  '&ouml;',  '&oslash;',  '&ugrave;',  '&uacute;',  '&ucirc;',  '&uuml;',  '&yacute;',  '&thorn;',  '&yuml;',  '&OElig;',  '&oelig;',  '&Scaron;',  '&scaron;',  '&Yuml;',  '&fnof;');
+  
    foreach($fckgLPluginPatterns as $pat) {  
      $pat[0] = preg_replace('/\s+$/',"",$pat[0]);  
      $pat[1] = str_replace('&','&amp;', $pat[1]);    
@@ -755,6 +758,7 @@ var fckgLPluginPatterns = new Array();
      $pat[1] = str_replace('<', '&lt;',$pat[1]);    
      $pat[0] = preg_replace('/\s+/', '\s+',$pat[0]);    
      $pat[0] = str_replace('*', '%%\*%%',$pat[0]);    
+     $pat[0] = str_replace($utf8Chars, $utf8Replacments,$pat[0]);    
      $pat[0] = preg_quote($pat[0], "/");   
      echo "fckgLPluginPatterns.push({'pat': '$pat[0]', 'orig': '$pat[1]' });\n"; 
  
