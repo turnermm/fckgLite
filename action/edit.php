@@ -243,7 +243,7 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
             );   
       }
 
-      /* convert html tags to entities in indented code blocks*/
+              /* convert html tags to entities in indented code blocks*/
        $text= preg_replace_callback(
           '/(\n  )((?![\*\-]).*?)(\n)(?!\s)/ms',
           create_function(
@@ -254,8 +254,8 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
             $matches[0] = preg_replace("/__IWIKI__/ms", ">", $matches[0]);    
             return $matches[0];  '
           ), $text
-        );
-        
+        );   
+
        $pos = strpos($text, '<');
 
        if($pos !== false) {
@@ -352,7 +352,7 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
 
        $text = preg_replace('/{{(.*)\.swf(\s*)}}/ms',"SWF$1.swf$2FWS",$text);
        $this->xhtml = $this->_render_xhtml($text);
-	 
+
        $this->xhtml = str_replace("__IWIKI_FSLASH__", "&frasl;", $this->xhtml);       
 	   if($this->getConf('duplicate_notes')) {
 			$this->xhtml = preg_replace("/FNoteINSert\d+/ms", "",$this->xhtml);
@@ -745,6 +745,9 @@ var fckgLPluginPatterns = new Array();
 
 <?php
    global $fckgLPluginPatterns; 
+   $utf8Chars = array('À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'Æ', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ð', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'Ù', 'Ú', 'Û', 'Ü', 'Ý', 'Þ', 'ß', 'à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ð', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'þ', 'ÿ', 'Œ', 'œ', 'Š', 'š', 'Ÿ', 'ƒ');
+   $utf8Replacments = array( '&Agrave;',  '&Aacute;',  '&Acirc;',  '&Atilde;',  '&Auml;',  '&Aring;',  '&AElig;',  '&Ccedil;',  '&Egrave;',  '&Eacute;',  '&Ecirc;',  '&Euml;',  '&Igrave;',  '&Iacute;',  '&Icirc;',  '&Iuml;',  '&ETH;',  '&Ntilde;',  '&Ograve;',  '&Oacute;',  '&Ocirc;',  '&Otilde;',  '&Ouml;',  '&Oslash;',  '&Ugrave;',  '&Uacute;',  '&Ucirc;',  '&Uuml;',  '&Yacute;',  '&THORN;',  '&szlig;',  '&agrave;',  '&aacute;',  '&acirc;',  '&atilde;',  '&auml;',  '&aring;',  '&aelig;',  '&ccedil;',  '&egrave;',  '&eacute;',  '&ecirc;',  '&euml;',  '&igrave;',  '&iacute;',  '&icirc;',  '&iuml;',  '&eth;',  '&ntilde;',  '&ograve;',  '&oacute;',  '&ocirc;',  '&otilde;',  '&ouml;',  '&oslash;',  '&ugrave;',  '&uacute;',  '&ucirc;',  '&uuml;',  '&yacute;',  '&thorn;',  '&yuml;',  '&OElig;',  '&oelig;',  '&Scaron;',  '&scaron;',  '&Yuml;',  '&fnof;');
+  
    foreach($fckgLPluginPatterns as $pat) {  
      $pat[0] = preg_replace('/\s+$/',"",$pat[0]);  
      $pat[1] = str_replace('&','&amp;', $pat[1]);    
@@ -755,6 +758,7 @@ var fckgLPluginPatterns = new Array();
      $pat[1] = str_replace('<', '&lt;',$pat[1]);    
      $pat[0] = preg_replace('/\s+/', '\s+',$pat[0]);    
      $pat[0] = str_replace('*', '%%\*%%',$pat[0]);    
+     $pat[0] = str_replace($utf8Chars, $utf8Replacments,$pat[0]);    
      $pat[0] = preg_quote($pat[0], "/");   
      echo "fckgLPluginPatterns.push({'pat': '$pat[0]', 'orig': '$pat[1]' });\n"; 
  
@@ -1025,7 +1029,7 @@ function parse_wikitext(id)
  //   var geshi_classes = 'br0|co0|co1|co2|co3|coMULTI|es0|kw1|kw2|kw3|kw4|kw5|me1|me2|nu0|re0|re1|re2|re3|re4|st0|sy0|sy1|sy2|sy3|sy4';
       var geshi_classes = '(br|co|coMULTI|es|kw|me|nu|re|st|sy)[0-9]';
    String.frasl = new RegExp("⁄\|&frasl;\|&#8260;\|&#x2044;",'g');
-
+   
    geshi_classes = new RegExp(geshi_classes);
    HTMLParser(oDokuWiki_FCKEditorInstance.GetData( true ), {
     attribute: "",
@@ -1359,7 +1363,7 @@ function parse_wikitext(id)
                     if(http) save_url = attrs[i].escaped;                    
                     if(attrs[i].escaped.match(/\/lib\/exe\/detail.php/)) {
                         this.image_link_type = 'detail';
-                    }
+                    }                    
                     else if(attrs[i].escaped.match(/exe\/fetch.php/)) {
                        this.image_link_type = 'direct';
                     }
@@ -2128,8 +2132,8 @@ function parse_wikitext(id)
     },
 
     chars: function( text ) {
-	
-	if(this.interwiki && results.match(/>\w+\s*\|$/)) 	{    
+
+	if(this.interwiki && results.match(/>\w+\s*\|$/)) 	{   
         text = text.replace(String.frasl,"\/");  
 	    this.interwiki=false;
         if(this.attr) {          
@@ -2412,12 +2416,12 @@ function parse_wikitext(id)
     }
    if(HTMLParserTopNotes.length) {
         results = results.replace(/\(\(+(\d+)\)\)+/,"(($1))");   
-        for(var i in HTMLParserBottomNotes) {  // re-insert DW's bottom notes at text level
+        for(var i in HTMLParserBottomNotes) {  // re-insert DW's bottom notes at text level            
             var matches =  i.match(/_(\d+)/);    
-            var pattern = new RegExp('(\<sup\>)*[\(]+' + matches[1] +  '[\)]+(<\/sup>)*');          
+            var pattern = new RegExp('(\<sup\>)*[\(]+' + matches[1] +  '[\)]+(<\/sup>)*');                
             results = results.replace(pattern,'((' + HTMLParserBottomNotes[i].replace(/_FN_PAREN_C_/g, ") ") +'))');
          }
-       results = results.replace(/<sup><\/sup>/g, "");
+       results = results.replace(/<sup><\/sup>/g, "");       
     }
 
     results = results.replace(/(={3,}.*?)(\{\{.*?\}\})(.*?={3,})/g,"$1$3\n\n$2");
@@ -2450,7 +2454,7 @@ function parse_wikitext(id)
     results = results.replace(/_LIST_EOFL_/gm, " " + line_break_final + " ");
     
     if(embedComplexTableMacro) {
-        if(results.indexOf('~~COMPLEX_TABLES~~') == -1) {
+        if(results.indexOf('~~COMPLEX_TABLES~~') == -1) {         
            results += "\n~~COMPLEX_TABLES~~\n"
         }
     }
