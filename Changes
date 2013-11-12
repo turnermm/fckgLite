@@ -1,4 +1,4 @@
-rev 13-Nov_06-11_35
+rev 13-Nov_12-12_59
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -295,3 +295,6 @@ Removed Aug 13 fix for handling plain text samaba shares; it corrupts some plugi
 
 6 Nov
 replace utf8 chars in plugin regexes with entities (edit.php)
+
+12 Nov
+Fixed boken snippet (side-effect from 18 March Weatherwax internal media fix)
