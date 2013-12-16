@@ -739,7 +739,9 @@ global $INFO;
     <?php  global $useComplexTables;  if($useComplexTables) { ?>               
         document.getElementById('complex_tables').click();            
     <?php } ?>  
-
+    <?php  if($this->getConf('complex_tables')) { ?>
+         document.getElementById('complex_tables').disabled = true;
+    <?php } ?> 
    
 var fckgLPluginPatterns = new Array();
 
