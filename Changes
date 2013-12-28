@@ -1,4 +1,4 @@
-rev 13-Nov_12-12_59
+rev 13-Dec_28-10_38
 
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
 2.6.6 is the final FCKeditor before the change-over to CKeditor.  The upgrade required bringing the ie and gecko 
@@ -297,3 +297,12 @@ replace utf8 chars in plugin regexes with entities (edit.php)
 
 12 Nov
 Fixed boken snippet (side-effect from 18 March Weatherwax internal media fix)
+
+9 Dec
+Fixed corrupted tables with vertical spans in across from empty cells (on initial table creation)
+
+10 Dec
+Removed unintentional _FCKG_BLANK_TD_markers
+
+15 Dec
+Remove ~~COMPLEX_TABLES~~ macro in save.php and disable macro checkbox if complex set in config manager

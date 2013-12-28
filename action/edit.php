@@ -739,7 +739,9 @@ global $INFO;
     <?php  global $useComplexTables;  if($useComplexTables) { ?>               
         document.getElementById('complex_tables').click();            
     <?php } ?>  
-
+    <?php  if($this->getConf('complex_tables')) { ?>
+         document.getElementById('complex_tables').disabled = true;
+    <?php } ?> 
    
 var fckgLPluginPatterns = new Array();
 
@@ -2163,7 +2165,7 @@ function parse_wikitext(id)
     if(!this.code_type) { 
         if(! this.last_col_pipes) {
             text = text.replace(/\x20{6,}/, "   "); 
-            text = text.replace(/^(&nbsp;)+/, '');
+            text = text.replace(/^(&nbsp;)+\s*$/, '_FCKG_BLANK_TD_');
             text = text.replace(/(&nbsp;)+/, ' ');   
         }
         if(this.immutable_plugin) {
@@ -2406,11 +2408,11 @@ function parse_wikitext(id)
      results = results.replace(/(\||\^)[ ]+(\||\^)/g, "$1");
     
      // prevents valid empty td/th cells from being removed above
-     results = results.replace(/_FCKG_BLANK_TD_/g, " ");
+     //results = results.replace(/_FCKG_BLANK_TD_/g, " ");
      
     
     }
-
+    results = results.replace(/_FCKG_BLANK_TD_/g, " ");
     if(HTMLParserOpenAngleBracket) {
          results = results.replace(/\/\/&lt;\/\/\s*/g,'&lt;');
     }
