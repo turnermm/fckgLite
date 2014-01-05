@@ -205,7 +205,7 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
                 //Check for text from template event handler
                  if(!$text && $this->page_from_template) $text = $this->page_from_template;
             }
-
+    $text =  str_replace("{{rss>http://", "{ { rss>Feed:",  $text);
     if($this->getConf('smiley_hack')) {
         $new_addr = $_SERVER['SERVER_NAME'] . DOKU_BASE;
         $text=preg_replace("#(?<=http://)(.*?)(?=lib/plugins/fckg/fckeditor/editor/images/smiley/msn)#s", $new_addr,$text);
@@ -2341,7 +2341,7 @@ function parse_wikitext(id)
     if(id == 'test') {
       if(!HTMLParser_test_result(results)) return;     
     }
-
+	results = results.replace(/\{ \{ rss&gt;Feed:/mg,'{{rss&gt;http://');
     if(HTMLParser_FORMAT_SPACE) { 
         if(HTMLParser_COLSPAN) {           
              results =results.replace(/\s*([\|\^]+)((\W\W_FORMAT_SPACE_)+)/gm,function(match,pipes,format) {
@@ -2789,7 +2789,7 @@ if(window.DWikifnEncode && window.DWikifnEncode == 'safe') {
  $patterns = $DOKU_PLUGINS['syntax'][$list[0]]->Lexer->_regexes['base']->_patterns;
  $labels = array();
  $regex = '~~NOCACHE~~|~~NOTOC~~';
- $regex .= "|\{\{rss>http:\/\/.*?\}\}";
+ //$regex .= "|\{\{rss>http:\/\/.*?\}\}";
 
  $exclusions = $this->getConf('xcl_plugins');
  $exclusions = trim($exclusions, " ,");
