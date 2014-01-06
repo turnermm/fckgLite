@@ -98,6 +98,10 @@ class action_plugin_fckg_save extends DokuWiki_Action_Plugin {
  
         $this->replace_entities();
 
+       $TEXT = preg_replace('/__QUOTE__/ms',">",$TEXT);
+       $TEXT = preg_replace('/[\t\x20]+$/ms',"",$TEXT);
+       $TEXT = preg_replace('/\n{4,}/ms',"\n\n",$TEXT);
+       $TEXT = preg_replace('/\n{3,}/ms',"\n\n",$TEXT);
      
          return;
     
