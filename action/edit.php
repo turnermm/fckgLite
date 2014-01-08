@@ -205,7 +205,7 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
                 //Check for text from template event handler
                  if(!$text && $this->page_from_template) $text = $this->page_from_template;
             }
-
+    $text =  str_replace("{{rss>http://", "{ { rss>Feed:",  $text);
     if($this->getConf('smiley_hack')) {
         $new_addr = $_SERVER['SERVER_NAME'] . DOKU_BASE;
         $text=preg_replace("#(?<=http://)(.*?)(?=lib/plugins/fckg/fckeditor/editor/images/smiley/msn)#s", $new_addr,$text);
@@ -226,21 +226,23 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
       }
       if(strpos($text, '%%') !== false) {     
          $text= preg_replace_callback(
-            '/(<nowiki>)*(\s*)%%\s*([^%]+)\s*%%(<\/nowiki>)*(\s*)/ms',
-             create_function(
-               '$matches',
-                'if(preg_match("/<nowiki>/",$matches[1])) {
-                   $matches[1] .= "%%";
-                }
-                else  $matches[1] = "<nowiki>";
-                if(preg_match("/<\/nowiki>/",$matches[4])) {
-                   $matches[4] = "%%</nowiki>";
-                }
-                else $matches[4] = "</nowiki>";  
-                return   $matches[1] .  $matches[2] .  $matches[3] . $matches[4] . $matches[5];'  
-             ),
+            "/<(nowiki|code|file)>(.*?)<\/(nowiki|code|file)/ms",
+            function ($matches) {
+                $matches[0] = str_replace('%%', 'DBLPERCENT',$matches[0]);
+                return $matches[0];
+            },
              $text
             );   
+
+        $text = preg_replace_callback(
+            "/(?<!nowiki>)%%(.*?)%%/ms",
+            function($matches) {
+            return '<nowiki>' . $matches[1] . '</nowiki>';
+            },
+             $text
+            );   
+
+        $text =  str_replace('DBLPERCENT','%%',$text);    
       }
 
               /* convert html tags to entities in indented code blocks*/
@@ -344,6 +346,7 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
 				 ), $text
 			);			 
 		}
+       $text = preg_replace('/^\>/ms',"_dwQUOT_",$text);  // dw quotes 
        $text = str_replace('>>','CHEVRONescC',$text);
        $text = str_replace('<<','CHEVRONescO',$text);
        $text = preg_replace('/(={3,}.*?)(\{\{.*?\}\})(.*?={3,})/',"$1$3\n$2",$text);
@@ -362,7 +365,7 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
        $this->xhtml = str_replace("__GESHI_OPEN__", "&#60; ", $this->xhtml); 
        $this->xhtml = str_replace('CHEVRONescC', '>>',$this->xhtml);
        $this->xhtml = str_replace('CHEVRONescO', '<<',$this->xhtml);
-     
+       $this->xhtml = preg_replace('/_dwQUOT_/ms','>',$this->xhtml);  // dw quotes
        
        if($pos !== false) {
        $this->xhtml = preg_replace_callback(
@@ -2149,6 +2152,10 @@ function parse_wikitext(id)
       else if(this.interwiki) {
         text = text.replace(String.frasl,"\/");  
       }	
+     text = text.replace(/^(&gt;)+/,function(match,quotes) {
+         return(match.replace(/(&gt;)/g, "\__QUOTE__")) ;         
+     }
+     );       
       //adjust spacing on multi-formatted strings
     results=results.replace(/([\/\*_])_FORMAT_SPACE_([\/\*_]{2})_FORMAT_SPACE_$/,"$1$2");
     if(text.match(/^&\w+;/)) {
@@ -2341,7 +2348,7 @@ function parse_wikitext(id)
     if(id == 'test') {
       if(!HTMLParser_test_result(results)) return;     
     }
-
+	results = results.replace(/\{ \{ rss&gt;Feed:/mg,'{{rss&gt;http://');
     if(HTMLParser_FORMAT_SPACE) { 
         if(HTMLParser_COLSPAN) {           
              results =results.replace(/\s*([\|\^]+)((\W\W_FORMAT_SPACE_)+)/gm,function(match,pipes,format) {
@@ -2789,7 +2796,7 @@ if(window.DWikifnEncode && window.DWikifnEncode == 'safe') {
  $patterns = $DOKU_PLUGINS['syntax'][$list[0]]->Lexer->_regexes['base']->_patterns;
  $labels = array();
  $regex = '~~NOCACHE~~|~~NOTOC~~';
- $regex .= "|\{\{rss>http:\/\/.*?\}\}";
+ //$regex .= "|\{\{rss>http:\/\/.*?\}\}";
 
  $exclusions = $this->getConf('xcl_plugins');
  $exclusions = trim($exclusions, " ,");
