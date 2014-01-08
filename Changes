@@ -1,4 +1,4 @@
-rev 14-Jan_05-20_27
+rev 14-Jan_07-20_48
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -311,3 +311,6 @@ Remove ~~COMPLEX_TABLES~~ macro in save.php and disable macro checkbox if comple
 -------- 2014 --------
 Fixed bug in handling of rss feed syntax that inserted initial italic markup following feed markup.
 Fixed parsing and output of Dokuwiki quote syntax
+
+7 Jan 2014
+Rewrote Non Parsed Block handling (edit.php pre-processor).

@@ -226,21 +226,23 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
       }
       if(strpos($text, '%%') !== false) {     
          $text= preg_replace_callback(
-            '/(<nowiki>)*(\s*)%%\s*([^%]+)\s*%%(<\/nowiki>)*(\s*)/ms',
-             create_function(
-               '$matches',
-                'if(preg_match("/<nowiki>/",$matches[1])) {
-                   $matches[1] .= "%%";
-                }
-                else  $matches[1] = "<nowiki>";
-                if(preg_match("/<\/nowiki>/",$matches[4])) {
-                   $matches[4] = "%%</nowiki>";
-                }
-                else $matches[4] = "</nowiki>";  
-                return   $matches[1] .  $matches[2] .  $matches[3] . $matches[4] . $matches[5];'  
-             ),
+            "/<(nowiki|code|file)>(.*?)<\/(nowiki|code|file)/ms",
+            function ($matches) {
+                $matches[0] = str_replace('%%', 'DBLPERCENT',$matches[0]);
+                return $matches[0];
+            },
              $text
             );   
+
+        $text = preg_replace_callback(
+            "/(?<!nowiki>)%%(.*?)%%/ms",
+            function($matches) {
+            return '<nowiki>' . $matches[1] . '</nowiki>';
+            },
+            $text
+        );
+
+        $text =  str_replace('DBLPERCENT','%%',$text);    
       }
 
       /* convert html tags to entities in indented code blocks*/
