@@ -1,4 +1,4 @@
-rev 14-Jan_28-10_56
+rev 14-Jan_28-13_15
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -325,3 +325,5 @@ are considered valid.
 
 28 Jan
 Improvements to image copy notifications
+
+Add GD lib check for above
