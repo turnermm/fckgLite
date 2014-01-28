@@ -1,4 +1,4 @@
-rev 14-Jan_23-12_02
+rev 14-Jan_27-23_26
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -318,3 +318,7 @@ Rewrote Non Parsed Block handling (edit.php pre-processor).
 23 Jan
 Removed query string from copied/pasted images; interfered with parsing of url. Affects
 mainly thumbnails with sizes.
+
+27 Jan
+Added support for copying images into editor from clipboard; only images convertible by PHP
+are considered valid.
