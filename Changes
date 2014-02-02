@@ -1,4 +1,4 @@
-rev 14-Feb_2-05_23
+rev 14-Feb_02-10_43
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -321,3 +321,14 @@ mainly thumbnails with sizes.
 2 Feb
 Added support for copying images into editor from clipboard; only images convertible by PHP
 are considered valid.
+
+28 Jan
+Improvements to image copy notifications
+
+Add GD lib check for above
+
+29 Jan
+Fixed bug in extension recognition in image copy/paste (save.php)
+
+Feb 2
+Image copied from clipboard saved to namespace of page being edited
