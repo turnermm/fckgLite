@@ -22,7 +22,12 @@ if(isset($conf['lang'])) {
 class action_plugin_fckg_meta extends DokuWiki_Action_Plugin {
   var $session_id = false;    
   var $draft_file;
+  var $dokuwiki_priority;
 
+   function action_plugin_fckg_meta() {
+      
+      $this->dokuwiki_priority = $this->getConf('dw_priority');
+   }
   /*
    * Register its handlers with the dokuwiki's event controller
    */
@@ -60,7 +65,7 @@ class action_plugin_fckg_meta extends DokuWiki_Action_Plugin {
 
   // restore preview button if standard DW editor is in place
   // $FCKG_show_preview is set in edit.php in the register() function
-if($_REQUEST['fck_preview_mode'] != 'nil' && !isset($_COOKIE['FCKW_USE']) && !$FCKG_show_preview) {    
+if($_REQUEST['fck_preview_mode'] != 'nil' && !isset($_COOKIE['FCKG_USE']) && !$FCKG_show_preview) {    
      echo '<style type="text/css">#edbtn__preview { display:none; }</style>';
  }
  elseif($FCKG_show_preview) {
@@ -114,7 +119,10 @@ if($_REQUEST['fck_preview_mode'] != 'nil' && !isset($_COOKIE['FCKW_USE']) && !$F
    }
   global $INFO;
   $cname =  $INFO['draft'];   
-    
+  $dokuwiki_priority =$this->dokuwiki_priority;
+  echo "<script type='text/javascript'>\n//<![CDATA[ \n";
+  echo "var useDW_Editor =$dokuwiki_priority;";
+  echo "\n //]]> </script>\n";
   echo <<<SCRIPT
     <script type="text/javascript">
     //<![CDATA[ 
@@ -124,7 +132,12 @@ if($_REQUEST['fck_preview_mode'] != 'nil' && !isset($_COOKIE['FCKW_USE']) && !$F
        var dom = document.getElementById('fckg_mode_type');          
        if(which == 1) {
            dwedit_draft_delete("$cname");
-           document.cookie='FCKW_USE=other;expires=Thu,01-Jan-70 00:00:01 GMT;'
+             if(useDW_Editor) {
+                document.cookie = 'FCKG_USE=other;expires=';             
+              }  
+           else {
+                document.cookie='FCKG_USE=other;expires=Thu,01-Jan-70 00:00:01 GMT;'
+           }
            if(e && e.form) {
                     if(e.form['mode']) {
                        e.form['mode'].value = 'fck';
@@ -137,9 +150,7 @@ if($_REQUEST['fck_preview_mode'] != 'nil' && !isset($_COOKIE['FCKW_USE']) && !$F
            else dom.value = 'fck';  
        }
         else {            
-            var nextFCKyear=new Date();
-            nextFCKyear.setFullYear(nextFCKyear.getFullYear() +1 );
-            document.cookie = 'FCKW_USE=_false_;expires=' + nextFCKyear.toGMTString() + ';';    
+            document.cookie = 'FCKG_USE=_false_;expires=';                         
             dom.value = 'dwiki';        
 
         }
@@ -358,8 +369,15 @@ function check_userfiles() {
                }
            }
            
-               
-               
+           if ($this->dokuwiki_priority) {
+               if(isset($_COOKIE['FCKG_USE']) && $_COOKIE['FCKG_USE'] == 'other') {                              
+                   $expire = time() -60*60*24*30;
+                   setcookie('FCKG_USE','_false_', $expire, '/');           
+               }
+               else {            
+                  setcookie('FCKG_USE','_false_', $expire, '/');           
+                }
+           }
                    
   }
 

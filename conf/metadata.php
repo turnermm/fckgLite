@@ -24,3 +24,5 @@ $meta['scayt_lang'] = array('multichoice','_choices' => array('American English/
 $meta['complex_tables'] = array('onoff');
 $meta['duplicate_notes'] = array('onoff');
 $meta['smiley_hack'] = array('onoff');
+$meta['dw_priority'] = array('onoff');
+

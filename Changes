@@ -1,4 +1,4 @@
-rev 14-Feb_06-19_45
+rev 14-Feb_08-11_43
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -337,3 +337,6 @@ Image copied from clipboard saved to namespace of page being edited
 Feb 6
 Support for placement of copy/paste images using Image Properties, without having to save and re-load.
 Link type reverts to 'nolink' which can be changed after save and re-load
+
+8 Feb
+Option to give Dokuwiki editor priority on startup
