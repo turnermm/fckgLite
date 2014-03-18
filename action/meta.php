@@ -525,9 +525,9 @@ function fnencode_check() {
 
 
       if($rencode && !file_exists(DOKU_PLUGIN . 'fckg/saferencode')) {
-         msg("This version of fckgLiteSafe does not support the re-encoded safe filenames. "
+         msg("This version of fckgLite does not support the re-encoded safe filenames. "
          . "You risk corrupting your file system.  Download an fnrencode version from either gitHub or the fckgLite web site."
-         . " <a style='color:blue' href='http://www.dokuwiki.org/plugin:fckglite?&#fckglitesafe'>See fckgLite at Dokuwiki.org</a>  ",
+         . " <a style='color:blue' href='http://www.mturner.org/fckgLite/doku.php?id=docs:upgrade_6&#anteater'>or the fckgLite web site</a>  ",
             -1);
       }	 
       else if(!$rencode && file_exists(DOKU_PLUGIN . 'fckg/saferencode') && $this->is_safeUpgraded() )   {	    
