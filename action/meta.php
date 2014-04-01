@@ -369,6 +369,10 @@ function check_userfiles() {
                }
            }
            
+            if ($this->getConf('winstyle')) {
+              setcookie('FCKConnector','WIN', $expire, DOKU_BASE);                                
+            }  
+            
            if ($this->dokuwiki_priority) {
                if(isset($_COOKIE['FCKG_USE']) && $_COOKIE['FCKG_USE'] == 'other') {                              
                    $expire = time() -60*60*24*30;

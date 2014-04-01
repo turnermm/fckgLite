@@ -25,4 +25,7 @@ $meta['complex_tables'] = array('onoff');
 $meta['duplicate_notes'] = array('onoff');
 $meta['smiley_hack'] = array('onoff');
 $meta['dw_priority'] = array('onoff');
+$meta['winstyle'] = array('onoff');
+
+
 

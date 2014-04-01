@@ -32,3 +32,5 @@ $lang['smiley_hack'] = "Reset URL for FCKeditor's smilies when moving to new ser
 $lang['complex_tables'] ="Use the complex tables algorithm.  As opposed to the standard parsing of tables, this should give better results when mixing complex arrangements of rowspans and colspans.";
 $lang['duplicate_notes'] = "Set this to true if users create multiple footnotes with the same footnote texts; required to prevent notes from being corrupted.";
 $lang['dw_priority'] = "Make Dokuwiki editor the default editor"; 
+$lang['winstyle'] = 'Use direct path to media directory instead of fckeditor/userfiles. This requires that fckeditor/userfiles/.htaccess.security be copied  to data/media and renamed .htaccess';
+
