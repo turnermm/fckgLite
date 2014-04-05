@@ -34,3 +34,4 @@ $lang['smiley_hack']           = 'Reset de URL voor FCKeditor\'s smilies bij ver
 $lang['complex_tables']        = 'Gebruik het complex tables algorithm, in tegenstelling tot het standaard ontleding algoritme. Dit zou een beter resultaat geven wanneer complexe rowspans en colspans gemengd worden.';
 $lang['duplicate_notes']       = 'Zet deze optie op true (aanvinken) wanneer gebruikers meerdere voetnotas maken met dezelfde voettekst; deze optie is noodzakelijk om te voorkomen dat de voetnotas corrupt geraken.';
 $lang['dw_priority']           = 'Stel Dokuwiki in als standaard editor.';
+$lang['winstyle']              = 'Gebruik een direct pad naar de media directory in plaats van  fckeditor/userfiles. Hier moet het bestand fckeditor/userfiles/.htaccess.security worden gekopieerd naar  data/media en hernoemd worden naar .htaccess';
