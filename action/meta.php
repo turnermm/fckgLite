@@ -181,12 +181,16 @@ function check_userfiles() {
 // msg('REL='. DOKU_REL);
     if(!preg_match('#^\.\/data$#',$save_dir)) {
         $data_media = $conf['savedir']  . '/media/';
-        
+        $domain = trim(DOKU_BASE,'/');    
         $expire = null;        
+        
+        if(! empty($domain )) {
         list($prefix,$mdir) = explode(trim(DOKU_BASE, '/'),$userfiles);
+           $mdir = ltrim($mdir, '/');
         $media_dir = DOKU_BASE . $mdir . 'image/';
         setcookie('FCK_media',$media_dir, $expire, '/');           
-
+        }
+        else $media_dir = '/lib/plugins/ckgedit/fckeditor/userfiles/image/';        
      }
      else {
          $data_media = DOKU_INC.'data/media/';
