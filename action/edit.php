@@ -1869,6 +1869,9 @@ function parse_wikitext(id)
 
           }
           else if(tag == 'a' && this.attr) {
+              this.attr =  this.attr.replace(/%25/gm,'%');                        
+              this.attr =  this.attr.replace(/%25/gm,'%');                        
+              this.attr =  this.attr.replace(/%7c/,'%257c');                      
               results += this.attr + '|';			  
           }
           else if(tag == 'img') {      

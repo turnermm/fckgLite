@@ -1,4 +1,4 @@
-rev 14-Apr_12-17_09
+rev 14-Apr_17-11_19
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -352,3 +352,6 @@ Added winstyle option
 
 12 April 
 Support for alternate savedir where dokuwiki root is domain
+
+17 Apr
+Handle entities in URLs; requires URL to be entered using the link tool.
