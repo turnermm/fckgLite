@@ -1,7 +1,7 @@
 base  fckg
 author  Myron Turner
 email  turnermm02@shaw.ca
-date  2014-4-17
-name  fckgLite
+date  2014-5-14
+name  fckg
 desc  WYSIWYG plugin for Dokuwiki
-url  http://www.mturner.org/fckgLite
+url  http://www.mturner.org/fckg
