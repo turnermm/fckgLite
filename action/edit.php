@@ -708,7 +708,7 @@ global $INFO;
         <?php  echo 'var backup_empty = "' . $fckg_lang['backup_empty'] .'";'; ?>
 
         function aspell_window() {
-          var DURL = "<?php echo DOKU_URL; ?>";
+          var DURL = "<?php echo DOKU_BASE; ?>";
           window.open( DURL + "/lib/plugins/fckg/fckeditor/aspell.php?dw_conf_lang=<?php global $conf; echo $conf['lang']?>",
                     "smallwin", "width=600,height=500,scrollbars=yes");
         }
@@ -2512,7 +2512,7 @@ function parse_wikitext(id)
 
 <?php  
   
-  $url = DOKU_URL . 'lib/plugins/fckg/scripts/script-cmpr.js';    
+  $url = DOKU_BASE . 'lib/plugins/fckg/scripts/script-cmpr.js';    
   echo "var script_url = '$url';";
 //  $safe_url = DOKU_URL . 'lib/plugins/fckg/scripts/safeFN_cmpr.js';       
 ?>

@@ -443,7 +443,7 @@ SCRIPT;
   function setupDWEdit(&$event) {
   global $ACT;
 
-  $url = DOKU_URL . 'lib/plugins/fckg/scripts/script-cmpr.js';
+  $url = DOKU_BASE . 'lib/plugins/fckg/scripts/script-cmpr.js';
   echo <<<SCRIPT
 
     <script type="text/javascript">
