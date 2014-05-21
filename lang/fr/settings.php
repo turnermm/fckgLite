@@ -6,9 +6,9 @@
  * @author Matthieu Jouan <mat.jouan@gmail.com>
  * @author Caillot <remicaillot5@gmail.com>
  */
-$lang['groups']                = 'Groupe avec la permission de désactiver le temporisateur qui verouille (obsolète)';
+$lang['groups']                = 'Groupe avec la permission de désactiver le verrouillage temporisé (obsolète)';
 $lang['middot']                = 'Liste de groupes séparés par des virgules employant le &amp;middot; pour le &amp;nbsp;';
-$lang['guest_toolbar']         = 'Afficher la barre aux invités';
+$lang['guest_toolbar']         = 'Afficher la barre d\'outils aux invités';
 $lang['guest_media']           = 'Le invités peuvent liés vers des fichiers de média';
 $lang['open_upload']           = 'Les invités peuvent déposer des fichiers';
 $lang['smiley_as_text']        = 'Afficher les smileys en tant que texte dans l\'éditeur FCKeditor (elle seront toujours affichée en temps qu\'images dans le navigateur)';
