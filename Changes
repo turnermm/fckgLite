@@ -1,4 +1,4 @@
-rev 14-May_19-08_37
+rev 14-Jun_03-08_31
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -362,3 +362,6 @@ Updated plugin.info.txt from fckgLite to fckg
 19 May
 Changed DOKU_URL to DOKU_BASE to access script-cmpr.js; requested to 
 accommdate fckg behind an Apache reverse proxy.
+
+3 June
+Warning if userfiles nto writable. By-pass link creation if winstyle is true.
