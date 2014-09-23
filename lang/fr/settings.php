@@ -6,6 +6,7 @@
  * @author Matthieu Jouan <mat.jouan@gmail.com>
  * @author Caillot <remicaillot5@gmail.com>
  * @author Matthieu KIM <mkim@kimkyouk.fr>
+ * @author Syl <syl@mailoo.org>
  */
 $lang['groups']                = 'Groupe avec la permission de désactiver le verrouillage temporisé (obsolète)';
 $lang['middot']                = 'Liste de groupes séparés par des virgules employant le &amp;middot; pour le &amp;nbsp;';
@@ -19,4 +20,4 @@ $lang['auth_ci']               = 'Le nom d\'utilisateur n\'est pas sensible à l
 $lang['no_symlinks']           = 'Désactiver la création automatique de liens symboliques dans fckg/userfiles.';
 $lang['scayt_auto']            = 'Active automatiquement le correcteur orthographique SCAYT. "on" par défaut. Pour le désactiver, sélectionner "off"';
 $lang['scayt_lang']            = 'Définir la langue par défaut de SCAYT.';
-$lang['dw_priority']           = 'Faire de Dokuwiki l\'éditeur par défault';
+$lang['dw_priority']           = 'Faire de Dokuwiki l\'éditeur par défaut';
