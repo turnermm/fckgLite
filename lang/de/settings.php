@@ -4,6 +4,7 @@
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * 
  * @author Ben Fey <spam@lifeisgoooood.de>
+ * @author Florian Lamml <info@florian-lamml.de>
  */
 $lang['groups']                = 'Liste der Gruppen mit Erlaubnis den Verriegelung-Timer zu sperren';
 $lang['middot']                = 'Kommagetrennte Liste der Gruppen, die &amp;middot; für &amp;nbsp; verwenden';
@@ -23,3 +24,4 @@ $lang['no_symlinks']           = 'Automatische Erstellung von Links in fckg/user
 $lang['scayt_auto']            = 'Spellchecker "SCAYT" automatisch aktivieren. Standard ist "on". Um "SCAYT" zu deaktivieren auf "off" setzen.';
 $lang['scayt']                 = 'Spellchecker "SCAYT" verwenden. Standard ist "on". Auf "off" setzen um zum "spellerpages" Spellchecker zu wechseln.';
 $lang['scayt_lang']            = 'Setze SCAYT Standardsprache';
+$lang['dw_priority']           = 'Den Dokuwiki Editor als Standard-Editor verwenden';
