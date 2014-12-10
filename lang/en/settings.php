@@ -1,10 +1,6 @@
 <?php
 
 $lang['groups'] = "Group allowed to disable lock timer (deprecated)";
-$lang['middot'] = "Comma delimited list of groups using &amp;middot; for &amp;nbsp;";
-$lang['big_files'] = "Check to safely edit oversized files";
-$lang['big_file_sz'] = "Oversized File Size (bytes)";
-$lang['big_file_tm'] = "Oversized File processing will time out after (seconds):";
 $lang['fck_preview'] = "FCK Preview Group";
 $lang['guest_toolbar'] = "Display Toolbar to Guests";
 $lang['guest_media'] = "Guest Can Link to Media Files";
