@@ -142,7 +142,13 @@ if(!isset($Config['UserFilesAbsolutePath']) || !isset($Config['UserFilesPath']))
    if($isWindows || $useWinStyle) {
     setupBasePathsWin();
     if($dwfck_local) {
-     $Config['UserFilesPath'] = str_replace('/media', '/pages', $Config['UserFilesPath']);
+     $savedir = $Dwfck_conf_values['savedir'];
+     
+     if(trim($savedir,'./') != 'data') {
+        $Config['UserFilesPath'] = $savedir .'/pages/';
+        $Config['UserFilesAbsolutePath'] = $Config['UserFilesPath'];
+     }
+     else $Config['UserFilesPath'] = str_replace('/media', '/pages', $Config['UserFilesPath']);
      if($isWindows) {
          $Config['UserFilesAbsolutePath'] = str_replace('\\media', '\\pages', $Config['UserFilesAbsolutePath']);
      }
@@ -464,8 +470,11 @@ function DWFCK_is_OS($os) {
 
 function DWFCK_cfg_dbg($fname) {
    global $Config;
+   global $Dwfck_conf_values;
    $request = print_r($_REQUEST,true);
-   file_put_contents($fname, $Config['UserFilesAbsolutePath'] . "\r\n" . $Config['UserFilesPath'] . "\r\n" .$request ."\r\n");
+   $cvals = print_r($Dwfck_conf_values,true);
+   file_put_contents($fname, $Config['UserFilesAbsolutePath'] . "\r\n" . $Config['UserFilesPath'] . "\r\n" .$request ."\r\n"
+      . $cvals . "\r\n");
 }
 
 function doku_config_values() {
