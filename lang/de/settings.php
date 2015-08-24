@@ -5,11 +5,10 @@
  * 
  * @author Ben Fey <spam@lifeisgoooood.de>
  * @author Florian Lamml <info@florian-lamml.de>
+ * @author Padhie <develop@padhie.de>
  */
 $lang['groups']                = 'Liste der Gruppen mit Erlaubnis den Verriegelung-Timer zu sperren';
-$lang['middot']                = 'Kommagetrennte Liste der Gruppen, die &amp;middot; für &amp;nbsp; verwenden';
-$lang['big_file_sz']           = 'Übergröße für Dateien (bytes)';
-$lang['big_file_tm']           = 'Timeout für die Bearbeitung von Dateien mit Übergrößen';
+$lang['fck_preview']           = 'FCK Vorschaugruppe';
 $lang['guest_toolbar']         = 'Toolbar für Gäste anzeigen';
 $lang['guest_media']           = 'Gäste können Media-Dateien verlinken';
 $lang['open_upload']           = 'Gäste können Dateien hochladen';
