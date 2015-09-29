@@ -1,4 +1,4 @@
-rev 14-Dec_15-16_19
+rev 15-Sep_29-12_59
 
 6 June
 Upgraded from FCKeditor 2.4.1 to 2.6.6.  2.6.6 includes the scayt spellchecker, which is an in-editor spellchecker.
@@ -371,3 +371,6 @@ Updated entities for DW entities with  left-hand angle brackets.
 
 15 Dec
 Fixed failure to open file browser in external savedir
+
+9 September 2015
+Tested for compatibility with Detritus
