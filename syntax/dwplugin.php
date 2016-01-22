@@ -37,7 +37,7 @@ class syntax_plugin_fckg_dwplugin extends DokuWiki_Syntax_Plugin {
          $this->Lexer->addSpecialPattern('<plugin.*?</plugin>',$mode,'plugin_fckg_dwplugin'); 
        }
 
-    function handle($match, $state, $pos, &$handler){     
+    function handle($match, $state, $pos, Doku_Handler $handler){     
    
    
     $retv = $this->is_stet($match);
@@ -229,7 +229,7 @@ class syntax_plugin_fckg_dwplugin extends DokuWiki_Syntax_Plugin {
     /**
      * Create output
      */
-    function render($mode, &$renderer, $data) {
+    function render($mode, Doku_Renderer $renderer, $data) {
 
   
         if($mode == 'xhtml'){
