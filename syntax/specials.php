@@ -62,7 +62,7 @@ class syntax_plugin_fckg_specials extends DokuWiki_Syntax_Plugin {
     /**
      * Handle the match
      */
-    function handle($match, $state, $pos, &$handler){
+    function handle($match, $state, $pos, Doku_Handler $handler){
 
         $class = "";  
         $xhtml = "";
@@ -85,7 +85,7 @@ class syntax_plugin_fckg_specials extends DokuWiki_Syntax_Plugin {
     /**
      * Create output
      */
-    function render($mode, &$renderer, $data) {
+    function render($mode, Doku_Renderer $renderer, $data) {
         if($mode == 'xhtml'){
             list($state, $xhtml) = $data;
             $renderer->doc .=  DOKU_LF . $xhtml . DOKU_LF;

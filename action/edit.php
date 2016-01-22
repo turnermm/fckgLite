@@ -41,7 +41,7 @@ class action_plugin_fckg_edit extends DokuWiki_Action_Plugin {
     }
 
 
-    function register(&$controller)
+    function register(Doku_Event_Handler $controller)
     {
         if(method_exists($this->helper, 'is_outOfScope') &&  $this->helper->is_outOfScope()) return;
         

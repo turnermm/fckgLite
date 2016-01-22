@@ -31,7 +31,7 @@ class action_plugin_fckg_meta extends DokuWiki_Action_Plugin {
   /*
    * Register its handlers with the dokuwiki's event controller
    */
-  function register(&$controller) {            
+  function register(Doku_Event_Handler $controller) {            
             $controller->register_hook( 'TPL_METAHEADER_OUTPUT', 'AFTER', $this, 'loadScript');    
             $controller->register_hook( 'HTML_EDITFORM_INJECTION', 'AFTER', $this, 'preprocess'); 
             $controller->register_hook( 'HTML_EDITFORM_OUTPUT', 'BEFORE', $this, 'insertFormElement');            
