@@ -1,3 +1,5 @@
+NOTE:  fckgLite has been replaced by ckgedit and should be used only locally if at all.
+------------
 This version of fckgLite supports the Dokuwiki 'safe' file system encoding for non-Roman 
 character sets.  It also supports url-style encoding, which was the encoding 
 for all previous versions of Dokuwiki.
